@@ -70,7 +70,8 @@ body = ApprovalAPIClient::Action.new # Action | Action object that will be added
 
 begin
   #Add an action
-  api_instance.add_action(stage_id, body)
+  result = api_instance.add_action(stage_id, body)
+  p result
 rescue ApprovalAPIClient::ApiError => e
   puts "Exception when calling AdminsApi->add_action: #{e}"
 end

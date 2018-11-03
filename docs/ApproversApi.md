@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **add_action**
-> add_action(stage_id, body)
+> Action add_action(stage_id, body)
 
 Add an action
 
@@ -40,7 +40,8 @@ body = ApprovalAPIClient::Action.new # Action | Action object that will be added
 
 begin
   #Add an action
-  api_instance.add_action(stage_id, body)
+  result = api_instance.add_action(stage_id, body)
+  p result
 rescue ApprovalAPIClient::ApiError => e
   puts "Exception when calling ApproversApi->add_action: #{e}"
 end
@@ -55,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-nil (empty response body)
+[**Action**](Action.md)
 
 ### Authorization
 

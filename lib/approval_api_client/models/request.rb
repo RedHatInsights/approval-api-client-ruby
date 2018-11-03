@@ -17,9 +17,6 @@ module ApprovalAPIClient
   class Request
     attr_accessor :id
 
-    # The workflow ID request will use
-    attr_accessor :workflow_id
-
     # Requester info
     attr_accessor :requester
 
@@ -44,7 +41,6 @@ module ApprovalAPIClient
     def self.attribute_map
       {
         :'id' => :'id',
-        :'workflow_id' => :'workflow_id',
         :'requester' => :'requester',
         :'name' => :'name',
         :'description' => :'description',
@@ -59,7 +55,6 @@ module ApprovalAPIClient
     def self.swagger_types
       {
         :'id' => :'String',
-        :'workflow_id' => :'String',
         :'requester' => :'String',
         :'name' => :'String',
         :'description' => :'String',
@@ -80,10 +75,6 @@ module ApprovalAPIClient
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'workflow_id')
-        self.workflow_id = attributes[:'workflow_id']
       end
 
       if attributes.has_key?(:'requester')
@@ -120,10 +111,6 @@ module ApprovalAPIClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @workflow_id.nil?
-        invalid_properties.push("invalid value for 'workflow_id', workflow_id cannot be nil.")
-      end
-
       if @requester.nil?
         invalid_properties.push("invalid value for 'requester', requester cannot be nil.")
       end
@@ -142,7 +129,6 @@ module ApprovalAPIClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @workflow_id.nil?
       return false if @requester.nil?
       return false if @name.nil?
       return false if @content.nil?
@@ -155,7 +141,6 @@ module ApprovalAPIClient
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          workflow_id == o.workflow_id &&
           requester == o.requester &&
           name == o.name &&
           description == o.description &&
@@ -174,7 +159,7 @@ module ApprovalAPIClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, workflow_id, requester, name, description, state, decision, reason, content].hash
+      [id, requester, name, description, state, decision, reason, content].hash
     end
 
     # Builds the object from hash

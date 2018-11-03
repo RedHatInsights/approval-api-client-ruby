@@ -37,7 +37,7 @@ Method | HTTP request | Description
 
 
 # **add_action**
-> add_action(stage_id, body)
+> Action add_action(stage_id, body)
 
 Add an action
 
@@ -63,7 +63,8 @@ body = ApprovalAPIClient::Action.new # Action | Action object that will be added
 
 begin
   #Add an action
-  api_instance.add_action(stage_id, body)
+  result = api_instance.add_action(stage_id, body)
+  p result
 rescue ApprovalAPIClient::ApiError => e
   puts "Exception when calling AdminsApi->add_action: #{e}"
 end
@@ -78,7 +79,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-nil (empty response body)
+[**Action**](Action.md)
 
 ### Authorization
 
@@ -92,7 +93,7 @@ nil (empty response body)
 
 
 # **add_group**
-> add_group(body)
+> Group add_group(body)
 
 Add a new approver group
 
@@ -116,7 +117,8 @@ body = ApprovalAPIClient::Group.new # Group | Approver group object that needs t
 
 begin
   #Add a new approver group
-  api_instance.add_group(body)
+  result = api_instance.add_group(body)
+  p result
 rescue ApprovalAPIClient::ApiError => e
   puts "Exception when calling AdminsApi->add_group: #{e}"
 end
@@ -130,7 +132,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-nil (empty response body)
+[**Group**](Group.md)
 
 ### Authorization
 
@@ -144,7 +146,7 @@ nil (empty response body)
 
 
 # **add_stage**
-> add_stage(request_id, body)
+> Stage add_stage(request_id, body)
 
 Add a new stage
 
@@ -170,7 +172,8 @@ body = ApprovalAPIClient::Stage.new # Stage | Stage that needs to be added
 
 begin
   #Add a new stage
-  api_instance.add_stage(request_id, body)
+  result = api_instance.add_stage(request_id, body)
+  p result
 rescue ApprovalAPIClient::ApiError => e
   puts "Exception when calling AdminsApi->add_stage: #{e}"
 end
@@ -185,7 +188,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-nil (empty response body)
+[**Stage**](Stage.md)
 
 ### Authorization
 
@@ -199,7 +202,7 @@ nil (empty response body)
 
 
 # **add_template**
-> add_template(body)
+> Template add_template(body)
 
 Add a new template to the orgnization
 
@@ -223,7 +226,8 @@ body = ApprovalAPIClient::Template.new # Template | Approval template object tha
 
 begin
   #Add a new template to the orgnization
-  api_instance.add_template(body)
+  result = api_instance.add_template(body)
+  p result
 rescue ApprovalAPIClient::ApiError => e
   puts "Exception when calling AdminsApi->add_template: #{e}"
 end
@@ -237,7 +241,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-nil (empty response body)
+[**Template**](Template.md)
 
 ### Authorization
 
@@ -251,7 +255,7 @@ nil (empty response body)
 
 
 # **add_workflow**
-> add_workflow(template_id, body)
+> Workflow add_workflow(template_id, body)
 
 Add a new workflow
 
@@ -277,7 +281,8 @@ body = ApprovalAPIClient::Workflow.new # Workflow | Workflow that needs to be ad
 
 begin
   #Add a new workflow
-  api_instance.add_workflow(template_id, body)
+  result = api_instance.add_workflow(template_id, body)
+  p result
 rescue ApprovalAPIClient::ApiError => e
   puts "Exception when calling AdminsApi->add_workflow: #{e}"
 end
@@ -292,7 +297,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-nil (empty response body)
+[**Workflow**](Workflow.md)
 
 ### Authorization
 

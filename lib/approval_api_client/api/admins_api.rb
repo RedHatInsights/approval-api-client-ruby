@@ -25,10 +25,10 @@ module ApprovalAPIClient
     # @param stage_id id of stage
     # @param body Action object that will be added
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [Action]
     def add_action(stage_id, body, opts = {})
-      add_action_with_http_info(stage_id, body, opts)
-      return nil
+      data, _status_code, _headers = add_action_with_http_info(stage_id, body, opts)
+      return data
     end
 
     # Add an action
@@ -36,7 +36,7 @@ module ApprovalAPIClient
     # @param stage_id id of stage
     # @param body Action object that will be added
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(Action, Fixnum, Hash)>] Action data, response status code and response headers
     def add_action_with_http_info(stage_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.add_action ..."
@@ -71,7 +71,8 @@ module ApprovalAPIClient
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'Action')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#add_action\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -82,17 +83,17 @@ module ApprovalAPIClient
     # Add a new approver group
     # @param body Approver group object that needs to be added to the orgnization
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [Group]
     def add_group(body, opts = {})
-      add_group_with_http_info(body, opts)
-      return nil
+      data, _status_code, _headers = add_group_with_http_info(body, opts)
+      return data
     end
 
     # Add a new approver group
     # Add a new approver group
     # @param body Approver group object that needs to be added to the orgnization
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(Group, Fixnum, Hash)>] Group data, response status code and response headers
     def add_group_with_http_info(body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.add_group ..."
@@ -125,7 +126,8 @@ module ApprovalAPIClient
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'Group')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#add_group\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -137,10 +139,10 @@ module ApprovalAPIClient
     # @param request_id id of request
     # @param body Stage that needs to be added
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [Stage]
     def add_stage(request_id, body, opts = {})
-      add_stage_with_http_info(request_id, body, opts)
-      return nil
+      data, _status_code, _headers = add_stage_with_http_info(request_id, body, opts)
+      return data
     end
 
     # Add a new stage
@@ -148,7 +150,7 @@ module ApprovalAPIClient
     # @param request_id id of request
     # @param body Stage that needs to be added
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(Stage, Fixnum, Hash)>] Stage data, response status code and response headers
     def add_stage_with_http_info(request_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.add_stage ..."
@@ -185,7 +187,8 @@ module ApprovalAPIClient
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'Stage')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#add_stage\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -196,17 +199,17 @@ module ApprovalAPIClient
     # Add template
     # @param body Approval template object that needs to be added to the orgnization
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [Template]
     def add_template(body, opts = {})
-      add_template_with_http_info(body, opts)
-      return nil
+      data, _status_code, _headers = add_template_with_http_info(body, opts)
+      return data
     end
 
     # Add a new template to the orgnization
     # Add template
     # @param body Approval template object that needs to be added to the orgnization
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(Template, Fixnum, Hash)>] Template data, response status code and response headers
     def add_template_with_http_info(body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.add_template ..."
@@ -239,7 +242,8 @@ module ApprovalAPIClient
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'Template')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#add_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -251,10 +255,10 @@ module ApprovalAPIClient
     # @param template_id id of template
     # @param body Workflow that needs to be added
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [Workflow]
     def add_workflow(template_id, body, opts = {})
-      add_workflow_with_http_info(template_id, body, opts)
-      return nil
+      data, _status_code, _headers = add_workflow_with_http_info(template_id, body, opts)
+      return data
     end
 
     # Add a new workflow
@@ -262,7 +266,7 @@ module ApprovalAPIClient
     # @param template_id id of template
     # @param body Workflow that needs to be added
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(Workflow, Fixnum, Hash)>] Workflow data, response status code and response headers
     def add_workflow_with_http_info(template_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.add_workflow ..."
@@ -299,7 +303,8 @@ module ApprovalAPIClient
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'Workflow')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#add_workflow\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

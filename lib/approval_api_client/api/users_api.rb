@@ -25,10 +25,10 @@ module ApprovalAPIClient
     # @param workflow_id id of workflow
     # @param body Approval request object that needs to be added
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [Request]
     def add_request(workflow_id, body, opts = {})
-      add_request_with_http_info(workflow_id, body, opts)
-      return nil
+      data, _status_code, _headers = add_request_with_http_info(workflow_id, body, opts)
+      return data
     end
 
     # Add a new approval request
@@ -36,7 +36,7 @@ module ApprovalAPIClient
     # @param workflow_id id of workflow
     # @param body Approval request object that needs to be added
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(Request, Fixnum, Hash)>] Request data, response status code and response headers
     def add_request_with_http_info(workflow_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: UsersApi.add_request ..."
@@ -73,7 +73,8 @@ module ApprovalAPIClient
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'Request')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: UsersApi#add_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **add_request**
-> add_request(workflow_id, body)
+> Request add_request(workflow_id, body)
 
 Add a new approval request
 
@@ -36,7 +36,8 @@ body = ApprovalAPIClient::Request.new # Request | Approval request object that n
 
 begin
   #Add a new approval request
-  api_instance.add_request(workflow_id, body)
+  result = api_instance.add_request(workflow_id, body)
+  p result
 rescue ApprovalAPIClient::ApiError => e
   puts "Exception when calling UsersApi->add_request: #{e}"
 end
@@ -51,7 +52,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-nil (empty response body)
+[**Request**](Request.md)
 
 ### Authorization
 

@@ -25,10 +25,10 @@ module ApprovalAPIClient
     # @param stage_id id of stage
     # @param body Action object that will be added
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [Action]
     def add_action(stage_id, body, opts = {})
-      add_action_with_http_info(stage_id, body, opts)
-      return nil
+      data, _status_code, _headers = add_action_with_http_info(stage_id, body, opts)
+      return data
     end
 
     # Add an action
@@ -36,7 +36,7 @@ module ApprovalAPIClient
     # @param stage_id id of stage
     # @param body Action object that will be added
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(Action, Fixnum, Hash)>] Action data, response status code and response headers
     def add_action_with_http_info(stage_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: ApproversApi.add_action ..."
@@ -71,7 +71,8 @@ module ApprovalAPIClient
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'Action')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ApproversApi#add_action\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
