@@ -23,6 +23,8 @@ module ApprovalAPIClient
 
     attr_accessor :groups
 
+    attr_accessor :group_ids
+
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -30,7 +32,8 @@ module ApprovalAPIClient
         :'id' => :'id',
         :'name' => :'name',
         :'description' => :'description',
-        :'groups' => :'groups'
+        :'groups' => :'groups',
+        :'group_ids' => :'group-ids'
       }
     end
 
@@ -40,7 +43,8 @@ module ApprovalAPIClient
         :'id' => :'String',
         :'name' => :'String',
         :'description' => :'String',
-        :'groups' => :'Array<Group>'
+        :'groups' => :'Array<Group>',
+        :'group_ids' => :'Array<String>'
       }
     end
 
@@ -67,6 +71,12 @@ module ApprovalAPIClient
       if attributes.has_key?(:'groups')
         if (value = attributes[:'groups']).is_a?(Array)
           self.groups = value
+        end
+      end
+
+      if attributes.has_key?(:'group-ids')
+        if (value = attributes[:'group-ids']).is_a?(Array)
+          self.group_ids = value
         end
       end
 
@@ -98,7 +108,8 @@ module ApprovalAPIClient
           id == o.id &&
           name == o.name &&
           description == o.description &&
-          groups == o.groups
+          groups == o.groups &&
+          group_ids == o.group_ids
     end
 
     # @see the `==` method
@@ -110,7 +121,7 @@ module ApprovalAPIClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, description, groups].hash
+      [id, name, description, groups, group_ids].hash
     end
 
     # Builds the object from hash

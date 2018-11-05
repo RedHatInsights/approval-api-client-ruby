@@ -28,6 +28,8 @@ module ApprovalAPIClient
 
     attr_accessor :workflows
 
+    attr_accessor :workflow_ids
+
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -36,7 +38,8 @@ module ApprovalAPIClient
         :'name' => :'name',
         :'contact_method' => :'contact_method',
         :'contact_setting' => :'contact_setting',
-        :'workflows' => :'workflows'
+        :'workflows' => :'workflows',
+        :'workflow_ids' => :'workflow-ids'
       }
     end
 
@@ -47,7 +50,8 @@ module ApprovalAPIClient
         :'name' => :'String',
         :'contact_method' => :'String',
         :'contact_setting' => :'String',
-        :'workflows' => :'Array<Workflow>'
+        :'workflows' => :'Array<Workflow>',
+        :'workflow_ids' => :'Array<String>'
       }
     end
 
@@ -78,6 +82,12 @@ module ApprovalAPIClient
       if attributes.has_key?(:'workflows')
         if (value = attributes[:'workflows']).is_a?(Array)
           self.workflows = value
+        end
+      end
+
+      if attributes.has_key?(:'workflow-ids')
+        if (value = attributes[:'workflow-ids']).is_a?(Array)
+          self.workflow_ids = value
         end
       end
 
@@ -120,7 +130,8 @@ module ApprovalAPIClient
           name == o.name &&
           contact_method == o.contact_method &&
           contact_setting == o.contact_setting &&
-          workflows == o.workflows
+          workflows == o.workflows &&
+          workflow_ids == o.workflow_ids
     end
 
     # @see the `==` method
@@ -132,7 +143,7 @@ module ApprovalAPIClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, contact_method, contact_setting, workflows].hash
+      [id, name, contact_method, contact_setting, workflows, workflow_ids].hash
     end
 
     # Builds the object from hash

@@ -8,5 +8,6 @@ Name | Type | Description | Notes
 **contact_method** | **String** | Contact type | 
 **contact_setting** | **String** | Settings of contact | 
 **workflows** | [**Array&lt;Workflow&gt;**](Workflow.md) |  | [optional] 
+**workflow_ids** | **Array&lt;String&gt;** |  | [optional] 
 
 
