@@ -11,5 +11,7 @@ Name | Type | Description | Notes
 **decision** | [**Decision**](Decision.md) |  | [optional] 
 **reason** | **String** | Comments for requests | [optional] 
 **content** | **String** | Request content | 
+**workflow** | [**Workflow**](Workflow.md) |  | [optional] 
+**workflow_id** | **String** | Associate workflow id | [optional] 
 
 

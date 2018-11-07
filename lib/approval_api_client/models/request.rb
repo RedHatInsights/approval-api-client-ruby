@@ -36,6 +36,11 @@ module ApprovalAPIClient
     # Request content
     attr_accessor :content
 
+    attr_accessor :workflow
+
+    # Associate workflow id
+    attr_accessor :workflow_id
+
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -47,7 +52,9 @@ module ApprovalAPIClient
         :'state' => :'state',
         :'decision' => :'decision',
         :'reason' => :'reason',
-        :'content' => :'content'
+        :'content' => :'content',
+        :'workflow' => :'workflow',
+        :'workflow_id' => :'workflow_id'
       }
     end
 
@@ -61,7 +68,9 @@ module ApprovalAPIClient
         :'state' => :'State',
         :'decision' => :'Decision',
         :'reason' => :'String',
-        :'content' => :'String'
+        :'content' => :'String',
+        :'workflow' => :'Workflow',
+        :'workflow_id' => :'String'
       }
     end
 
@@ -103,6 +112,14 @@ module ApprovalAPIClient
 
       if attributes.has_key?(:'content')
         self.content = attributes[:'content']
+      end
+
+      if attributes.has_key?(:'workflow')
+        self.workflow = attributes[:'workflow']
+      end
+
+      if attributes.has_key?(:'workflow_id')
+        self.workflow_id = attributes[:'workflow_id']
       end
 
     end
@@ -147,7 +164,9 @@ module ApprovalAPIClient
           state == o.state &&
           decision == o.decision &&
           reason == o.reason &&
-          content == o.content
+          content == o.content &&
+          workflow == o.workflow &&
+          workflow_id == o.workflow_id
     end
 
     # @see the `==` method
@@ -159,7 +178,7 @@ module ApprovalAPIClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, requester, name, description, state, decision, reason, content].hash
+      [id, requester, name, description, state, decision, reason, content, workflow, workflow_id].hash
     end
 
     # Builds the object from hash
