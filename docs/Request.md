@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **state** | [**State**](State.md) |  | [optional] 
 **decision** | [**Decision**](Decision.md) |  | [optional] 
 **reason** | **String** | Comments for requests | [optional] 
-**content** | **String** | Request content | 
-**workflow** | [**Workflow**](Workflow.md) |  | [optional] 
+**content** | **Object** | JSON object with request content | 
 **workflow_id** | **String** | Associate workflow id | [optional] 
+**stages** | [**Array&lt;Stage&gt;**](Stage.md) |  | [optional] 
 
 

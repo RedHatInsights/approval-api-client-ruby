@@ -23,12 +23,8 @@ module ApprovalAPIClient
     # Contact type
     attr_accessor :contact_method
 
-    # Settings of contact
+    # JSON object with contact Setting
     attr_accessor :contact_setting
-
-    attr_accessor :workflows
-
-    attr_accessor :workflow_ids
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -37,9 +33,7 @@ module ApprovalAPIClient
         :'id' => :'id',
         :'name' => :'name',
         :'contact_method' => :'contact_method',
-        :'contact_setting' => :'contact_setting',
-        :'workflows' => :'workflows',
-        :'workflow_ids' => :'workflow-ids'
+        :'contact_setting' => :'contact_setting'
       }
     end
 
@@ -49,9 +43,7 @@ module ApprovalAPIClient
         :'id' => :'String',
         :'name' => :'String',
         :'contact_method' => :'String',
-        :'contact_setting' => :'String',
-        :'workflows' => :'Array<Workflow>',
-        :'workflow_ids' => :'Array<String>'
+        :'contact_setting' => :'Object'
       }
     end
 
@@ -77,18 +69,6 @@ module ApprovalAPIClient
 
       if attributes.has_key?(:'contact_setting')
         self.contact_setting = attributes[:'contact_setting']
-      end
-
-      if attributes.has_key?(:'workflows')
-        if (value = attributes[:'workflows']).is_a?(Array)
-          self.workflows = value
-        end
-      end
-
-      if attributes.has_key?(:'workflow-ids')
-        if (value = attributes[:'workflow-ids']).is_a?(Array)
-          self.workflow_ids = value
-        end
       end
 
     end
@@ -129,9 +109,7 @@ module ApprovalAPIClient
           id == o.id &&
           name == o.name &&
           contact_method == o.contact_method &&
-          contact_setting == o.contact_setting &&
-          workflows == o.workflows &&
-          workflow_ids == o.workflow_ids
+          contact_setting == o.contact_setting
     end
 
     # @see the `==` method
@@ -143,7 +121,7 @@ module ApprovalAPIClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, contact_method, contact_setting, workflows, workflow_ids].hash
+      [id, name, contact_method, contact_setting].hash
     end
 
     # Builds the object from hash

@@ -21,7 +21,8 @@ module ApprovalAPIClient
 
     attr_accessor :description
 
-    attr_accessor :groups
+    # Associated template id
+    attr_accessor :template_id
 
     attr_accessor :group_ids
 
@@ -32,8 +33,8 @@ module ApprovalAPIClient
         :'id' => :'id',
         :'name' => :'name',
         :'description' => :'description',
-        :'groups' => :'groups',
-        :'group_ids' => :'group-ids'
+        :'template_id' => :'template_id',
+        :'group_ids' => :'group_ids'
       }
     end
 
@@ -43,7 +44,7 @@ module ApprovalAPIClient
         :'id' => :'String',
         :'name' => :'String',
         :'description' => :'String',
-        :'groups' => :'Array<Group>',
+        :'template_id' => :'String',
         :'group_ids' => :'Array<String>'
       }
     end
@@ -68,14 +69,12 @@ module ApprovalAPIClient
         self.description = attributes[:'description']
       end
 
-      if attributes.has_key?(:'groups')
-        if (value = attributes[:'groups']).is_a?(Array)
-          self.groups = value
-        end
+      if attributes.has_key?(:'template_id')
+        self.template_id = attributes[:'template_id']
       end
 
-      if attributes.has_key?(:'group-ids')
-        if (value = attributes[:'group-ids']).is_a?(Array)
+      if attributes.has_key?(:'group_ids')
+        if (value = attributes[:'group_ids']).is_a?(Array)
           self.group_ids = value
         end
       end
@@ -108,7 +107,7 @@ module ApprovalAPIClient
           id == o.id &&
           name == o.name &&
           description == o.description &&
-          groups == o.groups &&
+          template_id == o.template_id &&
           group_ids == o.group_ids
     end
 
@@ -121,7 +120,7 @@ module ApprovalAPIClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, description, groups, group_ids].hash
+      [id, name, description, template_id, group_ids].hash
     end
 
     # Builds the object from hash

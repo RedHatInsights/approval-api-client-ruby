@@ -17,8 +17,6 @@ module ApprovalAPIClient
   class Stage
     attr_accessor :id
 
-    attr_accessor :group_id
-
     attr_accessor :state
 
     attr_accessor :decision
@@ -26,15 +24,25 @@ module ApprovalAPIClient
     # approval stage
     attr_accessor :comments
 
+    attr_accessor :actions
+
+    # Associated group id
+    attr_accessor :group_id
+
+    # Associated request id
+    attr_accessor :request_id
+
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'group_id' => :'group_id',
         :'state' => :'state',
         :'decision' => :'decision',
-        :'comments' => :'comments'
+        :'comments' => :'comments',
+        :'actions' => :'actions',
+        :'group_id' => :'group_id',
+        :'request_id' => :'request_id'
       }
     end
 
@@ -42,10 +50,12 @@ module ApprovalAPIClient
     def self.swagger_types
       {
         :'id' => :'String',
-        :'group_id' => :'Integer',
         :'state' => :'State',
         :'decision' => :'Decision',
-        :'comments' => :'String'
+        :'comments' => :'String',
+        :'actions' => :'Array<Action>',
+        :'group_id' => :'String',
+        :'request_id' => :'String'
       }
     end
 
@@ -61,10 +71,6 @@ module ApprovalAPIClient
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'group_id')
-        self.group_id = attributes[:'group_id']
-      end
-
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
       end
@@ -75,6 +81,20 @@ module ApprovalAPIClient
 
       if attributes.has_key?(:'comments')
         self.comments = attributes[:'comments']
+      end
+
+      if attributes.has_key?(:'actions')
+        if (value = attributes[:'actions']).is_a?(Array)
+          self.actions = value
+        end
+      end
+
+      if attributes.has_key?(:'group_id')
+        self.group_id = attributes[:'group_id']
+      end
+
+      if attributes.has_key?(:'request_id')
+        self.request_id = attributes[:'request_id']
       end
 
     end
@@ -103,10 +123,12 @@ module ApprovalAPIClient
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          group_id == o.group_id &&
           state == o.state &&
           decision == o.decision &&
-          comments == o.comments
+          comments == o.comments &&
+          actions == o.actions &&
+          group_id == o.group_id &&
+          request_id == o.request_id
     end
 
     # @see the `==` method
@@ -118,7 +140,7 @@ module ApprovalAPIClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, group_id, state, decision, comments].hash
+      [id, state, decision, comments, actions, group_id, request_id].hash
     end
 
     # Builds the object from hash

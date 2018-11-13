@@ -33,13 +33,13 @@ module ApprovalAPIClient
     # Comments for requests
     attr_accessor :reason
 
-    # Request content
+    # JSON object with request content
     attr_accessor :content
-
-    attr_accessor :workflow
 
     # Associate workflow id
     attr_accessor :workflow_id
+
+    attr_accessor :stages
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -53,8 +53,8 @@ module ApprovalAPIClient
         :'decision' => :'decision',
         :'reason' => :'reason',
         :'content' => :'content',
-        :'workflow' => :'workflow',
-        :'workflow_id' => :'workflow_id'
+        :'workflow_id' => :'workflow_id',
+        :'stages' => :'stages'
       }
     end
 
@@ -68,9 +68,9 @@ module ApprovalAPIClient
         :'state' => :'State',
         :'decision' => :'Decision',
         :'reason' => :'String',
-        :'content' => :'String',
-        :'workflow' => :'Workflow',
-        :'workflow_id' => :'String'
+        :'content' => :'Object',
+        :'workflow_id' => :'String',
+        :'stages' => :'Array<Stage>'
       }
     end
 
@@ -114,12 +114,14 @@ module ApprovalAPIClient
         self.content = attributes[:'content']
       end
 
-      if attributes.has_key?(:'workflow')
-        self.workflow = attributes[:'workflow']
-      end
-
       if attributes.has_key?(:'workflow_id')
         self.workflow_id = attributes[:'workflow_id']
+      end
+
+      if attributes.has_key?(:'stages')
+        if (value = attributes[:'stages']).is_a?(Array)
+          self.stages = value
+        end
       end
 
     end
@@ -165,8 +167,8 @@ module ApprovalAPIClient
           decision == o.decision &&
           reason == o.reason &&
           content == o.content &&
-          workflow == o.workflow &&
-          workflow_id == o.workflow_id
+          workflow_id == o.workflow_id &&
+          stages == o.stages
     end
 
     # @see the `==` method
@@ -178,7 +180,7 @@ module ApprovalAPIClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, requester, name, description, state, decision, reason, content, workflow, workflow_id].hash
+      [id, requester, name, description, state, decision, reason, content, workflow_id, stages].hash
     end
 
     # Builds the object from hash
