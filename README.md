@@ -56,6 +56,11 @@ require 'approval_api_client'
 
 # Setup authorization
 ApprovalAPIClient.configure do |config|
+  # Configure API key authorization: APIKey_auth
+  config.api_key['x-rh-auth-identity'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['x-rh-auth-identity'] = 'Bearer'
+
   # Configure HTTP basic authorization: approval_auth
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
@@ -63,13 +68,13 @@ end
 
 api_instance = ApprovalAPIClient::AdminsApi.new
 
-stage_id = 56 # Integer | id of stage
+stage_id = 56 # Integer | Id of stage
 
 body = ApprovalAPIClient::Action.new # Action | Action object that will be added
 
 
 begin
-  #Add an action
+  #Add an action to a given stage
   result = api_instance.add_action(stage_id, body)
   p result
 rescue ApprovalAPIClient::ApiError => e
@@ -80,50 +85,37 @@ end
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://localhost:3000*
+All URIs are relative to *http://localhost:3000*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ApprovalAPIClient::AdminsApi* | [**add_action**](docs/AdminsApi.md#add_action) | **POST** /stages/{stage_id}/actions | Add an action
-*ApprovalAPIClient::AdminsApi* | [**add_group**](docs/AdminsApi.md#add_group) | **POST** /groups | Add a new approver group
-*ApprovalAPIClient::AdminsApi* | [**add_stage**](docs/AdminsApi.md#add_stage) | **POST** /requests/{request_id}/stages | Add a new stage
-*ApprovalAPIClient::AdminsApi* | [**add_template**](docs/AdminsApi.md#add_template) | **POST** /templates | Add a new template to the orgnization
-*ApprovalAPIClient::AdminsApi* | [**add_workflow**](docs/AdminsApi.md#add_workflow) | **POST** /templates/{template_id}/workflows | Add a new workflow
-*ApprovalAPIClient::AdminsApi* | [**fetch_action_by_id**](docs/AdminsApi.md#fetch_action_by_id) | **GET** /actions/{id} | Finds approver action by id
-*ApprovalAPIClient::AdminsApi* | [**fetch_actions**](docs/AdminsApi.md#fetch_actions) | **GET** /actions | Returns list of approver actions
-*ApprovalAPIClient::AdminsApi* | [**fetch_group_by_id**](docs/AdminsApi.md#fetch_group_by_id) | **GET** /groups/{id} | Finds approver group by id
-*ApprovalAPIClient::AdminsApi* | [**fetch_groups**](docs/AdminsApi.md#fetch_groups) | **GET** /groups | Returns list of approver groups
-*ApprovalAPIClient::AdminsApi* | [**fetch_requests**](docs/AdminsApi.md#fetch_requests) | **GET** /requests | List approval requests
-*ApprovalAPIClient::AdminsApi* | [**fetch_stage_by_id**](docs/AdminsApi.md#fetch_stage_by_id) | **GET** /stages/{id} | Retrieves approval stages by given id
-*ApprovalAPIClient::AdminsApi* | [**fetch_stages**](docs/AdminsApi.md#fetch_stages) | **GET** /stages | List approval stages
-*ApprovalAPIClient::AdminsApi* | [**fetch_template_by_id**](docs/AdminsApi.md#fetch_template_by_id) | **GET** /templates/{id} | Finds template by id
-*ApprovalAPIClient::AdminsApi* | [**fetch_template_workflows**](docs/AdminsApi.md#fetch_template_workflows) | **GET** /templates/{template_id}/workflows | Returns list of workflows by given template id
-*ApprovalAPIClient::AdminsApi* | [**fetch_templates**](docs/AdminsApi.md#fetch_templates) | **GET** /templates | Returns list of templates
-*ApprovalAPIClient::AdminsApi* | [**fetch_workflow_by_id**](docs/AdminsApi.md#fetch_workflow_by_id) | **GET** /workflows/{id} | List approval workflow by id
-*ApprovalAPIClient::AdminsApi* | [**fetch_workflow_requests**](docs/AdminsApi.md#fetch_workflow_requests) | **GET** /workflows/{workflow_id}/requests | List of all approval requests
-*ApprovalAPIClient::AdminsApi* | [**fetch_workflows**](docs/AdminsApi.md#fetch_workflows) | **GET** /workflows | List all approval workflows
-*ApprovalAPIClient::AdminsApi* | [**remove_action**](docs/AdminsApi.md#remove_action) | **DELETE** /actions/{id} | Delete action by id
-*ApprovalAPIClient::AdminsApi* | [**remove_group**](docs/AdminsApi.md#remove_group) | **DELETE** /groups/{id} | Delete approver group by id
-*ApprovalAPIClient::AdminsApi* | [**remove_request**](docs/AdminsApi.md#remove_request) | **DELETE** /requests/{id} | Delete approval request by id
-*ApprovalAPIClient::AdminsApi* | [**remove_stage**](docs/AdminsApi.md#remove_stage) | **DELETE** /stages/{id} | Delete approval stage by id
-*ApprovalAPIClient::AdminsApi* | [**remove_template**](docs/AdminsApi.md#remove_template) | **DELETE** /templates/{id} | Delete template by id
-*ApprovalAPIClient::AdminsApi* | [**remove_workflow**](docs/AdminsApi.md#remove_workflow) | **DELETE** /workflows/{id} | Delete approval workflow by id
-*ApprovalAPIClient::AdminsApi* | [**update_action**](docs/AdminsApi.md#update_action) | **PUT** /actions/{id} | Update an existing action
-*ApprovalAPIClient::AdminsApi* | [**update_group**](docs/AdminsApi.md#update_group) | **PUT** /groups/{id} | Update an existing approver group
-*ApprovalAPIClient::AdminsApi* | [**update_request**](docs/AdminsApi.md#update_request) | **PUT** /requests/{id} | Update an existing approval request status
-*ApprovalAPIClient::AdminsApi* | [**update_stage**](docs/AdminsApi.md#update_stage) | **PUT** /stages/{id} | Update an existing approval stage
-*ApprovalAPIClient::AdminsApi* | [**update_template**](docs/AdminsApi.md#update_template) | **PUT** /templates/{id} | Update an existing template
-*ApprovalAPIClient::AdminsApi* | [**update_workflow**](docs/AdminsApi.md#update_workflow) | **PUT** /workflows/{id} | Update an existing approval workflow
-*ApprovalAPIClient::ApproversApi* | [**add_action**](docs/ApproversApi.md#add_action) | **POST** /stages/{stage_id}/actions | Add an action
-*ApprovalAPIClient::ApproversApi* | [**fetch_action_by_id**](docs/ApproversApi.md#fetch_action_by_id) | **GET** /actions/{id} | Finds approver action by id
-*ApprovalAPIClient::ApproversApi* | [**fetch_actions**](docs/ApproversApi.md#fetch_actions) | **GET** /actions | Returns list of approver actions
-*ApprovalAPIClient::ApproversApi* | [**fetch_stage_by_id**](docs/ApproversApi.md#fetch_stage_by_id) | **GET** /stages/{id} | Retrieves approval stages by given id
-*ApprovalAPIClient::ApproversApi* | [**remove_action**](docs/ApproversApi.md#remove_action) | **DELETE** /actions/{id} | Delete action by id
-*ApprovalAPIClient::ApproversApi* | [**update_action**](docs/ApproversApi.md#update_action) | **PUT** /actions/{id} | Update an existing action
-*ApprovalAPIClient::ApproversApi* | [**update_stage**](docs/ApproversApi.md#update_stage) | **PUT** /stages/{id} | Update an existing approval stage
-*ApprovalAPIClient::UsersApi* | [**add_request**](docs/UsersApi.md#add_request) | **POST** /workflows/{workflow_id}/requests | Add a new approval request
-*ApprovalAPIClient::UsersApi* | [**fetch_request_by_id**](docs/UsersApi.md#fetch_request_by_id) | **GET** /requests/{id} | Retrieves approval request by given id
-*ApprovalAPIClient::UsersApi* | [**fetch_request_stages**](docs/UsersApi.md#fetch_request_stages) | **GET** /requests/{request_id}/stages | Returns stages by given request id
+*ApprovalAPIClient::AdminsApi* | [**add_action**](docs/AdminsApi.md#add_action) | **POST** /stages/{stage_id}/actions | Add an action to a given stage
+*ApprovalAPIClient::AdminsApi* | [**add_group**](docs/AdminsApi.md#add_group) | **POST** /groups | Add a new approver group by given parameters
+*ApprovalAPIClient::AdminsApi* | [**add_workflow**](docs/AdminsApi.md#add_workflow) | **POST** /templates/{template_id}/workflows | Add a workflow by given template id
+*ApprovalAPIClient::AdminsApi* | [**fetch_action_by_id**](docs/AdminsApi.md#fetch_action_by_id) | **GET** /actions/{id} | Return an approver action by id
+*ApprovalAPIClient::AdminsApi* | [**fetch_actions**](docs/AdminsApi.md#fetch_actions) | **GET** /actions | Return a list of approver actions
+*ApprovalAPIClient::AdminsApi* | [**fetch_group_by_id**](docs/AdminsApi.md#fetch_group_by_id) | **GET** /groups/{id} | Return approver group by given id
+*ApprovalAPIClient::AdminsApi* | [**fetch_groups**](docs/AdminsApi.md#fetch_groups) | **GET** /groups | Return all approver groups
+*ApprovalAPIClient::AdminsApi* | [**fetch_requests**](docs/AdminsApi.md#fetch_requests) | **GET** /requests | Return an array of approval requests
+*ApprovalAPIClient::AdminsApi* | [**fetch_stage_by_id**](docs/AdminsApi.md#fetch_stage_by_id) | **GET** /stages/{id} | Return an approval stage by given id
+*ApprovalAPIClient::AdminsApi* | [**fetch_stages**](docs/AdminsApi.md#fetch_stages) | **GET** /stages | Return all approval stages
+*ApprovalAPIClient::AdminsApi* | [**fetch_template_by_id**](docs/AdminsApi.md#fetch_template_by_id) | **GET** /templates/{id} | Return a template by given id
+*ApprovalAPIClient::AdminsApi* | [**fetch_template_workflows**](docs/AdminsApi.md#fetch_template_workflows) | **GET** /templates/{template_id}/workflows | Return an array of workflows by given template id
+*ApprovalAPIClient::AdminsApi* | [**fetch_templates**](docs/AdminsApi.md#fetch_templates) | **GET** /templates | Return all templates
+*ApprovalAPIClient::AdminsApi* | [**fetch_workflow_by_id**](docs/AdminsApi.md#fetch_workflow_by_id) | **GET** /workflows/{id} | Return an approval workflow by given id
+*ApprovalAPIClient::AdminsApi* | [**fetch_workflow_requests**](docs/AdminsApi.md#fetch_workflow_requests) | **GET** /workflows/{workflow_id}/requests | Return approval requests by given workflow id
+*ApprovalAPIClient::AdminsApi* | [**fetch_workflows**](docs/AdminsApi.md#fetch_workflows) | **GET** /workflows | Return all approval workflows
+*ApprovalAPIClient::AdminsApi* | [**remove_group**](docs/AdminsApi.md#remove_group) | **DELETE** /groups/{id} | Delete approver group by given id
+*ApprovalAPIClient::AdminsApi* | [**remove_workflow**](docs/AdminsApi.md#remove_workflow) | **DELETE** /workflows/{id} | Delete approval workflow by given id
+*ApprovalAPIClient::AdminsApi* | [**update_group**](docs/AdminsApi.md#update_group) | **PATCH** /groups/{id} | Update an approver group by given id
+*ApprovalAPIClient::AdminsApi* | [**update_workflow**](docs/AdminsApi.md#update_workflow) | **PATCH** /workflows/{id} | Update an approval workflow by given id
+*ApprovalAPIClient::ApproversApi* | [**add_action**](docs/ApproversApi.md#add_action) | **POST** /stages/{stage_id}/actions | Add an action to a given stage
+*ApprovalAPIClient::ApproversApi* | [**fetch_action_by_id**](docs/ApproversApi.md#fetch_action_by_id) | **GET** /actions/{id} | Return an approver action by id
+*ApprovalAPIClient::ApproversApi* | [**fetch_actions**](docs/ApproversApi.md#fetch_actions) | **GET** /actions | Return a list of approver actions
+*ApprovalAPIClient::ApproversApi* | [**fetch_stage_by_id**](docs/ApproversApi.md#fetch_stage_by_id) | **GET** /stages/{id} | Return an approval stage by given id
+*ApprovalAPIClient::UsersApi* | [**add_request**](docs/UsersApi.md#add_request) | **POST** /workflows/{workflow_id}/requests | Add an approval request by given parameters
+*ApprovalAPIClient::UsersApi* | [**fetch_request_by_id**](docs/UsersApi.md#fetch_request_by_id) | **GET** /requests/{id} | Return an approval request by given id
+*ApprovalAPIClient::UsersApi* | [**fetch_request_stages**](docs/UsersApi.md#fetch_request_stages) | **GET** /requests/{request_id}/stages | Return an array of stages by given request id
 
 
 ## Documentation for Models
@@ -131,15 +123,23 @@ Class | Method | HTTP request | Description
  - [ApprovalAPIClient::Action](docs/Action.md)
  - [ApprovalAPIClient::Decision](docs/Decision.md)
  - [ApprovalAPIClient::Group](docs/Group.md)
+ - [ApprovalAPIClient::Operation](docs/Operation.md)
  - [ApprovalAPIClient::Request](docs/Request.md)
  - [ApprovalAPIClient::Stage](docs/Stage.md)
  - [ApprovalAPIClient::State](docs/State.md)
  - [ApprovalAPIClient::Template](docs/Template.md)
  - [ApprovalAPIClient::Workflow](docs/Workflow.md)
+ - [ApprovalAPIClient::WorkflowGroups](docs/WorkflowGroups.md)
 
 
 ## Documentation for Authorization
 
+
+### APIKey_auth
+
+- **Type**: API key
+- **API key parameter name**: x-rh-auth-identity
+- **Location**: HTTP header
 
 ### approval_auth
 

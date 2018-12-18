@@ -13,19 +13,20 @@ Swagger Codegen version: 2.3.1
 require 'date'
 
 module ApprovalAPIClient
-  class State
+  class Operation
     
-    PENDING = "pending".freeze
-    SKIPPED = "skipped".freeze
-    NOTIFIED = "notified".freeze
-    FINISHED = "finished".freeze
+    APPROVE = "approve".freeze
+    DENY = "deny".freeze
+    NOTIFY = "notify".freeze
+    MEMO = "memo".freeze
+    SKIP = "skip".freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = State.constants.select{|c| State::const_get(c) == value}
-      raise "Invalid ENUM value #{value} for class #State" if constantValues.empty?
+      constantValues = Operation.constants.select{|c| Operation::const_get(c) == value}
+      raise "Invalid ENUM value #{value} for class #Operation" if constantValues.empty?
       value
     end
   end

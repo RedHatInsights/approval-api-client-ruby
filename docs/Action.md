@@ -4,11 +4,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | [optional] 
-**processed_by** | **String** | Person to process the action | 
-**actioned_at** | **DateTime** | Timestamp of action be processed | [optional] 
-**notified_at** | **DateTime** | Timestamp of action be notified | [optional] 
-**state** | [**State**](State.md) |  | [optional] 
-**decision** | [**Decision**](Decision.md) |  | [optional] 
-**comments** | **String** | Comments about the action | [optional] 
+**processed_by** | **String** | Processor info who perform the action | 
+**operation** | [**Operation**](Operation.md) |  | [optional] 
+**comments** | **String** | Comments for action | [optional] 
+**created_at** | **DateTime** | Timestamp of creation | [optional] 
 
 

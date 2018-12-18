@@ -12,6 +12,5 @@ Name | Type | Description | Notes
 **reason** | **String** | Comments for requests | [optional] 
 **content** | **Object** | JSON object with request content | 
 **workflow_id** | **String** | Associate workflow id | [optional] 
-**stages** | [**Array&lt;Stage&gt;**](Stage.md) |  | [optional] 
 
 

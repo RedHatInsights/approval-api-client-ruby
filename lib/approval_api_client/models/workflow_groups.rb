@@ -13,45 +13,30 @@ Swagger Codegen version: 2.3.1
 require 'date'
 
 module ApprovalAPIClient
-  # The stage of approval request.
-  class Stage
-    attr_accessor :id
+  # The associated approval groups
+  class WorkflowGroups
+    attr_accessor :name
 
-    attr_accessor :state
+    attr_accessor :description
 
-    attr_accessor :decision
-
-    # Approval stage
-    attr_accessor :comments
-
-    # Associated group id
-    attr_accessor :group_id
-
-    # Associated request id
-    attr_accessor :request_id
+    attr_accessor :group_ids
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'state' => :'state',
-        :'decision' => :'decision',
-        :'comments' => :'comments',
-        :'group_id' => :'group_id',
-        :'request_id' => :'request_id'
+        :'name' => :'name',
+        :'description' => :'description',
+        :'group_ids' => :'group_ids'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'String',
-        :'state' => :'State',
-        :'decision' => :'Decision',
-        :'comments' => :'String',
-        :'group_id' => :'String',
-        :'request_id' => :'String'
+        :'name' => :'String',
+        :'description' => :'String',
+        :'group_ids' => :'Array<Integer>'
       }
     end
 
@@ -63,28 +48,18 @@ module ApprovalAPIClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
+      if attributes.has_key?(:'description')
+        self.description = attributes[:'description']
       end
 
-      if attributes.has_key?(:'decision')
-        self.decision = attributes[:'decision']
-      end
-
-      if attributes.has_key?(:'comments')
-        self.comments = attributes[:'comments']
-      end
-
-      if attributes.has_key?(:'group_id')
-        self.group_id = attributes[:'group_id']
-      end
-
-      if attributes.has_key?(:'request_id')
-        self.request_id = attributes[:'request_id']
+      if attributes.has_key?(:'group_ids')
+        if (value = attributes[:'group_ids']).is_a?(Array)
+          self.group_ids = value
+        end
       end
 
     end
@@ -93,8 +68,12 @@ module ApprovalAPIClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @group_id.nil?
-        invalid_properties.push("invalid value for 'group_id', group_id cannot be nil.")
+      if @name.nil?
+        invalid_properties.push("invalid value for 'name', name cannot be nil.")
+      end
+
+      if @group_ids.nil?
+        invalid_properties.push("invalid value for 'group_ids', group_ids cannot be nil.")
       end
 
       return invalid_properties
@@ -103,7 +82,8 @@ module ApprovalAPIClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @group_id.nil?
+      return false if @name.nil?
+      return false if @group_ids.nil?
       return true
     end
 
@@ -112,12 +92,9 @@ module ApprovalAPIClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          state == o.state &&
-          decision == o.decision &&
-          comments == o.comments &&
-          group_id == o.group_id &&
-          request_id == o.request_id
+          name == o.name &&
+          description == o.description &&
+          group_ids == o.group_ids
     end
 
     # @see the `==` method
@@ -129,7 +106,7 @@ module ApprovalAPIClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, state, decision, comments, group_id, request_id].hash
+      [name, description, group_ids].hash
     end
 
     # Builds the object from hash
