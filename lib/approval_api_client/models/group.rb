@@ -13,18 +13,14 @@ Swagger Codegen version: 2.3.1
 require 'date'
 
 module ApprovalAPIClient
-  # Approver groups. Each group may have one or many approvers. The first response from any approver will be treated as group response.
+  # User groups. Each group may have one or many users. The first response from any user will be treated as group response.
   class Group
     attr_accessor :id
 
     # Group name
     attr_accessor :name
 
-    # Contact type. It may be email, slack, team, etc. So far only email is supported.
-    attr_accessor :contact_method
-
-    # JSON object with contact Setting
-    attr_accessor :contact_setting
+    attr_accessor :user_ids
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -32,8 +28,7 @@ module ApprovalAPIClient
       {
         :'id' => :'id',
         :'name' => :'name',
-        :'contact_method' => :'contact_method',
-        :'contact_setting' => :'contact_setting'
+        :'user_ids' => :'user_ids'
       }
     end
 
@@ -42,8 +37,7 @@ module ApprovalAPIClient
       {
         :'id' => :'String',
         :'name' => :'String',
-        :'contact_method' => :'String',
-        :'contact_setting' => :'Object'
+        :'user_ids' => :'Array<String>'
       }
     end
 
@@ -63,12 +57,10 @@ module ApprovalAPIClient
         self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'contact_method')
-        self.contact_method = attributes[:'contact_method']
-      end
-
-      if attributes.has_key?(:'contact_setting')
-        self.contact_setting = attributes[:'contact_setting']
+      if attributes.has_key?(:'user_ids')
+        if (value = attributes[:'user_ids']).is_a?(Array)
+          self.user_ids = value
+        end
       end
 
     end
@@ -81,14 +73,6 @@ module ApprovalAPIClient
         invalid_properties.push("invalid value for 'name', name cannot be nil.")
       end
 
-      if @contact_method.nil?
-        invalid_properties.push("invalid value for 'contact_method', contact_method cannot be nil.")
-      end
-
-      if @contact_setting.nil?
-        invalid_properties.push("invalid value for 'contact_setting', contact_setting cannot be nil.")
-      end
-
       return invalid_properties
     end
 
@@ -96,8 +80,6 @@ module ApprovalAPIClient
     # @return true if the model is valid
     def valid?
       return false if @name.nil?
-      return false if @contact_method.nil?
-      return false if @contact_setting.nil?
       return true
     end
 
@@ -108,8 +90,7 @@ module ApprovalAPIClient
       self.class == o.class &&
           id == o.id &&
           name == o.name &&
-          contact_method == o.contact_method &&
-          contact_setting == o.contact_setting
+          user_ids == o.user_ids
     end
 
     # @see the `==` method
@@ -121,7 +102,7 @@ module ApprovalAPIClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, contact_method, contact_setting].hash
+      [id, name, user_ids].hash
     end
 
     # Builds the object from hash

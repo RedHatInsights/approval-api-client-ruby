@@ -17,8 +17,10 @@ module ApprovalAPIClient
   class Stage
     attr_accessor :id
 
+    # The state of stage or request. It may be one of values (pending, skipped, notified or finished)
     attr_accessor :state
 
+    # Final decision, may be one of the value (undecided, approved, or denied)
     attr_accessor :decision
 
     # Approval stage
@@ -30,6 +32,27 @@ module ApprovalAPIClient
     # Associated request id
     attr_accessor :request_id
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -47,8 +70,8 @@ module ApprovalAPIClient
     def self.swagger_types
       {
         :'id' => :'String',
-        :'state' => :'State',
-        :'decision' => :'Decision',
+        :'state' => :'String',
+        :'decision' => :'String',
         :'comments' => :'String',
         :'group_id' => :'String',
         :'request_id' => :'String'
@@ -69,10 +92,14 @@ module ApprovalAPIClient
 
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
+      else
+        self.state = "pending"
       end
 
       if attributes.has_key?(:'decision')
         self.decision = attributes[:'decision']
+      else
+        self.decision = "undecided"
       end
 
       if attributes.has_key?(:'comments')
@@ -103,8 +130,32 @@ module ApprovalAPIClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      state_validator = EnumAttributeValidator.new('String', ["pending", "skipped", "notified", "finished"])
+      return false unless state_validator.valid?(@state)
+      decision_validator = EnumAttributeValidator.new('String', ["undecided", "approved", "denied"])
+      return false unless decision_validator.valid?(@decision)
       return false if @group_id.nil?
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] state Object to be assigned
+    def state=(state)
+      validator = EnumAttributeValidator.new('String', ["pending", "skipped", "notified", "finished"])
+      unless validator.valid?(state)
+        fail ArgumentError, "invalid value for 'state', must be one of #{validator.allowable_values}."
+      end
+      @state = state
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] decision Object to be assigned
+    def decision=(decision)
+      validator = EnumAttributeValidator.new('String', ["undecided", "approved", "denied"])
+      unless validator.valid?(decision)
+        fail ArgumentError, "invalid value for 'decision', must be one of #{validator.allowable_values}."
+      end
+      @decision = decision
     end
 
     # Checks equality by comparing each attribute.

@@ -20,37 +20,37 @@ module ApprovalAPIClient
       @api_client = api_client
     end
 
-    # Add an approval request by given parameters
-    # Add an approval request by given parameters
-    # @param workflow_id Id of workflow
-    # @param body Parameters need to create a request
+    # Add an action to a given stage
+    # Add an action to a given stage
+    # @param stage_id Id of stage
+    # @param body Action object that will be added
     # @param [Hash] opts the optional parameters
-    # @return [Request]
-    def add_request(workflow_id, body, opts = {})
-      data, _status_code, _headers = add_request_with_http_info(workflow_id, body, opts)
+    # @return [ActionOut]
+    def add_action(stage_id, body, opts = {})
+      data, _status_code, _headers = add_action_with_http_info(stage_id, body, opts)
       return data
     end
 
-    # Add an approval request by given parameters
-    # Add an approval request by given parameters
-    # @param workflow_id Id of workflow
-    # @param body Parameters need to create a request
+    # Add an action to a given stage
+    # Add an action to a given stage
+    # @param stage_id Id of stage
+    # @param body Action object that will be added
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Request, Fixnum, Hash)>] Request data, response status code and response headers
-    def add_request_with_http_info(workflow_id, body, opts = {})
+    # @return [Array<(ActionOut, Fixnum, Hash)>] ActionOut data, response status code and response headers
+    def add_action_with_http_info(stage_id, body, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: UsersApi.add_request ..."
+        @api_client.config.logger.debug "Calling API: UsersApi.add_action ..."
       end
-      # verify the required parameter 'workflow_id' is set
-      if @api_client.config.client_side_validation && workflow_id.nil?
-        fail ArgumentError, "Missing the required parameter 'workflow_id' when calling UsersApi.add_request"
+      # verify the required parameter 'stage_id' is set
+      if @api_client.config.client_side_validation && stage_id.nil?
+        fail ArgumentError, "Missing the required parameter 'stage_id' when calling UsersApi.add_action"
       end
       # verify the required parameter 'body' is set
       if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling UsersApi.add_request"
+        fail ArgumentError, "Missing the required parameter 'body' when calling UsersApi.add_action"
       end
       # resource path
-      local_var_path = "/workflows/{workflow_id}/requests".sub('{' + 'workflow_id' + '}', workflow_id.to_s)
+      local_var_path = "/stages/{stage_id}/actions".sub('{' + 'stage_id' + '}', stage_id.to_s)
 
       # query parameters
       query_params = {}
@@ -59,53 +59,51 @@ module ApprovalAPIClient
       header_params = {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
 
       # form parameters
       form_params = {}
 
       # http body (model)
       post_body = @api_client.object_to_http_body(body)
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Request')
+        :return_type => 'ActionOut')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: UsersApi#add_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: UsersApi#add_action\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Return an approval request by given id
-    # Return an approval request by given id
+    # Return an user action by id
+    # Return an user action by id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Request]
-    def fetch_request_by_id(id, opts = {})
-      data, _status_code, _headers = fetch_request_by_id_with_http_info(id, opts)
+    # @return [ActionOut]
+    def fetch_action_by_id(id, opts = {})
+      data, _status_code, _headers = fetch_action_by_id_with_http_info(id, opts)
       return data
     end
 
-    # Return an approval request by given id
-    # Return an approval request by given id
+    # Return an user action by id
+    # Return an user action by id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Request, Fixnum, Hash)>] Request data, response status code and response headers
-    def fetch_request_by_id_with_http_info(id, opts = {})
+    # @return [Array<(ActionOut, Fixnum, Hash)>] ActionOut data, response status code and response headers
+    def fetch_action_by_id_with_http_info(id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: UsersApi.fetch_request_by_id ..."
+        @api_client.config.logger.debug "Calling API: UsersApi.fetch_action_by_id ..."
       end
       # verify the required parameter 'id' is set
       if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling UsersApi.fetch_request_by_id"
+        fail ArgumentError, "Missing the required parameter 'id' when calling UsersApi.fetch_action_by_id"
       end
       # resource path
-      local_var_path = "/requests/{id}".sub('{' + 'id' + '}', id.to_s)
+      local_var_path = "/actions/{id}".sub('{' + 'id' + '}', id.to_s)
 
       # query parameters
       query_params = {}
@@ -118,48 +116,60 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Request')
+        :return_type => 'ActionOut')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: UsersApi#fetch_request_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: UsersApi#fetch_action_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Return an array of stages by given request id
-    # Return an array of stages by given request id
-    # @param request_id Id of request
+    # Return a list of user actions
+    # Return a list of user actions
     # @param [Hash] opts the optional parameters
-    # @return [Array<Stage>]
-    def fetch_request_stages(request_id, opts = {})
-      data, _status_code, _headers = fetch_request_stages_with_http_info(request_id, opts)
+    # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
+    # @option opts [Integer] :offset Starting Offset (default to 0)
+    # @return [Array<ActionOut>]
+    def fetch_actions(opts = {})
+      data, _status_code, _headers = fetch_actions_with_http_info(opts)
       return data
     end
 
-    # Return an array of stages by given request id
-    # Return an array of stages by given request id
-    # @param request_id Id of request
+    # Return a list of user actions
+    # Return a list of user actions
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Array<Stage>, Fixnum, Hash)>] Array<Stage> data, response status code and response headers
-    def fetch_request_stages_with_http_info(request_id, opts = {})
+    # @option opts [Integer] :limit How many items to return at one time (max 1000)
+    # @option opts [Integer] :offset Starting Offset
+    # @return [Array<(Array<ActionOut>, Fixnum, Hash)>] Array<ActionOut> data, response status code and response headers
+    def fetch_actions_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: UsersApi.fetch_request_stages ..."
+        @api_client.config.logger.debug "Calling API: UsersApi.fetch_actions ..."
       end
-      # verify the required parameter 'request_id' is set
-      if @api_client.config.client_side_validation && request_id.nil?
-        fail ArgumentError, "Missing the required parameter 'request_id' when calling UsersApi.fetch_request_stages"
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling UsersApi.fetch_actions, must be smaller than or equal to 100.'
       end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 20
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling UsersApi.fetch_actions, must be greater than or equal to 20.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'offset'].nil? && opts[:'offset'] < 0
+        fail ArgumentError, 'invalid value for "opts[:"offset"]" when calling UsersApi.fetch_actions, must be greater than or equal to 0.'
+      end
+
       # resource path
-      local_var_path = "/requests/{request_id}/stages".sub('{' + 'request_id' + '}', request_id.to_s)
+      local_var_path = "/actions"
 
       # query parameters
       query_params = {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
 
       # header parameters
       header_params = {}
@@ -171,16 +181,16 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<Stage>')
+        :return_type => 'Array<ActionOut>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: UsersApi#fetch_request_stages\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: UsersApi#fetch_actions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

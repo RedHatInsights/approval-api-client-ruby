@@ -25,7 +25,7 @@ module ApprovalAPIClient
     # @param stage_id Id of stage
     # @param body Action object that will be added
     # @param [Hash] opts the optional parameters
-    # @return [Action]
+    # @return [ActionOut]
     def add_action(stage_id, body, opts = {})
       data, _status_code, _headers = add_action_with_http_info(stage_id, body, opts)
       return data
@@ -36,7 +36,7 @@ module ApprovalAPIClient
     # @param stage_id Id of stage
     # @param body Action object that will be added
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Action, Fixnum, Hash)>] Action data, response status code and response headers
+    # @return [Array<(ActionOut, Fixnum, Hash)>] ActionOut data, response status code and response headers
     def add_action_with_http_info(stage_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.add_action ..."
@@ -65,35 +65,94 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = @api_client.object_to_http_body(body)
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Action')
+        :return_type => 'ActionOut')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#add_action\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Add a new approver group by given parameters
-    # Add a new approver group by given parameters
-    # @param body Parameters need to create approver group
+    # Add an action to a given request
+    # Add an action to a given request
+    # @param request_id Id of request
+    # @param body Action object that will be added
     # @param [Hash] opts the optional parameters
-    # @return [Group]
+    # @return [ActionOut]
+    def add_action_by_request_id(request_id, body, opts = {})
+      data, _status_code, _headers = add_action_by_request_id_with_http_info(request_id, body, opts)
+      return data
+    end
+
+    # Add an action to a given request
+    # Add an action to a given request
+    # @param request_id Id of request
+    # @param body Action object that will be added
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ActionOut, Fixnum, Hash)>] ActionOut data, response status code and response headers
+    def add_action_by_request_id_with_http_info(request_id, body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AdminsApi.add_action_by_request_id ..."
+      end
+      # verify the required parameter 'request_id' is set
+      if @api_client.config.client_side_validation && request_id.nil?
+        fail ArgumentError, "Missing the required parameter 'request_id' when calling AdminsApi.add_action_by_request_id"
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling AdminsApi.add_action_by_request_id"
+      end
+      # resource path
+      local_var_path = "/requests/{request_id}/actions".sub('{' + 'request_id' + '}', request_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(body)
+      auth_names = ['APIKey_auth']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'ActionOut')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdminsApi#add_action_by_request_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Add a new user group by given parameters
+    # Add a new user group by given parameters
+    # @param body Parameters need to create user group
+    # @param [Hash] opts the optional parameters
+    # @return [GroupOut]
     def add_group(body, opts = {})
       data, _status_code, _headers = add_group_with_http_info(body, opts)
       return data
     end
 
-    # Add a new approver group by given parameters
-    # Add a new approver group by given parameters
-    # @param body Parameters need to create approver group
+    # Add a new user group by given parameters
+    # Add a new user group by given parameters
+    # @param body Parameters need to create user group
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Group, Fixnum, Hash)>] Group data, response status code and response headers
+    # @return [Array<(GroupOut, Fixnum, Hash)>] GroupOut data, response status code and response headers
     def add_group_with_http_info(body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.add_group ..."
@@ -120,16 +179,71 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = @api_client.object_to_http_body(body)
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Group')
+        :return_type => 'GroupOut')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#add_group\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Add a new user by given parameters
+    # Add a new user by given parameters
+    # @param body Parameters need to create user
+    # @param [Hash] opts the optional parameters
+    # @return [UserOut]
+    def add_user(body, opts = {})
+      data, _status_code, _headers = add_user_with_http_info(body, opts)
+      return data
+    end
+
+    # Add a new user by given parameters
+    # Add a new user by given parameters
+    # @param body Parameters need to create user
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UserOut, Fixnum, Hash)>] UserOut data, response status code and response headers
+    def add_user_with_http_info(body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AdminsApi.add_user ..."
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling AdminsApi.add_user"
+      end
+      # resource path
+      local_var_path = "/users"
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(body)
+      auth_names = ['APIKey_auth']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'UserOut')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdminsApi#add_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -139,7 +253,7 @@ module ApprovalAPIClient
     # @param template_id Id of template
     # @param body Parameters need to create workflow
     # @param [Hash] opts the optional parameters
-    # @return [Workflow]
+    # @return [WorkflowOut]
     def add_workflow(template_id, body, opts = {})
       data, _status_code, _headers = add_workflow_with_http_info(template_id, body, opts)
       return data
@@ -150,7 +264,7 @@ module ApprovalAPIClient
     # @param template_id Id of template
     # @param body Parameters need to create workflow
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Workflow, Fixnum, Hash)>] Workflow data, response status code and response headers
+    # @return [Array<(WorkflowOut, Fixnum, Hash)>] WorkflowOut data, response status code and response headers
     def add_workflow_with_http_info(template_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.add_workflow ..."
@@ -181,35 +295,35 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = @api_client.object_to_http_body(body)
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Workflow')
+        :return_type => 'WorkflowOut')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#add_workflow\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Return an approver action by id
-    # Return an approver action by id
+    # Return an user action by id
+    # Return an user action by id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Action]
+    # @return [ActionOut]
     def fetch_action_by_id(id, opts = {})
       data, _status_code, _headers = fetch_action_by_id_with_http_info(id, opts)
       return data
     end
 
-    # Return an approver action by id
-    # Return an approver action by id
+    # Return an user action by id
+    # Return an user action by id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Action, Fixnum, Hash)>] Action data, response status code and response headers
+    # @return [Array<(ActionOut, Fixnum, Hash)>] ActionOut data, response status code and response headers
     def fetch_action_by_id_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.fetch_action_by_id ..."
@@ -232,37 +346,37 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Action')
+        :return_type => 'ActionOut')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#fetch_action_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Return a list of approver actions
-    # Return a list of approver actions
+    # Return a list of user actions
+    # Return a list of user actions
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
     # @option opts [Integer] :offset Starting Offset (default to 0)
-    # @return [Array<Action>]
+    # @return [Array<ActionOut>]
     def fetch_actions(opts = {})
       data, _status_code, _headers = fetch_actions_with_http_info(opts)
       return data
     end
 
-    # Return a list of approver actions
-    # Return a list of approver actions
+    # Return a list of user actions
+    # Return a list of user actions
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
-    # @return [Array<(Array<Action>, Fixnum, Hash)>] Array<Action> data, response status code and response headers
+    # @return [Array<(Array<ActionOut>, Fixnum, Hash)>] Array<ActionOut> data, response status code and response headers
     def fetch_actions_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.fetch_actions ..."
@@ -297,35 +411,35 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<Action>')
+        :return_type => 'Array<ActionOut>')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#fetch_actions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Return approver group by given id
-    # Return approver group by given id
+    # Return user group by given id
+    # Return user group by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Group]
+    # @return [GroupOut]
     def fetch_group_by_id(id, opts = {})
       data, _status_code, _headers = fetch_group_by_id_with_http_info(id, opts)
       return data
     end
 
-    # Return approver group by given id
-    # Return approver group by given id
+    # Return user group by given id
+    # Return user group by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Group, Fixnum, Hash)>] Group data, response status code and response headers
+    # @return [Array<(GroupOut, Fixnum, Hash)>] GroupOut data, response status code and response headers
     def fetch_group_by_id_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.fetch_group_by_id ..."
@@ -348,37 +462,37 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Group')
+        :return_type => 'GroupOut')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#fetch_group_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Return all approver groups
-    # Return all approver groups
+    # Return all user groups
+    # Return all user groups
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
     # @option opts [Integer] :offset Starting Offset (default to 0)
-    # @return [Array<Group>]
+    # @return [Array<GroupOut>]
     def fetch_groups(opts = {})
       data, _status_code, _headers = fetch_groups_with_http_info(opts)
       return data
     end
 
-    # Return all approver groups
-    # Return all approver groups
+    # Return all user groups
+    # Return all user groups
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
-    # @return [Array<(Array<Group>, Fixnum, Hash)>] Array<Group> data, response status code and response headers
+    # @return [Array<(Array<GroupOut>, Fixnum, Hash)>] Array<GroupOut> data, response status code and response headers
     def fetch_groups_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.fetch_groups ..."
@@ -413,16 +527,69 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<Group>')
+        :return_type => 'Array<GroupOut>')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#fetch_groups\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Return associated groups by given user id
+    # Return groups by given user id
+    # @param user_id Id of user
+    # @param [Hash] opts the optional parameters
+    # @return [Array<GroupOut>]
+    def fetch_groups_by_user_id(user_id, opts = {})
+      data, _status_code, _headers = fetch_groups_by_user_id_with_http_info(user_id, opts)
+      return data
+    end
+
+    # Return associated groups by given user id
+    # Return groups by given user id
+    # @param user_id Id of user
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Array<GroupOut>, Fixnum, Hash)>] Array<GroupOut> data, response status code and response headers
+    def fetch_groups_by_user_id_with_http_info(user_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AdminsApi.fetch_groups_by_user_id ..."
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling AdminsApi.fetch_groups_by_user_id"
+      end
+      # resource path
+      local_var_path = "/users/{user_id}/groups".sub('{' + 'user_id' + '}', user_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['APIKey_auth']
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Array<GroupOut>')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdminsApi#fetch_groups_by_user_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -435,7 +602,7 @@ module ApprovalAPIClient
     # @option opts [String] :requester Fetch item by given requester
     # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
     # @option opts [Integer] :offset Starting Offset (default to 0)
-    # @return [Array<Request>]
+    # @return [Array<RequestOut>]
     def fetch_requests(opts = {})
       data, _status_code, _headers = fetch_requests_with_http_info(opts)
       return data
@@ -449,7 +616,7 @@ module ApprovalAPIClient
     # @option opts [String] :requester Fetch item by given requester
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
-    # @return [Array<(Array<Request>, Fixnum, Hash)>] Array<Request> data, response status code and response headers
+    # @return [Array<(Array<RequestOut>, Fixnum, Hash)>] Array<RequestOut> data, response status code and response headers
     def fetch_requests_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.fetch_requests ..."
@@ -495,16 +662,69 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<Request>')
+        :return_type => 'Array<RequestOut>')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#fetch_requests\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Return associated requests by given user id
+    # Return requests by given user id
+    # @param user_id Id of user
+    # @param [Hash] opts the optional parameters
+    # @return [Array<RequestOut>]
+    def fetch_requests_by_user_id(user_id, opts = {})
+      data, _status_code, _headers = fetch_requests_by_user_id_with_http_info(user_id, opts)
+      return data
+    end
+
+    # Return associated requests by given user id
+    # Return requests by given user id
+    # @param user_id Id of user
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Array<RequestOut>, Fixnum, Hash)>] Array<RequestOut> data, response status code and response headers
+    def fetch_requests_by_user_id_with_http_info(user_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AdminsApi.fetch_requests_by_user_id ..."
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling AdminsApi.fetch_requests_by_user_id"
+      end
+      # resource path
+      local_var_path = "/users/{user_id}/requests".sub('{' + 'user_id' + '}', user_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['APIKey_auth']
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Array<RequestOut>')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdminsApi#fetch_requests_by_user_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -513,7 +733,7 @@ module ApprovalAPIClient
     # Return an approval stage by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Stage]
+    # @return [StageOut]
     def fetch_stage_by_id(id, opts = {})
       data, _status_code, _headers = fetch_stage_by_id_with_http_info(id, opts)
       return data
@@ -523,7 +743,7 @@ module ApprovalAPIClient
     # Return an approval stage by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Stage, Fixnum, Hash)>] Stage data, response status code and response headers
+    # @return [Array<(StageOut, Fixnum, Hash)>] StageOut data, response status code and response headers
     def fetch_stage_by_id_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.fetch_stage_by_id ..."
@@ -546,14 +766,14 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Stage')
+        :return_type => 'StageOut')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#fetch_stage_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -565,7 +785,7 @@ module ApprovalAPIClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
     # @option opts [Integer] :offset Starting Offset (default to 0)
-    # @return [Array<Stage>]
+    # @return [Array<StageOut>]
     def fetch_stages(opts = {})
       data, _status_code, _headers = fetch_stages_with_http_info(opts)
       return data
@@ -576,7 +796,7 @@ module ApprovalAPIClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
-    # @return [Array<(Array<Stage>, Fixnum, Hash)>] Array<Stage> data, response status code and response headers
+    # @return [Array<(Array<StageOut>, Fixnum, Hash)>] Array<StageOut> data, response status code and response headers
     def fetch_stages_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.fetch_stages ..."
@@ -609,14 +829,14 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<Stage>')
+        :return_type => 'Array<StageOut>')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#fetch_stages\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -627,7 +847,7 @@ module ApprovalAPIClient
     # Return a template by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Template]
+    # @return [TemplateOut]
     def fetch_template_by_id(id, opts = {})
       data, _status_code, _headers = fetch_template_by_id_with_http_info(id, opts)
       return data
@@ -637,7 +857,7 @@ module ApprovalAPIClient
     # Return a template by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Template, Fixnum, Hash)>] Template data, response status code and response headers
+    # @return [Array<(TemplateOut, Fixnum, Hash)>] TemplateOut data, response status code and response headers
     def fetch_template_by_id_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.fetch_template_by_id ..."
@@ -660,14 +880,14 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Template')
+        :return_type => 'TemplateOut')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#fetch_template_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -680,7 +900,7 @@ module ApprovalAPIClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
     # @option opts [Integer] :offset Starting Offset (default to 0)
-    # @return [Array<Workflow>]
+    # @return [Array<WorkflowOut>]
     def fetch_template_workflows(template_id, opts = {})
       data, _status_code, _headers = fetch_template_workflows_with_http_info(template_id, opts)
       return data
@@ -692,7 +912,7 @@ module ApprovalAPIClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
-    # @return [Array<(Array<Workflow>, Fixnum, Hash)>] Array<Workflow> data, response status code and response headers
+    # @return [Array<(Array<WorkflowOut>, Fixnum, Hash)>] Array<WorkflowOut> data, response status code and response headers
     def fetch_template_workflows_with_http_info(template_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.fetch_template_workflows ..."
@@ -731,14 +951,14 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<Workflow>')
+        :return_type => 'Array<WorkflowOut>')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#fetch_template_workflows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -750,7 +970,7 @@ module ApprovalAPIClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
     # @option opts [Integer] :offset Starting Offset (default to 0)
-    # @return [Array<Template>]
+    # @return [Array<TemplateOut>]
     def fetch_templates(opts = {})
       data, _status_code, _headers = fetch_templates_with_http_info(opts)
       return data
@@ -761,7 +981,7 @@ module ApprovalAPIClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
-    # @return [Array<(Array<Template>, Fixnum, Hash)>] Array<Template> data, response status code and response headers
+    # @return [Array<(Array<TemplateOut>, Fixnum, Hash)>] Array<TemplateOut> data, response status code and response headers
     def fetch_templates_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.fetch_templates ..."
@@ -796,16 +1016,185 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<Template>')
+        :return_type => 'Array<TemplateOut>')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#fetch_templates\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Return user by given id
+    # Return user by given id
+    # @param id Query by id
+    # @param [Hash] opts the optional parameters
+    # @return [UserOut]
+    def fetch_user_by_id(id, opts = {})
+      data, _status_code, _headers = fetch_user_by_id_with_http_info(id, opts)
+      return data
+    end
+
+    # Return user by given id
+    # Return user by given id
+    # @param id Query by id
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UserOut, Fixnum, Hash)>] UserOut data, response status code and response headers
+    def fetch_user_by_id_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AdminsApi.fetch_user_by_id ..."
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling AdminsApi.fetch_user_by_id"
+      end
+      # resource path
+      local_var_path = "/users/{id}".sub('{' + 'id' + '}', id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['APIKey_auth']
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'UserOut')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdminsApi#fetch_user_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Return a list of users
+    # Return a list of users
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
+    # @option opts [Integer] :offset Starting Offset (default to 0)
+    # @return [Array<UserOut>]
+    def fetch_users(opts = {})
+      data, _status_code, _headers = fetch_users_with_http_info(opts)
+      return data
+    end
+
+    # Return a list of users
+    # Return a list of users
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit How many items to return at one time (max 1000)
+    # @option opts [Integer] :offset Starting Offset
+    # @return [Array<(Array<UserOut>, Fixnum, Hash)>] Array<UserOut> data, response status code and response headers
+    def fetch_users_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AdminsApi.fetch_users ..."
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdminsApi.fetch_users, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 20
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdminsApi.fetch_users, must be greater than or equal to 20.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'offset'].nil? && opts[:'offset'] < 0
+        fail ArgumentError, 'invalid value for "opts[:"offset"]" when calling AdminsApi.fetch_users, must be greater than or equal to 0.'
+      end
+
+      # resource path
+      local_var_path = "/users"
+
+      # query parameters
+      query_params = {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['APIKey_auth']
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Array<UserOut>')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdminsApi#fetch_users\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Return associated users by given group id
+    # Return users by given group id
+    # @param group_id Id of group
+    # @param [Hash] opts the optional parameters
+    # @return [Array<UserOut>]
+    def fetch_users_by_group_id(group_id, opts = {})
+      data, _status_code, _headers = fetch_users_by_group_id_with_http_info(group_id, opts)
+      return data
+    end
+
+    # Return associated users by given group id
+    # Return users by given group id
+    # @param group_id Id of group
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Array<UserOut>, Fixnum, Hash)>] Array<UserOut> data, response status code and response headers
+    def fetch_users_by_group_id_with_http_info(group_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AdminsApi.fetch_users_by_group_id ..."
+      end
+      # verify the required parameter 'group_id' is set
+      if @api_client.config.client_side_validation && group_id.nil?
+        fail ArgumentError, "Missing the required parameter 'group_id' when calling AdminsApi.fetch_users_by_group_id"
+      end
+      # resource path
+      local_var_path = "/groups/{group_id}/users".sub('{' + 'group_id' + '}', group_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['APIKey_auth']
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Array<UserOut>')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdminsApi#fetch_users_by_group_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -814,7 +1203,7 @@ module ApprovalAPIClient
     # Return an approval workflow by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Workflow]
+    # @return [WorkflowOut]
     def fetch_workflow_by_id(id, opts = {})
       data, _status_code, _headers = fetch_workflow_by_id_with_http_info(id, opts)
       return data
@@ -824,7 +1213,7 @@ module ApprovalAPIClient
     # Return an approval workflow by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Workflow, Fixnum, Hash)>] Workflow data, response status code and response headers
+    # @return [Array<(WorkflowOut, Fixnum, Hash)>] WorkflowOut data, response status code and response headers
     def fetch_workflow_by_id_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.fetch_workflow_by_id ..."
@@ -847,14 +1236,14 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Workflow')
+        :return_type => 'WorkflowOut')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#fetch_workflow_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -867,7 +1256,7 @@ module ApprovalAPIClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
     # @option opts [Integer] :offset Starting Offset (default to 0)
-    # @return [Array<Request>]
+    # @return [Array<RequestOut>]
     def fetch_workflow_requests(workflow_id, opts = {})
       data, _status_code, _headers = fetch_workflow_requests_with_http_info(workflow_id, opts)
       return data
@@ -879,7 +1268,7 @@ module ApprovalAPIClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
-    # @return [Array<(Array<Request>, Fixnum, Hash)>] Array<Request> data, response status code and response headers
+    # @return [Array<(Array<RequestOut>, Fixnum, Hash)>] Array<RequestOut> data, response status code and response headers
     def fetch_workflow_requests_with_http_info(workflow_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.fetch_workflow_requests ..."
@@ -918,14 +1307,14 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<Request>')
+        :return_type => 'Array<RequestOut>')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#fetch_workflow_requests\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -937,7 +1326,7 @@ module ApprovalAPIClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
     # @option opts [Integer] :offset Starting Offset (default to 0)
-    # @return [Array<Workflow>]
+    # @return [Array<WorkflowOut>]
     def fetch_workflows(opts = {})
       data, _status_code, _headers = fetch_workflows_with_http_info(opts)
       return data
@@ -948,7 +1337,7 @@ module ApprovalAPIClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
-    # @return [Array<(Array<Workflow>, Fixnum, Hash)>] Array<Workflow> data, response status code and response headers
+    # @return [Array<(Array<WorkflowOut>, Fixnum, Hash)>] Array<WorkflowOut> data, response status code and response headers
     def fetch_workflows_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AdminsApi.fetch_workflows ..."
@@ -981,21 +1370,82 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<Workflow>')
+        :return_type => 'Array<WorkflowOut>')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#fetch_workflows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Delete approver group by given id
+    # Operation on a list of users to a given group
+    # Users join in or withdraw from a given group
+    # @param id Query by id
+    # @param body Parameters need to operate groups
+    # @param [Hash] opts the optional parameters
+    # @return [GroupOut]
+    def group_operation(id, body, opts = {})
+      data, _status_code, _headers = group_operation_with_http_info(id, body, opts)
+      return data
+    end
+
+    # Operation on a list of users to a given group
+    # Users join in or withdraw from a given group
+    # @param id Query by id
+    # @param body Parameters need to operate groups
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GroupOut, Fixnum, Hash)>] GroupOut data, response status code and response headers
+    def group_operation_with_http_info(id, body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AdminsApi.group_operation ..."
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling AdminsApi.group_operation"
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling AdminsApi.group_operation"
+      end
+      # resource path
+      local_var_path = "/groups/{id}".sub('{' + 'id' + '}', id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(body)
+      auth_names = ['APIKey_auth']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'GroupOut')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdminsApi#group_operation\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete user group by given id
     # Delete group by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
@@ -1005,7 +1455,7 @@ module ApprovalAPIClient
       return nil
     end
 
-    # Delete approver group by given id
+    # Delete user group by given id
     # Delete group by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
@@ -1034,7 +1484,7 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -1043,6 +1493,58 @@ module ApprovalAPIClient
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#remove_group\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete user by given id
+    # Delete user by given id
+    # @param id Query by id
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def remove_user(id, opts = {})
+      remove_user_with_http_info(id, opts)
+      return nil
+    end
+
+    # Delete user by given id
+    # Delete user by given id
+    # @param id Query by id
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def remove_user_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AdminsApi.remove_user ..."
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling AdminsApi.remove_user"
+      end
+      # resource path
+      local_var_path = "/users/{id}".sub('{' + 'id' + '}', id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['APIKey_auth']
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdminsApi#remove_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1086,7 +1588,7 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -1099,10 +1601,10 @@ module ApprovalAPIClient
       return data, status_code, headers
     end
 
-    # Update an approver group by given id
-    # Update an approver group by given id
+    # Update an user group by given id
+    # Update an user group by given id
     # @param id Query by id
-    # @param body Approver group object that needs to be updated
+    # @param body User group object that needs to be updated
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def update_group(id, body, opts = {})
@@ -1110,10 +1612,10 @@ module ApprovalAPIClient
       return nil
     end
 
-    # Update an approver group by given id
-    # Update an approver group by given id
+    # Update an user group by given id
+    # Update an user group by given id
     # @param id Query by id
-    # @param body Approver group object that needs to be updated
+    # @param body User group object that needs to be updated
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def update_group_with_http_info(id, body, opts = {})
@@ -1146,7 +1648,7 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = @api_client.object_to_http_body(body)
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:PATCH, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -1155,6 +1657,66 @@ module ApprovalAPIClient
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdminsApi#update_group\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update an user by given id
+    # Update an user by given id
+    # @param id Query by id
+    # @param body User object that needs to be updated
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def update_user(id, body, opts = {})
+      update_user_with_http_info(id, body, opts)
+      return nil
+    end
+
+    # Update an user by given id
+    # Update an user by given id
+    # @param id Query by id
+    # @param body User object that needs to be updated
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def update_user_with_http_info(id, body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AdminsApi.update_user ..."
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling AdminsApi.update_user"
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling AdminsApi.update_user"
+      end
+      # resource path
+      local_var_path = "/users/{id}".sub('{' + 'id' + '}', id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(body)
+      auth_names = ['APIKey_auth']
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdminsApi#update_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1206,7 +1768,7 @@ module ApprovalAPIClient
 
       # http body (model)
       post_body = @api_client.object_to_http_body(body)
-      auth_names = ['APIKey_auth', 'approval_auth']
+      auth_names = ['APIKey_auth']
       data, status_code, headers = @api_client.call_api(:PATCH, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
