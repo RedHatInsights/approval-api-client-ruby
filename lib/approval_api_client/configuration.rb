@@ -130,7 +130,7 @@ module ApprovalAPIClient
     def initialize
       @scheme = 'http'
       @host = 'localhost'
-      @base_path = ''
+      @base_path = '/api/approval'
       @api_key = {}
       @api_key_prefix = {}
       @timeout = 0
@@ -200,8 +200,15 @@ module ApprovalAPIClient
           {
             type: 'api_key',
             in: 'header',
-            key: 'x-rh-auth-identity',
-            value: api_key_with_prefix('x-rh-auth-identity')
+            key: 'x-rh-identity',
+            value: api_key_with_prefix('x-rh-identity')
+          },
+        'Basic_auth' =>
+          {
+            type: 'basic',
+            in: 'header',
+            key: 'Authorization',
+            value: basic_auth_token
           },
       }
     end
@@ -210,7 +217,7 @@ module ApprovalAPIClient
     def server_settings
       [
         {
-          url: "http://localhost:3000",
+          url: "http://localhost/api/approval",
           description: "No descriptoin provided",
         }
       ]

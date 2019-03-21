@@ -1,6 +1,6 @@
 # ApprovalAPIClient::StageApi
 
-All URIs are relative to *http://localhost:3000*
+All URIs are relative to *http://localhost/api/approval*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -22,9 +22,13 @@ require 'approval_api_client'
 # setup authorization
 ApprovalAPIClient.configure do |config|
   # Configure API key authorization: APIKey_auth
-  config.api_key['x-rh-auth-identity'] = 'YOUR API KEY'
+  config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['x-rh-auth-identity'] = 'Bearer'
+  #config.api_key_prefix['x-rh-identity'] = 'Bearer'
+
+  # Configure HTTP basic authorization: Basic_auth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
 end
 
 api_instance = ApprovalAPIClient::StageApi.new
@@ -51,7 +55,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKey_auth](../README.md#APIKey_auth)
+[APIKey_auth](../README.md#APIKey_auth), [Basic_auth](../README.md#Basic_auth)
 
 ### HTTP request headers
 
@@ -74,9 +78,13 @@ require 'approval_api_client'
 # setup authorization
 ApprovalAPIClient.configure do |config|
   # Configure API key authorization: APIKey_auth
-  config.api_key['x-rh-auth-identity'] = 'YOUR API KEY'
+  config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['x-rh-auth-identity'] = 'Bearer'
+  #config.api_key_prefix['x-rh-identity'] = 'Bearer'
+
+  # Configure HTTP basic authorization: Basic_auth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
 end
 
 api_instance = ApprovalAPIClient::StageApi.new
@@ -103,7 +111,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKey_auth](../README.md#APIKey_auth)
+[APIKey_auth](../README.md#APIKey_auth), [Basic_auth](../README.md#Basic_auth)
 
 ### HTTP request headers
 
