@@ -1,0 +1,1376 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Insights Service Approval APIs",
+        "description": "APIs to query approval service",
+        "version": "1.0.0",
+        "contact": {
+            "email": "support@redhat.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "tags": [
+        {
+            "name": "Action",
+            "description": "Operations about actions"
+        },
+        {
+            "name": "Request",
+            "description": "Operations about requests"
+        },
+        {
+            "name": "Stage",
+            "description": "Operations about stages"
+        },
+        {
+            "name": "Template",
+            "description": "Operations about templates"
+        },
+        {
+            "name": "Workflow",
+            "description": "Operations about workflows"
+        }
+    ],
+    "paths": {
+        "/stages/{stage_id}/actions": {
+            "post": {
+                "tags": [
+                  "Action"
+                ],
+                "summary": "Add an action to a given stage",
+                "description": "Add an action to a given stage",
+                "operationId": "createAction",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/stage_id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ActionIn"
+                            }
+                        }
+                    },
+                    "description": "Action object that will be added",
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ActionOut"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                  "Action"
+                ],
+                "summary": "Return actions in a given stage",
+                "description": "List all actions of a stage",
+                "operationId": "listActionsByStage",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/stage_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "headers": {
+                            "X-total-count": {
+                                "description": "Total number of items",
+                                "schema": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ActionOutCollection"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            }
+        },
+        "/actions/{id}": {
+            "get": {
+                "tags": [
+                  "Action"
+                ],
+                "summary": "Return an user action by id",
+                "description": "Return an user action by id",
+                "operationId": "showAction",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ActionOut"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            }
+        },
+        "/requests": {
+            "get": {
+                "tags": [
+                  "Request"
+                ],
+                "summary": "Return an array of approval requests",
+                "description": "Return an array of requests",
+                "operationId": "listRequests",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/decision"
+                    },
+                    {
+                        "$ref": "#/components/parameters/state"
+                    },
+                    {
+                        "$ref": "#/components/parameters/requester"
+                    },
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/offset"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "headers": {
+                            "X-total-count": {
+                                "description": "Total number of items",
+                                "schema": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RequestOutCollection"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            }
+        },
+        "/workflows/{workflow_id}/requests": {
+            "get": {
+                "tags": [
+                  "Request"
+                ],
+                "summary": "Return approval requests by given workflow id",
+                "description": "Return approval requests by given workflow id",
+                "operationId": "listRequestsByWorkflow",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/workflow_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/offset"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "headers": {
+                            "X-total-count": {
+                                "description": "Total number of items",
+                                "schema": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RequestOutCollection"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                  "Request"
+                ],
+                "summary": "Add an approval request by given parameters",
+                "description": "Add an approval request by given parameters",
+                "operationId": "createRequest",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/workflow_id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestIn"
+                            }
+                        }
+                    },
+                    "description": "Parameters need to create a request",
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RequestOut"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            }
+        },
+        "/requests/{id}": {
+            "get": {
+                "tags": [
+                  "Request"
+                ],
+                "summary": "Return an approval request by given id",
+                "description": "Return an approval request by given id",
+                "operationId": "showRequest",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RequestOut"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            }
+        },
+        "/requests/{request_id}/stages": {
+            "get": {
+                "tags": [
+                  "Stage"
+                ],
+                "summary": "Return an array of stages by given request id",
+                "description": "Return an array of stages by given request id",
+                "operationId": "listStagesByRequest",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/request_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StageOutCollection"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            }
+        },
+        "/stages/{id}": {
+            "get": {
+                "tags": [
+                  "Stage"
+                ],
+                "summary": "Return an approval stage by given id",
+                "description": "Return an approval stage by given id",
+                "operationId": "showStage",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StageOut"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            }
+        },
+        "/templates": {
+            "get": {
+                "tags": [
+                  "Template"
+                ],
+                "summary": "Return all templates",
+                "description": "Return all templates",
+                "operationId": "listTemplates",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/offset"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "headers": {
+                            "X-total-count": {
+                                "description": "Total number of items",
+                                "schema": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TemplateOutCollection"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            }
+        },
+        "/templates/{id}": {
+            "get": {
+                "tags": [
+                  "Template"
+                ],
+                "summary": "Return a template by given id",
+                "description": "Return a template by given id",
+                "operationId": "showTemplate",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TemplateOut"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            }
+        },
+        "/workflows": {
+            "get": {
+                "tags": [
+                  "Workflow"
+                ],
+                "summary": "Return all approval workflows",
+                "description": "Return all approval workflows",
+                "operationId": "listWorkflows",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/offset"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "headers": {
+                            "X-total-count": {
+                                "description": "Total number of items",
+                                "schema": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WorkflowOutCollection"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            }
+        },
+        "/templates/{template_id}/workflows": {
+            "get": {
+                "tags": [
+                  "Workflow"
+                ],
+                "summary": "Return an array of workflows by given template id",
+                "description": "Return an array of workflows by given template id",
+                "operationId": "listWorkflowsByTemplate",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/template_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/offset"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "headers": {
+                            "X-total-count": {
+                                "description": "Total number of items",
+                                "schema": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WorkflowOutCollection"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                  "Workflow"
+                ],
+                "summary": "Add a workflow by given template id",
+                "description": "Add a workflow by given template id",
+                "operationId": "addWorkflowToTemplate",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/template_id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WorkflowIn"
+                            }
+                        }
+                    },
+                    "description": "Parameters need to create workflow",
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WorkflowOut"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            }
+        },
+        "/workflows/{id}": {
+            "get": {
+                "tags": [
+                  "Workflow"
+                ],
+                "summary": "Return an approval workflow by given id",
+                "description": "Return an approval workflow by given id",
+                "operationId": "showWorkflow",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WorkflowOut"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                  "Workflow"
+                ],
+                "summary": "Update an approval workflow by given id",
+                "description": "Update an approval workflow by given id",
+                "operationId": "updateWorkflow",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WorkflowIn"
+                            }
+                        }
+                    },
+                    "description": "Parameters need to update approval workflow",
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WorkflowOut"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                  "Workflow"
+                ],
+                "summary": "Delete approval workflow by given id",
+                "description": "Delete approval workflow by given id",
+                "operationId": "destroyWorkflow",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Workflow Deleted"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400BadRequestResponse"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401UnauthorizedResponse"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403ForbiddenResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404NotFoundResponse"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422UnprocessableEntityResponse"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "Basic_auth": []
+        },
+        {
+            "APIKey_auth": []
+        }
+    ],
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api/approval"
+        }
+    ],
+    "components": {
+        "parameters": {
+            "id": {
+                "name": "id",
+                "in": "path",
+                "description": "Query by id",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "template_id": {
+                "name": "template_id",
+                "in": "path",
+                "description": "Id of template",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "workflow_id": {
+                "name": "workflow_id",
+                "in": "path",
+                "description": "Id of workflow",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "request_id": {
+                "name": "request_id",
+                "in": "path",
+                "description": "Id of request",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "stage_id": {
+                "name": "stage_id",
+                "in": "path",
+                "description": "Id of stage",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "limit": {
+                "name": "limit",
+                "in": "query",
+                "description": "How many items to return at one time (max 1000)",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": 20,
+                    "maximum": 100,
+                    "default": 20
+                }
+            },
+            "offset": {
+                "name": "offset",
+                "in": "query",
+                "description": "Starting Offset",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": 0,
+                    "default": 0
+                }
+            },
+            "state": {
+                "name": "state",
+                "in": "query",
+                "description": "Fetch item by given state (pending, skipped, notified, finished)",
+                "required": false,
+                "schema": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "pending",
+                            "skipped",
+                            "notified",
+                            "finished"
+                        ]
+                    }
+                }
+            },
+            "decision": {
+                "name": "decision",
+                "in": "query",
+                "description": "Fetch item by given decision (undecided, approved, denied)",
+                "required": false,
+                "schema": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "undecided",
+                            "approved",
+                            "denied"
+                        ]
+                    }
+                }
+            },
+            "requester": {
+                "name": "requester",
+                "in": "query",
+                "description": "Fetch item by given requester",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "400BadRequestResponse": {
+                "description": "Bad request"
+            },
+            "401UnauthorizedResponse": {
+                "description": "Caller is not authorized to access the resource."
+            },
+            "403ForbiddenResponse": {
+                "description": "Caller is forbidden to perform the action."
+            },
+            "404NotFoundResponse": {
+                "description": "The requested resource is not found."
+            },
+            "422UnprocessableEntityResponse": {
+                "description": "The required paramters are either invalid or missed."
+            },
+            "DefaultUnexpectedResponse": {
+                "description": "An unexpected response."
+            }
+        },
+        "securitySchemes": {
+            "Basic_auth": {
+                "type": "http",
+                "description": "The userid/password is needed when accessing this API externally",
+                "scheme": "basic"
+            },
+            "APIKey_auth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "x-rh-identity",
+                "description": "This is a base64 encoded string of a collection of attributes, that identify a user. This token is needed when accessing the API internally."
+            }
+        },
+        "schemas": {
+            "ActionIn": {
+                "type": "object",
+                "description": "Input parameters for Action object",
+                "required": [
+                    "operation"
+                ],
+                "properties": {
+                    "processed_by": {
+                        "type": "string",
+                        "description": "The person who performs the action"
+                    },
+                    "operation": {
+                        "type": "string",
+                        "description": "Types of action, may be one of the value (approve, deny, notify, memo, or skip). The stage will be updated according to the operation.",
+                        "enum": [
+                            "approve",
+                            "deny",
+                            "notify",
+                            "memo",
+                            "skip"
+                        ],
+                        "default": "memo"
+                    },
+                    "comments": {
+                        "type": "string",
+                        "description": "Comments for action",
+                        "readOnly": true
+                    }
+                }
+            },
+            "ActionOut": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/ActionIn"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "id",
+                            "stage_id"
+                        ],
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "created_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "Timestamp of creation"
+                            },
+                            "stage_id": {
+                                "type": "string",
+                                "description": "Associated stage id"
+                            }
+                        }
+                    }
+                ]
+            },
+            "RequestIn": {
+                "type": "object",
+                "description": "Input parameters for approval request object.",
+                "required": [
+                    "name",
+                    "content"
+                ],
+                "properties": {
+                    "requester": {
+                        "type": "string",
+                        "description": "Requester id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Request name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Request description"
+                    },
+                    "content": {
+                        "type": "object",
+                        "description": "JSON object with request content"
+                    }
+                }
+            },
+            "RequestOut": {
+                "description": "Approval request. Each request will associate with a workflow. Corresponding to the groups of the associated workflow, every request will have a list of stages to record the request processing details.",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/RequestIn"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string",
+                                "description": "The state of stage or request. It may be one of values (pending, skipped, notified or finished)",
+                                "enum": [
+                                    "pending",
+                                    "skipped",
+                                    "notified",
+                                    "finished"
+                                ],
+                                "default": "pending"
+                            },
+                            "decision": {
+                                "type": "string",
+                                "description": "Final decision, may be one of the value (undecided, approved, or denied)",
+                                "enum": [
+                                    "undecided",
+                                    "approved",
+                                    "denied"
+                                ],
+                                "default": "undecided"
+                            },
+                            "reason": {
+                                "type": "string",
+                                "description": "Comments for requests"
+                            },
+                            "workflow_id": {
+                                "type": "string",
+                                "description": "Associate workflow id"
+                            }
+                        }
+                    }
+                ]
+            },
+            "StageOut": {
+                "type": "object",
+                "description": "A stage of an approval request.",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "name of the group that processes the stage"
+                    },
+                    "group_ref": {
+                        "type": "string",
+                        "description": "Associated group reference id"
+                    },
+                    "state": {
+                        "type": "string",
+                        "description": "The state of stage or request. It may be one of values (pending, skipped, notified or finished)",
+                        "enum": [
+                            "pending",
+                            "skipped",
+                            "notified",
+                            "finished"
+                        ],
+                        "default": "pending"
+                    },
+                    "decision": {
+                        "type": "string",
+                        "description": "Final decision, may be one of the value (undecided, approved, or denied)",
+                        "enum": [
+                            "undecided",
+                            "approved",
+                            "denied"
+                        ],
+                        "default": "undecided"
+                    },
+                    "notified_at": {
+                        "type": "string",
+                        "description": "the time approvers in the stage are notified"
+                    }
+                }
+            },
+            "TemplateOut": {
+                "type": "object",
+                "description": "The template to categorize workflows.",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            },
+            "WorkflowIn": {
+                "type": "object",
+                "required": [
+                    "name",
+                    "group_refs"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "group_refs": {
+                        "type": "array",
+                        "description": "Group reference ids associated with workflow",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "WorkflowOut": {
+                "description": "The workflow to process approval requests. Each workflow is linked to multiple groups of approvals.",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/WorkflowIn"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "template_id": {
+                                "type": "string",
+                                "description": "Associated template id"
+                            }
+                        }
+                    }
+                ]
+            },
+            "ActionOutCollection": {
+                "type": "object",
+                "properties": {
+                    "meta": {
+                        "$ref": "#/components/schemas/CollectionMetadata"
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/CollectionLinks"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/ActionOut"
+                        }
+                    }
+                }
+            },
+            "RequestOutCollection": {
+                "type": "object",
+                "properties": {
+                    "meta": {
+                        "$ref": "#/components/schemas/CollectionMetadata"
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/CollectionLinks"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/RequestOut"
+                        }
+                    }
+                }
+            },
+            "StageOutCollection": {
+                "type": "object",
+                "properties": {
+                    "meta": {
+                        "$ref": "#/components/schemas/CollectionMetadata"
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/CollectionLinks"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/StageOut"
+                        }
+                    }
+                }
+            },
+            "TemplateOutCollection": {
+                "type": "object",
+                "properties": {
+                    "meta": {
+                        "$ref": "#/components/schemas/CollectionMetadata"
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/CollectionLinks"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/TemplateOut"
+                        }
+                    }
+                }
+            },
+            "WorkflowOutCollection": {
+                "type": "object",
+                "properties": {
+                    "meta": {
+                        "$ref": "#/components/schemas/CollectionMetadata"
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/CollectionLinks"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/WorkflowOut"
+                        }
+                    }
+                }
+            },
+            "CollectionLinks": {
+                "type": "object",
+                "properties": {
+                    "first": {
+                        "type": "string",
+                        "title": "First Link",
+                        "description": "The link to fetch the first group of items in the result set"
+                    },
+                    "last": {
+                        "type": "string",
+                        "title": "Last Link",
+                        "description": "The link to fetch the last group of items in the result set"
+                    },
+                    "prev": {
+                        "type": "string",
+                        "title": "Previous Link",
+                        "description": "The link to fetch the previous group of items in the result set"
+                    },
+                    "next": {
+                        "type": "string",
+                        "title": "Next Link",
+                        "description": "The link to fetch the next group of items in the result set"
+                    }
+                }
+            },
+            "CollectionMetadata": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "title": "Total number of items in the result set",
+                        "description": "This is the total number of items in the result set, of which only a subset is returned defined by the QueryLimit parameter"
+                    }
+                }
+            }
+        }
+    }
+}

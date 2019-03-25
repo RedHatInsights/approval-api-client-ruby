@@ -1,4 +1,4 @@
-# ApprovalAPIClient::StageOutCollection
+# ApprovalApiClient::StageOutCollection
 
 ## Properties
 Name | Type | Description | Notes

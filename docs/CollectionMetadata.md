@@ -1,4 +1,4 @@
-# ApprovalAPIClient::CollectionMetadata
+# ApprovalApiClient::CollectionMetadata
 
 ## Properties
 Name | Type | Description | Notes

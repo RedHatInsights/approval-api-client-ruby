@@ -1,4 +1,4 @@
-# ApprovalAPIClient::ActionOutCollection
+# ApprovalApiClient::ActionOutCollection
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# ApprovalAPIClient::ActionApi
+# ApprovalApiClient::ActionApi
 
 All URIs are relative to *http://localhost/api/approval*
 
@@ -19,9 +19,9 @@ Add an action to a given stage
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -32,15 +32,15 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::ActionApi.new
+api_instance = ApprovalApiClient::ActionApi.new
 stage_id = 56 # Integer | Id of stage
-action_in = ApprovalAPIClient::ActionIn.new # ActionIn | Action object that will be added
+action_in = ApprovalApiClient::ActionIn.new # ActionIn | Action object that will be added
 
 begin
   #Add an action to a given stage
   result = api_instance.create_action(stage_id, action_in)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling ActionApi->create_action: #{e}"
 end
 ```
@@ -77,9 +77,9 @@ List all actions of a stage
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -90,14 +90,14 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::ActionApi.new
+api_instance = ApprovalApiClient::ActionApi.new
 stage_id = 56 # Integer | Id of stage
 
 begin
   #Return actions in a given stage
   result = api_instance.list_actions_by_stage(stage_id)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling ActionApi->list_actions_by_stage: #{e}"
 end
 ```
@@ -133,9 +133,9 @@ Return an user action by id
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -146,14 +146,14 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::ActionApi.new
+api_instance = ApprovalApiClient::ActionApi.new
 id = 56 # Integer | Query by id
 
 begin
   #Return an user action by id
   result = api_instance.show_action(id)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling ActionApi->show_action: #{e}"
 end
 ```

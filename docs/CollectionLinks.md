@@ -1,4 +1,4 @@
-# ApprovalAPIClient::CollectionLinks
+# ApprovalApiClient::CollectionLinks
 
 ## Properties
 Name | Type | Description | Notes
