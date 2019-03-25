@@ -1,4 +1,4 @@
-# ApprovalAPIClient::TemplateApi
+# ApprovalApiClient::TemplateApi
 
 All URIs are relative to *http://localhost/api/approval*
 
@@ -18,9 +18,9 @@ Return all templates
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -31,7 +31,7 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::TemplateApi.new
+api_instance = ApprovalApiClient::TemplateApi.new
 opts = {
   limit: 20, # Integer | How many items to return at one time (max 1000)
   offset: 0 # Integer | Starting Offset
@@ -41,7 +41,7 @@ begin
   #Return all templates
   result = api_instance.list_templates(opts)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling TemplateApi->list_templates: #{e}"
 end
 ```
@@ -78,9 +78,9 @@ Return a template by given id
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -91,14 +91,14 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::TemplateApi.new
+api_instance = ApprovalApiClient::TemplateApi.new
 id = 56 # Integer | Query by id
 
 begin
   #Return a template by given id
   result = api_instance.show_template(id)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling TemplateApi->show_template: #{e}"
 end
 ```

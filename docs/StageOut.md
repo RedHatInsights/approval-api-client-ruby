@@ -1,4 +1,4 @@
-# ApprovalAPIClient::StageOut
+# ApprovalApiClient::StageOut
 
 ## Properties
 Name | Type | Description | Notes

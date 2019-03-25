@@ -1,4 +1,4 @@
-# ApprovalAPIClient::WorkflowApi
+# ApprovalApiClient::WorkflowApi
 
 All URIs are relative to *http://localhost/api/approval*
 
@@ -22,9 +22,9 @@ Add a workflow by given template id
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -35,15 +35,15 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::WorkflowApi.new
+api_instance = ApprovalApiClient::WorkflowApi.new
 template_id = 56 # Integer | Id of template
-workflow_in = ApprovalAPIClient::WorkflowIn.new # WorkflowIn | Parameters need to create workflow
+workflow_in = ApprovalApiClient::WorkflowIn.new # WorkflowIn | Parameters need to create workflow
 
 begin
   #Add a workflow by given template id
   result = api_instance.add_workflow_to_template(template_id, workflow_in)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling WorkflowApi->add_workflow_to_template: #{e}"
 end
 ```
@@ -80,9 +80,9 @@ Delete approval workflow by given id
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -93,13 +93,13 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::WorkflowApi.new
+api_instance = ApprovalApiClient::WorkflowApi.new
 id = 56 # Integer | Query by id
 
 begin
   #Delete approval workflow by given id
   api_instance.destroy_workflow(id)
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling WorkflowApi->destroy_workflow: #{e}"
 end
 ```
@@ -135,9 +135,9 @@ Return all approval workflows
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -148,7 +148,7 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::WorkflowApi.new
+api_instance = ApprovalApiClient::WorkflowApi.new
 opts = {
   limit: 20, # Integer | How many items to return at one time (max 1000)
   offset: 0 # Integer | Starting Offset
@@ -158,7 +158,7 @@ begin
   #Return all approval workflows
   result = api_instance.list_workflows(opts)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling WorkflowApi->list_workflows: #{e}"
 end
 ```
@@ -195,9 +195,9 @@ Return an array of workflows by given template id
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -208,7 +208,7 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::WorkflowApi.new
+api_instance = ApprovalApiClient::WorkflowApi.new
 template_id = 56 # Integer | Id of template
 opts = {
   limit: 20, # Integer | How many items to return at one time (max 1000)
@@ -219,7 +219,7 @@ begin
   #Return an array of workflows by given template id
   result = api_instance.list_workflows_by_template(template_id, opts)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling WorkflowApi->list_workflows_by_template: #{e}"
 end
 ```
@@ -257,9 +257,9 @@ Return an approval workflow by given id
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -270,14 +270,14 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::WorkflowApi.new
+api_instance = ApprovalApiClient::WorkflowApi.new
 id = 56 # Integer | Query by id
 
 begin
   #Return an approval workflow by given id
   result = api_instance.show_workflow(id)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling WorkflowApi->show_workflow: #{e}"
 end
 ```
@@ -313,9 +313,9 @@ Update an approval workflow by given id
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -326,15 +326,15 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::WorkflowApi.new
+api_instance = ApprovalApiClient::WorkflowApi.new
 id = 56 # Integer | Query by id
-workflow_in = ApprovalAPIClient::WorkflowIn.new # WorkflowIn | Parameters need to update approval workflow
+workflow_in = ApprovalApiClient::WorkflowIn.new # WorkflowIn | Parameters need to update approval workflow
 
 begin
   #Update an approval workflow by given id
   result = api_instance.update_workflow(id, workflow_in)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling WorkflowApi->update_workflow: #{e}"
 end
 ```

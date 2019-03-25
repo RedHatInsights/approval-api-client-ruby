@@ -1,4 +1,4 @@
-# ApprovalAPIClient::TemplateOutCollection
+# ApprovalApiClient::TemplateOutCollection
 
 ## Properties
 Name | Type | Description | Notes

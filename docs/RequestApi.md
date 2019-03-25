@@ -1,4 +1,4 @@
-# ApprovalAPIClient::RequestApi
+# ApprovalApiClient::RequestApi
 
 All URIs are relative to *http://localhost/api/approval*
 
@@ -20,9 +20,9 @@ Add an approval request by given parameters
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -33,15 +33,15 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::RequestApi.new
+api_instance = ApprovalApiClient::RequestApi.new
 workflow_id = 56 # Integer | Id of workflow
-request_in = ApprovalAPIClient::RequestIn.new # RequestIn | Parameters need to create a request
+request_in = ApprovalApiClient::RequestIn.new # RequestIn | Parameters need to create a request
 
 begin
   #Add an approval request by given parameters
   result = api_instance.create_request(workflow_id, request_in)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling RequestApi->create_request: #{e}"
 end
 ```
@@ -78,9 +78,9 @@ Return an array of requests
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -91,7 +91,7 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::RequestApi.new
+api_instance = ApprovalApiClient::RequestApi.new
 opts = {
   decision: ['decision_example'], # Array<String> | Fetch item by given decision (undecided, approved, denied)
   state: ['state_example'], # Array<String> | Fetch item by given state (pending, skipped, notified, finished)
@@ -104,7 +104,7 @@ begin
   #Return an array of approval requests
   result = api_instance.list_requests(opts)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling RequestApi->list_requests: #{e}"
 end
 ```
@@ -144,9 +144,9 @@ Return approval requests by given workflow id
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -157,7 +157,7 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::RequestApi.new
+api_instance = ApprovalApiClient::RequestApi.new
 workflow_id = 56 # Integer | Id of workflow
 opts = {
   limit: 20, # Integer | How many items to return at one time (max 1000)
@@ -168,7 +168,7 @@ begin
   #Return approval requests by given workflow id
   result = api_instance.list_requests_by_workflow(workflow_id, opts)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling RequestApi->list_requests_by_workflow: #{e}"
 end
 ```
@@ -206,9 +206,9 @@ Return an approval request by given id
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -219,14 +219,14 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::RequestApi.new
+api_instance = ApprovalApiClient::RequestApi.new
 id = 56 # Integer | Query by id
 
 begin
   #Return an approval request by given id
   result = api_instance.show_request(id)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling RequestApi->show_request: #{e}"
 end
 ```

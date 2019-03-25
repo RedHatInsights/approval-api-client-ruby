@@ -1,4 +1,4 @@
-# ApprovalAPIClient::WorkflowOut
+# ApprovalApiClient::WorkflowOut
 
 ## Properties
 Name | Type | Description | Notes

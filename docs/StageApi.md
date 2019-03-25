@@ -1,4 +1,4 @@
-# ApprovalAPIClient::StageApi
+# ApprovalApiClient::StageApi
 
 All URIs are relative to *http://localhost/api/approval*
 
@@ -18,9 +18,9 @@ Return an array of stages by given request id
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -31,14 +31,14 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::StageApi.new
+api_instance = ApprovalApiClient::StageApi.new
 request_id = 56 # Integer | Id of request
 
 begin
   #Return an array of stages by given request id
   result = api_instance.list_stages_by_request(request_id)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling StageApi->list_stages_by_request: #{e}"
 end
 ```
@@ -74,9 +74,9 @@ Return an approval stage by given id
 ### Example
 ```ruby
 # load the gem
-require 'approval_api_client'
+require 'approval-api-client-ruby'
 # setup authorization
-ApprovalAPIClient.configure do |config|
+ApprovalApiClient.configure do |config|
   # Configure API key authorization: APIKey_auth
   config.api_key['x-rh-identity'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -87,14 +87,14 @@ ApprovalAPIClient.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = ApprovalAPIClient::StageApi.new
+api_instance = ApprovalApiClient::StageApi.new
 id = 56 # Integer | Query by id
 
 begin
   #Return an approval stage by given id
   result = api_instance.show_stage(id)
   p result
-rescue ApprovalAPIClient::ApiError => e
+rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling StageApi->show_stage: #{e}"
 end
 ```
