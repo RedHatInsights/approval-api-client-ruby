@@ -66,7 +66,7 @@ module ApprovalApiClient
 
       # http body (model)
       post_body = @api_client.object_to_http_body(action_in)
-      auth_names = ['APIKey_auth', 'Basic_auth']
+      auth_names = ['Basic_auth']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -119,7 +119,7 @@ module ApprovalApiClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'Basic_auth']
+      auth_names = ['Basic_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
@@ -172,7 +172,7 @@ module ApprovalApiClient
 
       # http body (model)
       post_body = nil
-      auth_names = ['APIKey_auth', 'Basic_auth']
+      auth_names = ['Basic_auth']
       data, status_code, headers = @api_client.call_api(:GET, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
