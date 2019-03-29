@@ -1,6 +1,6 @@
 # ApprovalApiClient::TemplateApi
 
-All URIs are relative to *http://localhost/api/approval*
+All URIs are relative to *http://localhost/api/approval/v1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

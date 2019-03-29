@@ -130,7 +130,7 @@ module ApprovalApiClient
     def initialize
       @scheme = 'http'
       @host = 'localhost'
-      @base_path = '/api/approval'
+      @base_path = '/api/approval/v1.0'
       @api_key = {}
       @api_key_prefix = {}
       @timeout = 0
@@ -217,7 +217,7 @@ module ApprovalApiClient
     def server_settings
       [
         {
-          url: "http://localhost/api/approval",
+          url: "http://localhost/api/approval/v1.0",
           description: "No descriptoin provided",
         }
       ]
