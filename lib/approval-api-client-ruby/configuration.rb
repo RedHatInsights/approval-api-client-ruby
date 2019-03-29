@@ -196,13 +196,6 @@ module ApprovalApiClient
     # Returns Auth Settings hash for api client.
     def auth_settings
       {
-        'APIKey_auth' =>
-          {
-            type: 'api_key',
-            in: 'header',
-            key: 'x-rh-identity',
-            value: api_key_with_prefix('x-rh-identity')
-          },
         'Basic_auth' =>
           {
             type: 'basic',

@@ -21,11 +21,6 @@ Return all templates
 require 'approval-api-client-ruby'
 # setup authorization
 ApprovalApiClient.configure do |config|
-  # Configure API key authorization: APIKey_auth
-  config.api_key['x-rh-identity'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['x-rh-identity'] = 'Bearer'
-
   # Configure HTTP basic authorization: Basic_auth
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
@@ -59,7 +54,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKey_auth](../README.md#APIKey_auth), [Basic_auth](../README.md#Basic_auth)
+[Basic_auth](../README.md#Basic_auth)
 
 ### HTTP request headers
 
@@ -81,11 +76,6 @@ Return a template by given id
 require 'approval-api-client-ruby'
 # setup authorization
 ApprovalApiClient.configure do |config|
-  # Configure API key authorization: APIKey_auth
-  config.api_key['x-rh-identity'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['x-rh-identity'] = 'Bearer'
-
   # Configure HTTP basic authorization: Basic_auth
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
@@ -115,7 +105,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKey_auth](../README.md#APIKey_auth), [Basic_auth](../README.md#Basic_auth)
+[Basic_auth](../README.md#Basic_auth)
 
 ### HTTP request headers
 
