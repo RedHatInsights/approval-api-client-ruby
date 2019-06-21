@@ -45,6 +45,19 @@ describe 'ActionApi' do
     end
   end
 
+  # unit tests for create_action_by_request
+  # Add an action to current active stage of a given request
+  # Add an action to current active stage of a given request. If request is finished, i.e. no current active stage is available, no action can be posted here.
+  # @param request_id Id of request
+  # @param action_in Action object that will be added
+  # @param [Hash] opts the optional parameters
+  # @return [ActionOut]
+  describe 'create_action_by_request test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for list_actions_by_stage
   # Return actions in a given stage
   # List all actions of a stage

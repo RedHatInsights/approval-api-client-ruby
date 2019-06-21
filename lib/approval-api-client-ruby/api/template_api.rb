@@ -22,8 +22,9 @@ module ApprovalApiClient
     # Return all templates
     # Return all templates
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
+    # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 100)
     # @option opts [Integer] :offset Starting Offset (default to 0)
+    # @option opts [Object] :filter Filter for querying collections.
     # @return [TemplateOutCollection]
     def list_templates(opts = {})
       data, _status_code, _headers = list_templates_with_http_info(opts)
@@ -35,17 +36,18 @@ module ApprovalApiClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
+    # @option opts [Object] :filter Filter for querying collections.
     # @return [Array<(TemplateOutCollection, Fixnum, Hash)>] TemplateOutCollection data, response status code and response headers
     def list_templates_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TemplateApi.list_templates ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling TemplateApi.list_templates, must be smaller than or equal to 100.'
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling TemplateApi.list_templates, must be smaller than or equal to 1000.'
       end
 
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 20
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling TemplateApi.list_templates, must be greater than or equal to 20.'
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling TemplateApi.list_templates, must be greater than or equal to 1.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'offset'].nil? && opts[:'offset'] < 0
@@ -59,6 +61,7 @@ module ApprovalApiClient
       query_params = {}
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
+      query_params[:'filter'] = opts[:'filter'] if !opts[:'filter'].nil?
 
       # header parameters
       header_params = {}

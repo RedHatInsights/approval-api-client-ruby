@@ -14,15 +14,6 @@ require 'date'
 
 module ApprovalApiClient
   class ActionOut
-    # The person who performs the action
-    attr_accessor :processed_by
-
-    # Types of action, may be one of the value (approve, deny, notify, memo, or skip). The stage will be updated according to the operation.
-    attr_accessor :operation
-
-    # Comments for action
-    attr_accessor :comments
-
     attr_accessor :id
 
     # Timestamp of creation
@@ -30,6 +21,15 @@ module ApprovalApiClient
 
     # Associated stage id
     attr_accessor :stage_id
+
+    # The person who performs the action
+    attr_accessor :processed_by
+
+    # Types of action, may be one of the value (approve, cancel, deny, notify, memo, or skip). The stage will be updated according to the operation.
+    attr_accessor :operation
+
+    # Comments for action
+    attr_accessor :comments
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -56,24 +56,24 @@ module ApprovalApiClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'processed_by' => :'processed_by',
-        :'operation' => :'operation',
-        :'comments' => :'comments',
         :'id' => :'id',
         :'created_at' => :'created_at',
-        :'stage_id' => :'stage_id'
+        :'stage_id' => :'stage_id',
+        :'processed_by' => :'processed_by',
+        :'operation' => :'operation',
+        :'comments' => :'comments'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'processed_by' => :'String',
-        :'operation' => :'String',
-        :'comments' => :'String',
         :'id' => :'String',
         :'created_at' => :'DateTime',
-        :'stage_id' => :'String'
+        :'stage_id' => :'String',
+        :'processed_by' => :'String',
+        :'operation' => :'String',
+        :'comments' => :'String'
       }
     end
 
@@ -84,6 +84,18 @@ module ApprovalApiClient
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.has_key?(:'stage_id')
+        self.stage_id = attributes[:'stage_id']
+      end
 
       if attributes.has_key?(:'processed_by')
         self.processed_by = attributes[:'processed_by']
@@ -98,28 +110,12 @@ module ApprovalApiClient
       if attributes.has_key?(:'comments')
         self.comments = attributes[:'comments']
       end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
-      if attributes.has_key?(:'stage_id')
-        self.stage_id = attributes[:'stage_id']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @operation.nil?
-        invalid_properties.push('invalid value for "operation", operation cannot be nil.')
-      end
-
       if @id.nil?
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
@@ -134,18 +130,17 @@ module ApprovalApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @operation.nil?
-      operation_validator = EnumAttributeValidator.new('String', ['approve', 'deny', 'notify', 'memo', 'skip'])
-      return false unless operation_validator.valid?(@operation)
       return false if @id.nil?
       return false if @stage_id.nil?
+      operation_validator = EnumAttributeValidator.new('String', ['approve', 'cancel', 'deny', 'notify', 'memo', 'skip'])
+      return false unless operation_validator.valid?(@operation)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] operation Object to be assigned
     def operation=(operation)
-      validator = EnumAttributeValidator.new('String', ['approve', 'deny', 'notify', 'memo', 'skip'])
+      validator = EnumAttributeValidator.new('String', ['approve', 'cancel', 'deny', 'notify', 'memo', 'skip'])
       unless validator.valid?(operation)
         fail ArgumentError, 'invalid value for "operation", must be one of #{validator.allowable_values}.'
       end
@@ -157,12 +152,12 @@ module ApprovalApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          processed_by == o.processed_by &&
-          operation == o.operation &&
-          comments == o.comments &&
           id == o.id &&
           created_at == o.created_at &&
-          stage_id == o.stage_id
+          stage_id == o.stage_id &&
+          processed_by == o.processed_by &&
+          operation == o.operation &&
+          comments == o.comments
     end
 
     # @see the `==` method
@@ -174,7 +169,7 @@ module ApprovalApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [processed_by, operation, comments, id, created_at, stage_id].hash
+      [id, created_at, stage_id, processed_by, operation, comments].hash
     end
 
     # Builds the object from hash

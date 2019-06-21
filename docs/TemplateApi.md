@@ -1,6 +1,6 @@
 # ApprovalApiClient::TemplateApi
 
-All URIs are relative to *http://localhost/api/approval/v1.0*
+All URIs are relative to *https://cloud.redhat.com//api/approval/v1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -28,8 +28,9 @@ end
 
 api_instance = ApprovalApiClient::TemplateApi.new
 opts = {
-  limit: 20, # Integer | How many items to return at one time (max 1000)
-  offset: 0 # Integer | Starting Offset
+  limit: 100, # Integer | How many items to return at one time (max 1000)
+  offset: 0, # Integer | Starting Offset
+  filter: nil # Object | Filter for querying collections.
 }
 
 begin
@@ -45,8 +46,9 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 20]
+ **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 100]
  **offset** | **Integer**| Starting Offset | [optional] [default to 0]
+ **filter** | [**Object**](.md)| Filter for querying collections. | [optional] 
 
 ### Return type
 
@@ -82,7 +84,7 @@ ApprovalApiClient.configure do |config|
 end
 
 api_instance = ApprovalApiClient::TemplateApi.new
-id = 56 # Integer | Query by id
+id = 'id_example' # String | Query by id
 
 begin
   #Return a template by given id
@@ -97,7 +99,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Integer**| Query by id | 
+ **id** | **String**| Query by id | 
 
 ### Return type
 

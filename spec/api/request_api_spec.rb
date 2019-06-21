@@ -49,11 +49,10 @@ describe 'RequestApi' do
   # Return an array of approval requests
   # Return an array of requests
   # @param [Hash] opts the optional parameters
-  # @option opts [Array<String>] :decision Fetch item by given decision (undecided, approved, denied)
-  # @option opts [Array<String>] :state Fetch item by given state (pending, skipped, notified, finished)
-  # @option opts [String] :requester Fetch item by given requester
+  # @option opts [String] :approver Fetch requests by given approver username
   # @option opts [Integer] :limit How many items to return at one time (max 1000)
   # @option opts [Integer] :offset Starting Offset
+  # @option opts [Object] :filter Filter for querying collections.
   # @return [RequestOutCollection]
   describe 'list_requests test' do
     it 'should work' do
@@ -68,6 +67,7 @@ describe 'RequestApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :limit How many items to return at one time (max 1000)
   # @option opts [Integer] :offset Starting Offset
+  # @option opts [Object] :filter Filter for querying collections.
   # @return [RequestOutCollection]
   describe 'list_requests_by_workflow test' do
     it 'should work' do

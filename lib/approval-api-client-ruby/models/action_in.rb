@@ -18,7 +18,7 @@ module ApprovalApiClient
     # The person who performs the action
     attr_accessor :processed_by
 
-    # Types of action, may be one of the value (approve, deny, notify, memo, or skip). The stage will be updated according to the operation.
+    # Types of action, may be one of the value (approve, cancel, deny, notify, memo, or skip). The stage will be updated according to the operation.
     attr_accessor :operation
 
     # Comments for action
@@ -102,7 +102,7 @@ module ApprovalApiClient
     # @return true if the model is valid
     def valid?
       return false if @operation.nil?
-      operation_validator = EnumAttributeValidator.new('String', ['approve', 'deny', 'notify', 'memo', 'skip'])
+      operation_validator = EnumAttributeValidator.new('String', ['approve', 'cancel', 'deny', 'notify', 'memo', 'skip'])
       return false unless operation_validator.valid?(@operation)
       true
     end
@@ -110,7 +110,7 @@ module ApprovalApiClient
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] operation Object to be assigned
     def operation=(operation)
-      validator = EnumAttributeValidator.new('String', ['approve', 'deny', 'notify', 'memo', 'skip'])
+      validator = EnumAttributeValidator.new('String', ['approve', 'cancel', 'deny', 'notify', 'memo', 'skip'])
       unless validator.valid?(operation)
         fail ArgumentError, 'invalid value for "operation", must be one of #{validator.allowable_values}.'
       end

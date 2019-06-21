@@ -23,10 +23,10 @@ module ApprovalApiClient
     # Associated group reference id
     attr_accessor :group_ref
 
-    # The state of stage or request. It may be one of values (pending, skipped, notified or finished)
+    # The state of stage or request. It may be one of values (canceled, pending, skipped, notified or finished)
     attr_accessor :state
 
-    # Final decision, may be one of the value (undecided, approved, or denied)
+    # Final decision, may be one of the value (undecided, approved, canceled or denied)
     attr_accessor :decision
 
     # the time approvers in the stage are notified
@@ -125,9 +125,9 @@ module ApprovalApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      state_validator = EnumAttributeValidator.new('String', ['pending', 'skipped', 'notified', 'finished'])
+      state_validator = EnumAttributeValidator.new('String', ['canceled', 'pending', 'skipped', 'notified', 'finished'])
       return false unless state_validator.valid?(@state)
-      decision_validator = EnumAttributeValidator.new('String', ['undecided', 'approved', 'denied'])
+      decision_validator = EnumAttributeValidator.new('String', ['undecided', 'approved', 'canceled', 'denied'])
       return false unless decision_validator.valid?(@decision)
       true
     end
@@ -135,7 +135,7 @@ module ApprovalApiClient
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] state Object to be assigned
     def state=(state)
-      validator = EnumAttributeValidator.new('String', ['pending', 'skipped', 'notified', 'finished'])
+      validator = EnumAttributeValidator.new('String', ['canceled', 'pending', 'skipped', 'notified', 'finished'])
       unless validator.valid?(state)
         fail ArgumentError, 'invalid value for "state", must be one of #{validator.allowable_values}.'
       end
@@ -145,7 +145,7 @@ module ApprovalApiClient
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] decision Object to be assigned
     def decision=(decision)
-      validator = EnumAttributeValidator.new('String', ['undecided', 'approved', 'denied'])
+      validator = EnumAttributeValidator.new('String', ['undecided', 'approved', 'canceled', 'denied'])
       unless validator.valid?(decision)
         fail ArgumentError, 'invalid value for "decision", must be one of #{validator.allowable_values}.'
       end

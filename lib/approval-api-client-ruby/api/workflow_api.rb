@@ -133,8 +133,9 @@ module ApprovalApiClient
     # Return all approval workflows
     # Return all approval workflows
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
+    # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 100)
     # @option opts [Integer] :offset Starting Offset (default to 0)
+    # @option opts [Object] :filter Filter for querying collections.
     # @return [WorkflowOutCollection]
     def list_workflows(opts = {})
       data, _status_code, _headers = list_workflows_with_http_info(opts)
@@ -146,17 +147,18 @@ module ApprovalApiClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
+    # @option opts [Object] :filter Filter for querying collections.
     # @return [Array<(WorkflowOutCollection, Fixnum, Hash)>] WorkflowOutCollection data, response status code and response headers
     def list_workflows_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WorkflowApi.list_workflows ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WorkflowApi.list_workflows, must be smaller than or equal to 100.'
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WorkflowApi.list_workflows, must be smaller than or equal to 1000.'
       end
 
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 20
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WorkflowApi.list_workflows, must be greater than or equal to 20.'
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WorkflowApi.list_workflows, must be greater than or equal to 1.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'offset'].nil? && opts[:'offset'] < 0
@@ -170,6 +172,7 @@ module ApprovalApiClient
       query_params = {}
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
+      query_params[:'filter'] = opts[:'filter'] if !opts[:'filter'].nil?
 
       # header parameters
       header_params = {}
@@ -199,8 +202,9 @@ module ApprovalApiClient
     # Return an array of workflows by given template id
     # @param template_id Id of template
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
+    # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 100)
     # @option opts [Integer] :offset Starting Offset (default to 0)
+    # @option opts [Object] :filter Filter for querying collections.
     # @return [WorkflowOutCollection]
     def list_workflows_by_template(template_id, opts = {})
       data, _status_code, _headers = list_workflows_by_template_with_http_info(template_id, opts)
@@ -213,6 +217,7 @@ module ApprovalApiClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
+    # @option opts [Object] :filter Filter for querying collections.
     # @return [Array<(WorkflowOutCollection, Fixnum, Hash)>] WorkflowOutCollection data, response status code and response headers
     def list_workflows_by_template_with_http_info(template_id, opts = {})
       if @api_client.config.debugging
@@ -222,12 +227,12 @@ module ApprovalApiClient
       if @api_client.config.client_side_validation && template_id.nil?
         fail ArgumentError, "Missing the required parameter 'template_id' when calling WorkflowApi.list_workflows_by_template"
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WorkflowApi.list_workflows_by_template, must be smaller than or equal to 100.'
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WorkflowApi.list_workflows_by_template, must be smaller than or equal to 1000.'
       end
 
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 20
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WorkflowApi.list_workflows_by_template, must be greater than or equal to 20.'
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WorkflowApi.list_workflows_by_template, must be greater than or equal to 1.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'offset'].nil? && opts[:'offset'] < 0
@@ -241,6 +246,7 @@ module ApprovalApiClient
       query_params = {}
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
+      query_params[:'filter'] = opts[:'filter'] if !opts[:'filter'].nil?
 
       # header parameters
       header_params = {}

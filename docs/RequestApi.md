@@ -1,6 +1,6 @@
 # ApprovalApiClient::RequestApi
 
-All URIs are relative to *http://localhost/api/approval/v1.0*
+All URIs are relative to *https://cloud.redhat.com//api/approval/v1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -29,7 +29,7 @@ ApprovalApiClient.configure do |config|
 end
 
 api_instance = ApprovalApiClient::RequestApi.new
-workflow_id = 56 # Integer | Id of workflow
+workflow_id = 'workflow_id_example' # String | Id of workflow
 request_in = ApprovalApiClient::RequestIn.new # RequestIn | Parameters need to create a request
 
 begin
@@ -45,7 +45,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **workflow_id** | **Integer**| Id of workflow | 
+ **workflow_id** | **String**| Id of workflow | 
  **request_in** | [**RequestIn**](RequestIn.md)| Parameters need to create a request | 
 
 ### Return type
@@ -83,11 +83,10 @@ end
 
 api_instance = ApprovalApiClient::RequestApi.new
 opts = {
-  decision: ['decision_example'], # Array<String> | Fetch item by given decision (undecided, approved, denied)
-  state: ['state_example'], # Array<String> | Fetch item by given state (pending, skipped, notified, finished)
-  requester: 'requester_example', # String | Fetch item by given requester
-  limit: 20, # Integer | How many items to return at one time (max 1000)
-  offset: 0 # Integer | Starting Offset
+  approver: 'approver_example', # String | Fetch requests by given approver username
+  limit: 100, # Integer | How many items to return at one time (max 1000)
+  offset: 0, # Integer | Starting Offset
+  filter: nil # Object | Filter for querying collections.
 }
 
 begin
@@ -103,11 +102,10 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **decision** | [**Array&lt;String&gt;**](String.md)| Fetch item by given decision (undecided, approved, denied) | [optional] 
- **state** | [**Array&lt;String&gt;**](String.md)| Fetch item by given state (pending, skipped, notified, finished) | [optional] 
- **requester** | **String**| Fetch item by given requester | [optional] 
- **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 20]
+ **approver** | **String**| Fetch requests by given approver username | [optional] 
+ **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 100]
  **offset** | **Integer**| Starting Offset | [optional] [default to 0]
+ **filter** | [**Object**](.md)| Filter for querying collections. | [optional] 
 
 ### Return type
 
@@ -143,10 +141,11 @@ ApprovalApiClient.configure do |config|
 end
 
 api_instance = ApprovalApiClient::RequestApi.new
-workflow_id = 56 # Integer | Id of workflow
+workflow_id = 'workflow_id_example' # String | Id of workflow
 opts = {
-  limit: 20, # Integer | How many items to return at one time (max 1000)
-  offset: 0 # Integer | Starting Offset
+  limit: 100, # Integer | How many items to return at one time (max 1000)
+  offset: 0, # Integer | Starting Offset
+  filter: nil # Object | Filter for querying collections.
 }
 
 begin
@@ -162,9 +161,10 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **workflow_id** | **Integer**| Id of workflow | 
- **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 20]
+ **workflow_id** | **String**| Id of workflow | 
+ **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 100]
  **offset** | **Integer**| Starting Offset | [optional] [default to 0]
+ **filter** | [**Object**](.md)| Filter for querying collections. | [optional] 
 
 ### Return type
 
@@ -200,7 +200,7 @@ ApprovalApiClient.configure do |config|
 end
 
 api_instance = ApprovalApiClient::RequestApi.new
-id = 56 # Integer | Query by id
+id = 'id_example' # String | Query by id
 
 begin
   #Return an approval request by given id
@@ -215,7 +215,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Integer**| Query by id | 
+ **id** | **String**| Query by id | 
 
 ### Return type
 

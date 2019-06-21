@@ -80,6 +80,67 @@ module ApprovalApiClient
       return data, status_code, headers
     end
 
+    # Add an action to current active stage of a given request
+    # Add an action to current active stage of a given request. If request is finished, i.e. no current active stage is available, no action can be posted here.
+    # @param request_id Id of request
+    # @param action_in Action object that will be added
+    # @param [Hash] opts the optional parameters
+    # @return [ActionOut]
+    def create_action_by_request(request_id, action_in, opts = {})
+      data, _status_code, _headers = create_action_by_request_with_http_info(request_id, action_in, opts)
+      data
+    end
+
+    # Add an action to current active stage of a given request
+    # Add an action to current active stage of a given request. If request is finished, i.e. no current active stage is available, no action can be posted here.
+    # @param request_id Id of request
+    # @param action_in Action object that will be added
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ActionOut, Fixnum, Hash)>] ActionOut data, response status code and response headers
+    def create_action_by_request_with_http_info(request_id, action_in, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ActionApi.create_action_by_request ...'
+      end
+      # verify the required parameter 'request_id' is set
+      if @api_client.config.client_side_validation && request_id.nil?
+        fail ArgumentError, "Missing the required parameter 'request_id' when calling ActionApi.create_action_by_request"
+      end
+      # verify the required parameter 'action_in' is set
+      if @api_client.config.client_side_validation && action_in.nil?
+        fail ArgumentError, "Missing the required parameter 'action_in' when calling ActionApi.create_action_by_request"
+      end
+      # resource path
+      local_var_path = '/requests/{request_id}/actions'.sub('{' + 'request_id' + '}', request_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(action_in)
+      auth_names = ['Basic_auth']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'ActionOut')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ActionApi#create_action_by_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Return actions in a given stage
     # List all actions of a stage
     # @param stage_id Id of stage

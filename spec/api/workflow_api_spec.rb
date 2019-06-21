@@ -63,6 +63,7 @@ describe 'WorkflowApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :limit How many items to return at one time (max 1000)
   # @option opts [Integer] :offset Starting Offset
+  # @option opts [Object] :filter Filter for querying collections.
   # @return [WorkflowOutCollection]
   describe 'list_workflows test' do
     it 'should work' do
@@ -77,6 +78,7 @@ describe 'WorkflowApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :limit How many items to return at one time (max 1000)
   # @option opts [Integer] :offset Starting Offset
+  # @option opts [Object] :filter Filter for querying collections.
   # @return [WorkflowOutCollection]
   describe 'list_workflows_by_template test' do
     it 'should work' do

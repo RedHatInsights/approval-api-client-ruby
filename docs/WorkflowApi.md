@@ -1,6 +1,6 @@
 # ApprovalApiClient::WorkflowApi
 
-All URIs are relative to *http://localhost/api/approval/v1.0*
+All URIs are relative to *https://cloud.redhat.com//api/approval/v1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,7 +31,7 @@ ApprovalApiClient.configure do |config|
 end
 
 api_instance = ApprovalApiClient::WorkflowApi.new
-template_id = 56 # Integer | Id of template
+template_id = 'template_id_example' # String | Id of template
 workflow_in = ApprovalApiClient::WorkflowIn.new # WorkflowIn | Parameters need to create workflow
 
 begin
@@ -47,7 +47,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **Integer**| Id of template | 
+ **template_id** | **String**| Id of template | 
  **workflow_in** | [**WorkflowIn**](WorkflowIn.md)| Parameters need to create workflow | 
 
 ### Return type
@@ -84,7 +84,7 @@ ApprovalApiClient.configure do |config|
 end
 
 api_instance = ApprovalApiClient::WorkflowApi.new
-id = 56 # Integer | Query by id
+id = 'id_example' # String | Query by id
 
 begin
   #Delete approval workflow by given id
@@ -98,7 +98,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Integer**| Query by id | 
+ **id** | **String**| Query by id | 
 
 ### Return type
 
@@ -135,8 +135,9 @@ end
 
 api_instance = ApprovalApiClient::WorkflowApi.new
 opts = {
-  limit: 20, # Integer | How many items to return at one time (max 1000)
-  offset: 0 # Integer | Starting Offset
+  limit: 100, # Integer | How many items to return at one time (max 1000)
+  offset: 0, # Integer | Starting Offset
+  filter: nil # Object | Filter for querying collections.
 }
 
 begin
@@ -152,8 +153,9 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 20]
+ **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 100]
  **offset** | **Integer**| Starting Offset | [optional] [default to 0]
+ **filter** | [**Object**](.md)| Filter for querying collections. | [optional] 
 
 ### Return type
 
@@ -189,10 +191,11 @@ ApprovalApiClient.configure do |config|
 end
 
 api_instance = ApprovalApiClient::WorkflowApi.new
-template_id = 56 # Integer | Id of template
+template_id = 'template_id_example' # String | Id of template
 opts = {
-  limit: 20, # Integer | How many items to return at one time (max 1000)
-  offset: 0 # Integer | Starting Offset
+  limit: 100, # Integer | How many items to return at one time (max 1000)
+  offset: 0, # Integer | Starting Offset
+  filter: nil # Object | Filter for querying collections.
 }
 
 begin
@@ -208,9 +211,10 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **Integer**| Id of template | 
- **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 20]
+ **template_id** | **String**| Id of template | 
+ **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 100]
  **offset** | **Integer**| Starting Offset | [optional] [default to 0]
+ **filter** | [**Object**](.md)| Filter for querying collections. | [optional] 
 
 ### Return type
 
@@ -246,7 +250,7 @@ ApprovalApiClient.configure do |config|
 end
 
 api_instance = ApprovalApiClient::WorkflowApi.new
-id = 56 # Integer | Query by id
+id = 'id_example' # String | Query by id
 
 begin
   #Return an approval workflow by given id
@@ -261,7 +265,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Integer**| Query by id | 
+ **id** | **String**| Query by id | 
 
 ### Return type
 
@@ -297,7 +301,7 @@ ApprovalApiClient.configure do |config|
 end
 
 api_instance = ApprovalApiClient::WorkflowApi.new
-id = 56 # Integer | Query by id
+id = 'id_example' # String | Query by id
 workflow_in = ApprovalApiClient::WorkflowIn.new # WorkflowIn | Parameters need to update approval workflow
 
 begin
@@ -313,7 +317,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Integer**| Query by id | 
+ **id** | **String**| Query by id | 
  **workflow_in** | [**WorkflowIn**](WorkflowIn.md)| Parameters need to update approval workflow | 
 
 ### Return type
