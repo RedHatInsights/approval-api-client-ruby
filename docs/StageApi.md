@@ -1,6 +1,6 @@
 # ApprovalApiClient::StageApi
 
-All URIs are relative to *http://localhost/api/approval/v1.0*
+All URIs are relative to *https://cloud.redhat.com//api/approval/v1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -27,7 +27,7 @@ ApprovalApiClient.configure do |config|
 end
 
 api_instance = ApprovalApiClient::StageApi.new
-request_id = 56 # Integer | Id of request
+request_id = 'request_id_example' # String | Id of request
 
 begin
   #Return an array of stages by given request id
@@ -42,7 +42,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_id** | **Integer**| Id of request | 
+ **request_id** | **String**| Id of request | 
 
 ### Return type
 
@@ -78,7 +78,7 @@ ApprovalApiClient.configure do |config|
 end
 
 api_instance = ApprovalApiClient::StageApi.new
-id = 56 # Integer | Query by id
+id = 'id_example' # String | Query by id
 
 begin
   #Return an approval stage by given id
@@ -93,7 +93,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **Integer**| Query by id | 
+ **id** | **String**| Query by id | 
 
 ### Return type
 

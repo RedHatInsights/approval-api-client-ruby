@@ -15,6 +15,11 @@ require 'date'
 module ApprovalApiClient
   # The workflow to process approval requests. Each workflow is linked to multiple groups of approvals.
   class WorkflowOut
+    attr_accessor :id
+
+    # Associated template id
+    attr_accessor :template_id
+
     attr_accessor :name
 
     attr_accessor :description
@@ -22,30 +27,25 @@ module ApprovalApiClient
     # Group reference ids associated with workflow
     attr_accessor :group_refs
 
-    attr_accessor :id
-
-    # Associated template id
-    attr_accessor :template_id
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
+        :'template_id' => :'template_id',
         :'name' => :'name',
         :'description' => :'description',
-        :'group_refs' => :'group_refs',
-        :'id' => :'id',
-        :'template_id' => :'template_id'
+        :'group_refs' => :'group_refs'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
+        :'template_id' => :'String',
         :'name' => :'String',
         :'description' => :'String',
-        :'group_refs' => :'Array<String>',
-        :'id' => :'String',
-        :'template_id' => :'String'
+        :'group_refs' => :'Array<String>'
       }
     end
 
@@ -56,6 +56,14 @@ module ApprovalApiClient
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'template_id')
+        self.template_id = attributes[:'template_id']
+      end
 
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
@@ -70,36 +78,18 @@ module ApprovalApiClient
           self.group_refs = value
         end
       end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'template_id')
-        self.template_id = attributes[:'template_id']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @group_refs.nil?
-        invalid_properties.push('invalid value for "group_refs", group_refs cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @name.nil?
-      return false if @group_refs.nil?
       true
     end
 
@@ -108,11 +98,11 @@ module ApprovalApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
+          template_id == o.template_id &&
           name == o.name &&
           description == o.description &&
-          group_refs == o.group_refs &&
-          id == o.id &&
-          template_id == o.template_id
+          group_refs == o.group_refs
     end
 
     # @see the `==` method
@@ -124,7 +114,7 @@ module ApprovalApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, description, group_refs, id, template_id].hash
+      [id, template_id, name, description, group_refs].hash
     end
 
     # Builds the object from hash

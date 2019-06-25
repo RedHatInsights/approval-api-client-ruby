@@ -32,28 +32,6 @@ describe 'ActionOut' do
       expect(@instance).to be_instance_of(ApprovalApiClient::ActionOut)
     end
   end
-  describe 'test attribute "processed_by"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  describe 'test attribute "operation"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["approve", "deny", "notify", "memo", "skip"])
-      # validator.allowable_values.each do |value|
-      #   expect { @instance.operation = value }.not_to raise_error
-      # end
-    end
-  end
-
-  describe 'test attribute "comments"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -67,6 +45,28 @@ describe 'ActionOut' do
   end
 
   describe 'test attribute "stage_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "processed_by"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "operation"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["approve", "cancel", "deny", "notify", "memo", "skip"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.operation = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "comments"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

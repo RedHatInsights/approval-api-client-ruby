@@ -128,9 +128,9 @@ module ApprovalApiClient
     attr_accessor :force_ending_format
 
     def initialize
-      @scheme = 'http'
-      @host = 'localhost'
-      @base_path = '/api/approval/v1.0'
+      @scheme = 'https'
+      @host = 'cloud.redhat.com'
+      @base_path = '//api/approval/v1.0'
       @api_key = {}
       @api_key_prefix = {}
       @timeout = 0
@@ -210,8 +210,28 @@ module ApprovalApiClient
     def server_settings
       [
         {
-          url: "http://localhost/api/approval/v1.0",
-          description: "No descriptoin provided",
+          url: "https://cloud.redhat.com/{basePath}",
+          description: "Production Server",
+          variables: {
+            basePath: {
+                description: "No descriptoin provided",
+                default_value: "/api/approval/v1.0",
+              }
+            }
+        },
+        {
+          url: "http://localhost:{port}/{basePath}",
+          description: "Development Server",
+          variables: {
+            port: {
+                description: "No descriptoin provided",
+                default_value: "3000",
+              },
+            basePath: {
+                description: "No descriptoin provided",
+                default_value: "/api/approval/v1.0",
+              }
+            }
         }
       ]
     end

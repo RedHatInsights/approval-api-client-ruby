@@ -15,6 +15,32 @@ require 'date'
 module ApprovalApiClient
   # Approval request. Each request will associate with a workflow. Corresponding to the groups of the associated workflow, every request will have a list of stages to record the request processing details.
   class RequestOut
+    attr_accessor :id
+
+    # The state of stage or request. It may be one of values (canceled, pending, skipped, notified or finished)
+    attr_accessor :state
+
+    # Final decision, may be one of the value (undecided, approved, canceled or denied)
+    attr_accessor :decision
+
+    # Comments for requests
+    attr_accessor :reason
+
+    # Associate workflow id
+    attr_accessor :workflow_id
+
+    # Timestamp of creation
+    attr_accessor :created_at
+
+    # Timestamp of last update
+    attr_accessor :updated_at
+
+    # Current (or last) active stage. For regular approver this number is always 0
+    attr_accessor :active_stage
+
+    # Total number of stages. For regular approver this number is always 0.
+    attr_accessor :total_stages
+
     # Requester id
     attr_accessor :requester
 
@@ -26,20 +52,6 @@ module ApprovalApiClient
 
     # JSON object with request content
     attr_accessor :content
-
-    attr_accessor :id
-
-    # The state of stage or request. It may be one of values (pending, skipped, notified or finished)
-    attr_accessor :state
-
-    # Final decision, may be one of the value (undecided, approved, or denied)
-    attr_accessor :decision
-
-    # Comments for requests
-    attr_accessor :reason
-
-    # Associate workflow id
-    attr_accessor :workflow_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -66,30 +78,38 @@ module ApprovalApiClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'requester' => :'requester',
-        :'name' => :'name',
-        :'description' => :'description',
-        :'content' => :'content',
         :'id' => :'id',
         :'state' => :'state',
         :'decision' => :'decision',
         :'reason' => :'reason',
-        :'workflow_id' => :'workflow_id'
+        :'workflow_id' => :'workflow_id',
+        :'created_at' => :'created_at',
+        :'updated_at' => :'updated_at',
+        :'active_stage' => :'active_stage',
+        :'total_stages' => :'total_stages',
+        :'requester' => :'requester',
+        :'name' => :'name',
+        :'description' => :'description',
+        :'content' => :'content'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'requester' => :'String',
-        :'name' => :'String',
-        :'description' => :'String',
-        :'content' => :'Object',
         :'id' => :'String',
         :'state' => :'String',
         :'decision' => :'String',
         :'reason' => :'String',
-        :'workflow_id' => :'String'
+        :'workflow_id' => :'String',
+        :'created_at' => :'DateTime',
+        :'updated_at' => :'DateTime',
+        :'active_stage' => :'Integer',
+        :'total_stages' => :'Integer',
+        :'requester' => :'String',
+        :'name' => :'String',
+        :'description' => :'String',
+        :'content' => :'Object'
       }
     end
 
@@ -100,22 +120,6 @@ module ApprovalApiClient
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'requester')
-        self.requester = attributes[:'requester']
-      end
-
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
-      end
-
-      if attributes.has_key?(:'content')
-        self.content = attributes[:'content']
-      end
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -140,31 +144,53 @@ module ApprovalApiClient
       if attributes.has_key?(:'workflow_id')
         self.workflow_id = attributes[:'workflow_id']
       end
+
+      if attributes.has_key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.has_key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
+      end
+
+      if attributes.has_key?(:'active_stage')
+        self.active_stage = attributes[:'active_stage']
+      end
+
+      if attributes.has_key?(:'total_stages')
+        self.total_stages = attributes[:'total_stages']
+      end
+
+      if attributes.has_key?(:'requester')
+        self.requester = attributes[:'requester']
+      end
+
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.has_key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.has_key?(:'content')
+        self.content = attributes[:'content']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @content.nil?
-        invalid_properties.push('invalid value for "content", content cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @name.nil?
-      return false if @content.nil?
-      state_validator = EnumAttributeValidator.new('String', ['pending', 'skipped', 'notified', 'finished'])
+      state_validator = EnumAttributeValidator.new('String', ['canceled', 'pending', 'skipped', 'notified', 'finished'])
       return false unless state_validator.valid?(@state)
-      decision_validator = EnumAttributeValidator.new('String', ['undecided', 'approved', 'denied'])
+      decision_validator = EnumAttributeValidator.new('String', ['undecided', 'approved', 'canceled', 'denied'])
       return false unless decision_validator.valid?(@decision)
       true
     end
@@ -172,7 +198,7 @@ module ApprovalApiClient
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] state Object to be assigned
     def state=(state)
-      validator = EnumAttributeValidator.new('String', ['pending', 'skipped', 'notified', 'finished'])
+      validator = EnumAttributeValidator.new('String', ['canceled', 'pending', 'skipped', 'notified', 'finished'])
       unless validator.valid?(state)
         fail ArgumentError, 'invalid value for "state", must be one of #{validator.allowable_values}.'
       end
@@ -182,7 +208,7 @@ module ApprovalApiClient
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] decision Object to be assigned
     def decision=(decision)
-      validator = EnumAttributeValidator.new('String', ['undecided', 'approved', 'denied'])
+      validator = EnumAttributeValidator.new('String', ['undecided', 'approved', 'canceled', 'denied'])
       unless validator.valid?(decision)
         fail ArgumentError, 'invalid value for "decision", must be one of #{validator.allowable_values}.'
       end
@@ -194,15 +220,19 @@ module ApprovalApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          requester == o.requester &&
-          name == o.name &&
-          description == o.description &&
-          content == o.content &&
           id == o.id &&
           state == o.state &&
           decision == o.decision &&
           reason == o.reason &&
-          workflow_id == o.workflow_id
+          workflow_id == o.workflow_id &&
+          created_at == o.created_at &&
+          updated_at == o.updated_at &&
+          active_stage == o.active_stage &&
+          total_stages == o.total_stages &&
+          requester == o.requester &&
+          name == o.name &&
+          description == o.description &&
+          content == o.content
     end
 
     # @see the `==` method
@@ -214,7 +244,7 @@ module ApprovalApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [requester, name, description, content, id, state, decision, reason, workflow_id].hash
+      [id, state, decision, reason, workflow_id, created_at, updated_at, active_stage, total_stages, requester, name, description, content].hash
     end
 
     # Builds the object from hash

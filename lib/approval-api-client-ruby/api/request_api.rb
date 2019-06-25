@@ -83,11 +83,10 @@ module ApprovalApiClient
     # Return an array of approval requests
     # Return an array of requests
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<String>] :decision Fetch item by given decision (undecided, approved, denied)
-    # @option opts [Array<String>] :state Fetch item by given state (pending, skipped, notified, finished)
-    # @option opts [String] :requester Fetch item by given requester
-    # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
+    # @option opts [String] :approver Fetch requests by given approver username
+    # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 100)
     # @option opts [Integer] :offset Starting Offset (default to 0)
+    # @option opts [Object] :filter Filter for querying collections.
     # @return [RequestOutCollection]
     def list_requests(opts = {})
       data, _status_code, _headers = list_requests_with_http_info(opts)
@@ -97,28 +96,21 @@ module ApprovalApiClient
     # Return an array of approval requests
     # Return an array of requests
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<String>] :decision Fetch item by given decision (undecided, approved, denied)
-    # @option opts [Array<String>] :state Fetch item by given state (pending, skipped, notified, finished)
-    # @option opts [String] :requester Fetch item by given requester
+    # @option opts [String] :approver Fetch requests by given approver username
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
+    # @option opts [Object] :filter Filter for querying collections.
     # @return [Array<(RequestOutCollection, Fixnum, Hash)>] RequestOutCollection data, response status code and response headers
     def list_requests_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RequestApi.list_requests ...'
       end
-      if @api_client.config.client_side_validation && opts[:'decision'] && !opts[:'decision'].all? { |item| ['undecided', 'approved', 'denied'].include?(item) }
-        fail ArgumentError, 'invalid value for "decision", must include one of undecided, approved, denied'
-      end
-      if @api_client.config.client_side_validation && opts[:'state'] && !opts[:'state'].all? { |item| ['pending', 'skipped', 'notified', 'finished'].include?(item) }
-        fail ArgumentError, 'invalid value for "state", must include one of pending, skipped, notified, finished'
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RequestApi.list_requests, must be smaller than or equal to 100.'
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RequestApi.list_requests, must be smaller than or equal to 1000.'
       end
 
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 20
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RequestApi.list_requests, must be greater than or equal to 20.'
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RequestApi.list_requests, must be greater than or equal to 1.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'offset'].nil? && opts[:'offset'] < 0
@@ -130,11 +122,10 @@ module ApprovalApiClient
 
       # query parameters
       query_params = {}
-      query_params[:'decision'] = @api_client.build_collection_param(opts[:'decision'], :multi) if !opts[:'decision'].nil?
-      query_params[:'state'] = @api_client.build_collection_param(opts[:'state'], :multi) if !opts[:'state'].nil?
-      query_params[:'requester'] = opts[:'requester'] if !opts[:'requester'].nil?
+      query_params[:'approver'] = opts[:'approver'] if !opts[:'approver'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
+      query_params[:'filter'] = opts[:'filter'] if !opts[:'filter'].nil?
 
       # header parameters
       header_params = {}
@@ -164,8 +155,9 @@ module ApprovalApiClient
     # Return approval requests by given workflow id
     # @param workflow_id Id of workflow
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 20)
+    # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 100)
     # @option opts [Integer] :offset Starting Offset (default to 0)
+    # @option opts [Object] :filter Filter for querying collections.
     # @return [RequestOutCollection]
     def list_requests_by_workflow(workflow_id, opts = {})
       data, _status_code, _headers = list_requests_by_workflow_with_http_info(workflow_id, opts)
@@ -178,6 +170,7 @@ module ApprovalApiClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
+    # @option opts [Object] :filter Filter for querying collections.
     # @return [Array<(RequestOutCollection, Fixnum, Hash)>] RequestOutCollection data, response status code and response headers
     def list_requests_by_workflow_with_http_info(workflow_id, opts = {})
       if @api_client.config.debugging
@@ -187,12 +180,12 @@ module ApprovalApiClient
       if @api_client.config.client_side_validation && workflow_id.nil?
         fail ArgumentError, "Missing the required parameter 'workflow_id' when calling RequestApi.list_requests_by_workflow"
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RequestApi.list_requests_by_workflow, must be smaller than or equal to 100.'
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RequestApi.list_requests_by_workflow, must be smaller than or equal to 1000.'
       end
 
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 20
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RequestApi.list_requests_by_workflow, must be greater than or equal to 20.'
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RequestApi.list_requests_by_workflow, must be greater than or equal to 1.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'offset'].nil? && opts[:'offset'] < 0
@@ -206,6 +199,7 @@ module ApprovalApiClient
       query_params = {}
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
+      query_params[:'filter'] = opts[:'filter'] if !opts[:'filter'].nil?
 
       # header parameters
       header_params = {}

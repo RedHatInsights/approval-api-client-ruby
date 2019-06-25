@@ -53,7 +53,7 @@ describe 'StageOut' do
   describe 'test attribute "state"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["pending", "skipped", "notified", "finished"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["canceled", "pending", "skipped", "notified", "finished"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.state = value }.not_to raise_error
       # end
@@ -63,7 +63,7 @@ describe 'StageOut' do
   describe 'test attribute "decision"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["undecided", "approved", "denied"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["undecided", "approved", "canceled", "denied"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.decision = value }.not_to raise_error
       # end
