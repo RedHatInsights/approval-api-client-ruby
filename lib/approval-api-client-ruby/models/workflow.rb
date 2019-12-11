@@ -13,37 +13,44 @@ OpenAPI Generator version: 3.3.4
 require 'date'
 
 module ApprovalApiClient
-  # Input parameters for approval request object.
-  class RequestIn
-    # Request name
+  # The workflow to process approval requests. Each workflow is linked to multiple groups of approvals.
+  class Workflow
+    attr_accessor :id
+
+    # Associated template id
+    attr_accessor :template_id
+
     attr_accessor :name
 
-    # Request description
     attr_accessor :description
 
-    # JSON object with request content
-    attr_accessor :content
+    # an indicator of the execution order for selected workflows
+    attr_accessor :sequence
 
-    # collection of resources having tags that determine the workflows for the request
-    attr_accessor :tag_resources
+    # Group reference ids associated with workflow
+    attr_accessor :group_refs
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
+        :'template_id' => :'template_id',
         :'name' => :'name',
         :'description' => :'description',
-        :'content' => :'content',
-        :'tag_resources' => :'tag_resources'
+        :'sequence' => :'sequence',
+        :'group_refs' => :'group_refs'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
+        :'template_id' => :'String',
         :'name' => :'String',
         :'description' => :'String',
-        :'content' => :'Object',
-        :'tag_resources' => :'Array<TagResource>'
+        :'sequence' => :'Integer',
+        :'group_refs' => :'Array<String>'
       }
     end
 
@@ -55,6 +62,14 @@ module ApprovalApiClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'template_id')
+        self.template_id = attributes[:'template_id']
+      end
+
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
       end
@@ -63,13 +78,13 @@ module ApprovalApiClient
         self.description = attributes[:'description']
       end
 
-      if attributes.has_key?(:'content')
-        self.content = attributes[:'content']
+      if attributes.has_key?(:'sequence')
+        self.sequence = attributes[:'sequence']
       end
 
-      if attributes.has_key?(:'tag_resources')
-        if (value = attributes[:'tag_resources']).is_a?(Array)
-          self.tag_resources = value
+      if attributes.has_key?(:'group_refs')
+        if (value = attributes[:'group_refs']).is_a?(Array)
+          self.group_refs = value
         end
       end
     end
@@ -78,27 +93,12 @@ module ApprovalApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @content.nil?
-        invalid_properties.push('invalid value for "content", content cannot be nil.')
-      end
-
-      if @tag_resources.nil?
-        invalid_properties.push('invalid value for "tag_resources", tag_resources cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @name.nil?
-      return false if @content.nil?
-      return false if @tag_resources.nil?
       true
     end
 
@@ -107,10 +107,12 @@ module ApprovalApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
+          template_id == o.template_id &&
           name == o.name &&
           description == o.description &&
-          content == o.content &&
-          tag_resources == o.tag_resources
+          sequence == o.sequence &&
+          group_refs == o.group_refs
     end
 
     # @see the `==` method
@@ -122,7 +124,7 @@ module ApprovalApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, description, content, tag_resources].hash
+      [id, template_id, name, description, sequence, group_refs].hash
     end
 
     # Builds the object from hash

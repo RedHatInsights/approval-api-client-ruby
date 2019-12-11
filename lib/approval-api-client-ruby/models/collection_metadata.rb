@@ -17,17 +17,27 @@ module ApprovalApiClient
     # This is the total number of items in the result set, of which only a subset is returned defined by the QueryLimit parameter
     attr_accessor :count
 
+    # This is the number of items each page can display
+    attr_accessor :limit
+
+    # This is the offset from beginning of the result set
+    attr_accessor :offset
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'count' => :'count'
+        :'count' => :'count',
+        :'limit' => :'limit',
+        :'offset' => :'offset'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'count' => :'Integer'
+        :'count' => :'Integer',
+        :'limit' => :'Integer',
+        :'offset' => :'Integer'
       }
     end
 
@@ -41,6 +51,14 @@ module ApprovalApiClient
 
       if attributes.has_key?(:'count')
         self.count = attributes[:'count']
+      end
+
+      if attributes.has_key?(:'limit')
+        self.limit = attributes[:'limit']
+      end
+
+      if attributes.has_key?(:'offset')
+        self.offset = attributes[:'offset']
       end
     end
 
@@ -62,7 +80,9 @@ module ApprovalApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          count == o.count
+          count == o.count &&
+          limit == o.limit &&
+          offset == o.offset
     end
 
     # @see the `==` method
@@ -74,7 +94,7 @@ module ApprovalApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [count].hash
+      [count, limit, offset].hash
     end
 
     # Builds the object from hash

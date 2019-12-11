@@ -33,38 +33,25 @@ describe 'ActionApi' do
   end
 
   # unit tests for create_action
-  # Add an action to a given stage
-  # Add an action to a given stage
-  # @param stage_id Id of stage
-  # @param action_in Action object that will be added
+  # Add an action to a given request
+  # Add an action to a given request, available for admin/approver/requester
+  # @param request_id Id of request
+  # @param action Action object that will be added
   # @param [Hash] opts the optional parameters
-  # @return [ActionOut]
+  # @return [Action]
   describe 'create_action test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  # unit tests for create_action_by_request
-  # Add an action to current active stage of a given request
-  # Add an action to current active stage of a given request. If request is finished, i.e. no current active stage is available, no action can be posted here.
+  # unit tests for list_actions_by_request
+  # List all actions of a request
+  # Return actions in a given request, available for admin/approver
   # @param request_id Id of request
-  # @param action_in Action object that will be added
   # @param [Hash] opts the optional parameters
-  # @return [ActionOut]
-  describe 'create_action_by_request test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for list_actions_by_stage
-  # Return actions in a given stage
-  # List all actions of a stage
-  # @param stage_id Id of stage
-  # @param [Hash] opts the optional parameters
-  # @return [ActionOutCollection]
-  describe 'list_actions_by_stage test' do
+  # @return [ActionCollection]
+  describe 'list_actions_by_request test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -72,10 +59,10 @@ describe 'ActionApi' do
 
   # unit tests for show_action
   # Return an user action by id
-  # Return an user action by id
+  # Return an user action by id, available to all
   # @param id Query by id
   # @param [Hash] opts the optional parameters
-  # @return [ActionOut]
+  # @return [Action]
   describe 'show_action test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

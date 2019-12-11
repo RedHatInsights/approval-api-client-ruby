@@ -1,7 +1,7 @@
 #! /bin/sh
 
 rm -rf openapi.json
-curl https://raw.githubusercontent.com/ManageIQ/approval-api/master/public/approval/v1.0/openapi.json -o openapi.json
+curl https://raw.githubusercontent.com/RedHatInsights/approval-api/master/public/doc/openapi-3-v1.0.0.json -o openapi.json
 openapi-generator validate -i openapi.json
 rm -rf ./lib
 rm -rf ./spec

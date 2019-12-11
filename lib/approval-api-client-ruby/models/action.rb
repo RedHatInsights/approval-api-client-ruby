@@ -13,37 +13,72 @@ OpenAPI Generator version: 3.3.4
 require 'date'
 
 module ApprovalApiClient
-  # Input parameters for approval request object.
-  class RequestIn
-    # Request name
-    attr_accessor :name
+  class Action
+    attr_accessor :id
 
-    # Request description
-    attr_accessor :description
+    # Timestamp of creation
+    attr_accessor :created_at
 
-    # JSON object with request content
-    attr_accessor :content
+    # Timestamp of update
+    attr_accessor :updated_at
 
-    # collection of resources having tags that determine the workflows for the request
-    attr_accessor :tag_resources
+    # Associated request id
+    attr_accessor :request_id
+
+    # The person who performs the action
+    attr_accessor :processed_by
+
+    # Types of action, may be one of the value (approve, cancel, deny, notify, memo, or skip). The request will be updated according to the operation.
+    attr_accessor :operation
+
+    # Comments for action
+    attr_accessor :comments
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name',
-        :'description' => :'description',
-        :'content' => :'content',
-        :'tag_resources' => :'tag_resources'
+        :'id' => :'id',
+        :'created_at' => :'created_at',
+        :'updated_at' => :'updated_at',
+        :'request_id' => :'request_id',
+        :'processed_by' => :'processed_by',
+        :'operation' => :'operation',
+        :'comments' => :'comments'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'name' => :'String',
-        :'description' => :'String',
-        :'content' => :'Object',
-        :'tag_resources' => :'Array<TagResource>'
+        :'id' => :'String',
+        :'created_at' => :'DateTime',
+        :'updated_at' => :'DateTime',
+        :'request_id' => :'String',
+        :'processed_by' => :'String',
+        :'operation' => :'String',
+        :'comments' => :'String'
       }
     end
 
@@ -55,22 +90,34 @@ module ApprovalApiClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+      if attributes.has_key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
-      if attributes.has_key?(:'content')
-        self.content = attributes[:'content']
+      if attributes.has_key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
       end
 
-      if attributes.has_key?(:'tag_resources')
-        if (value = attributes[:'tag_resources']).is_a?(Array)
-          self.tag_resources = value
-        end
+      if attributes.has_key?(:'request_id')
+        self.request_id = attributes[:'request_id']
+      end
+
+      if attributes.has_key?(:'processed_by')
+        self.processed_by = attributes[:'processed_by']
+      end
+
+      if attributes.has_key?(:'operation')
+        self.operation = attributes[:'operation']
+      else
+        self.operation = 'memo'
+      end
+
+      if attributes.has_key?(:'comments')
+        self.comments = attributes[:'comments']
       end
     end
 
@@ -78,28 +125,25 @@ module ApprovalApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @content.nil?
-        invalid_properties.push('invalid value for "content", content cannot be nil.')
-      end
-
-      if @tag_resources.nil?
-        invalid_properties.push('invalid value for "tag_resources", tag_resources cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @name.nil?
-      return false if @content.nil?
-      return false if @tag_resources.nil?
+      operation_validator = EnumAttributeValidator.new('String', ['approve', 'cancel', 'deny', 'notify', 'memo', 'skip'])
+      return false unless operation_validator.valid?(@operation)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] operation Object to be assigned
+    def operation=(operation)
+      validator = EnumAttributeValidator.new('String', ['approve', 'cancel', 'deny', 'notify', 'memo', 'skip'])
+      unless validator.valid?(operation)
+        fail ArgumentError, 'invalid value for "operation", must be one of #{validator.allowable_values}.'
+      end
+      @operation = operation
     end
 
     # Checks equality by comparing each attribute.
@@ -107,10 +151,13 @@ module ApprovalApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          name == o.name &&
-          description == o.description &&
-          content == o.content &&
-          tag_resources == o.tag_resources
+          id == o.id &&
+          created_at == o.created_at &&
+          updated_at == o.updated_at &&
+          request_id == o.request_id &&
+          processed_by == o.processed_by &&
+          operation == o.operation &&
+          comments == o.comments
     end
 
     # @see the `==` method
@@ -122,7 +169,7 @@ module ApprovalApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, description, content, tag_resources].hash
+      [id, created_at, updated_at, request_id, processed_by, operation, comments].hash
     end
 
     # Builds the object from hash

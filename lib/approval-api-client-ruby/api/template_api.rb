@@ -19,25 +19,25 @@ module ApprovalApiClient
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Return all templates
+    # Return all templates, only available for admin
     # Return all templates
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 100)
     # @option opts [Integer] :offset Starting Offset (default to 0)
     # @option opts [Object] :filter Filter for querying collections.
-    # @return [TemplateOutCollection]
+    # @return [TemplateCollection]
     def list_templates(opts = {})
       data, _status_code, _headers = list_templates_with_http_info(opts)
       data
     end
 
-    # Return all templates
+    # Return all templates, only available for admin
     # Return all templates
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
     # @option opts [Object] :filter Filter for querying collections.
-    # @return [Array<(TemplateOutCollection, Fixnum, Hash)>] TemplateOutCollection data, response status code and response headers
+    # @return [Array<(TemplateCollection, Fixnum, Hash)>] TemplateCollection data, response status code and response headers
     def list_templates_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TemplateApi.list_templates ...'
@@ -80,28 +80,28 @@ module ApprovalApiClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'TemplateOutCollection')
+        :return_type => 'TemplateCollection')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TemplateApi#list_templates\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Return a template by given id
+    # Return a template by given id, only available for admin
     # Return a template by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [TemplateOut]
+    # @return [Template]
     def show_template(id, opts = {})
       data, _status_code, _headers = show_template_with_http_info(id, opts)
       data
     end
 
-    # Return a template by given id
+    # Return a template by given id, only available for admin
     # Return a template by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Array<(TemplateOut, Fixnum, Hash)>] TemplateOut data, response status code and response headers
+    # @return [Array<(Template, Fixnum, Hash)>] Template data, response status code and response headers
     def show_template_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TemplateApi.show_template ...'
@@ -110,6 +110,10 @@ module ApprovalApiClient
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling TemplateApi.show_template"
       end
+      if @api_client.config.client_side_validation && id !~ Regexp.new(/^\d+$/)
+        fail ArgumentError, "invalid value for 'id' when calling TemplateApi.show_template, must conform to the pattern /^\d+$/."
+      end
+
       # resource path
       local_var_path = '/templates/{id}'.sub('{' + 'id' + '}', id.to_s)
 
@@ -133,7 +137,7 @@ module ApprovalApiClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'TemplateOut')
+        :return_type => 'Template')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TemplateApi#show_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

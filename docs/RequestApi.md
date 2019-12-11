@@ -4,18 +4,18 @@ All URIs are relative to *https://cloud.redhat.com//api/approval/v1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_request**](RequestApi.md#create_request) | **POST** /workflows/{workflow_id}/requests | Add an approval request by given parameters
-[**list_requests**](RequestApi.md#list_requests) | **GET** /requests | Return an array of approval requests
-[**list_requests_by_workflow**](RequestApi.md#list_requests_by_workflow) | **GET** /workflows/{workflow_id}/requests | Return approval requests by given workflow id
+[**create_request**](RequestApi.md#create_request) | **POST** /requests | Add an approval request by given parameters
+[**list_requests**](RequestApi.md#list_requests) | **GET** /requests | Return an array of requester made approval requests, available to anyone
+[**list_requests_by_request**](RequestApi.md#list_requests_by_request) | **GET** /requests/{request_id}/requests | Return an array of child requests of a given request id
 [**show_request**](RequestApi.md#show_request) | **GET** /requests/{id} | Return an approval request by given id
 
 
 # **create_request**
-> RequestOut create_request(workflow_id, request_in)
+> Request create_request(request_in)
 
 Add an approval request by given parameters
 
-Add an approval request by given parameters
+Add an approval request by given parameters, available to anyone
 
 ### Example
 ```ruby
@@ -29,12 +29,11 @@ ApprovalApiClient.configure do |config|
 end
 
 api_instance = ApprovalApiClient::RequestApi.new
-workflow_id = 'workflow_id_example' # String | Id of workflow
 request_in = ApprovalApiClient::RequestIn.new # RequestIn | Parameters need to create a request
 
 begin
   #Add an approval request by given parameters
-  result = api_instance.create_request(workflow_id, request_in)
+  result = api_instance.create_request(request_in)
   p result
 rescue ApprovalApiClient::ApiError => e
   puts "Exception when calling RequestApi->create_request: #{e}"
@@ -45,12 +44,11 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **workflow_id** | **String**| Id of workflow | 
  **request_in** | [**RequestIn**](RequestIn.md)| Parameters need to create a request | 
 
 ### Return type
 
-[**RequestOut**](RequestOut.md)
+[**Request**](Request.md)
 
 ### Authorization
 
@@ -64,11 +62,11 @@ Name | Type | Description  | Notes
 
 
 # **list_requests**
-> RequestOutCollection list_requests(opts)
+> RequestCollection list_requests(opts)
 
-Return an array of approval requests
+Return an array of requester made approval requests, available to anyone
 
-Return an array of requests
+The result depends on the x-rh-persona header (approval/admin, approval/requseter, or approval/approver). Program generated child requests are not included.
 
 ### Example
 ```ruby
@@ -83,14 +81,14 @@ end
 
 api_instance = ApprovalApiClient::RequestApi.new
 opts = {
-  approver: 'approver_example', # String | Fetch requests by given approver username
+  x_rh_persona: 'x_rh_persona_example', # String | Current login user's persona
   limit: 100, # Integer | How many items to return at one time (max 1000)
   offset: 0, # Integer | Starting Offset
   filter: nil # Object | Filter for querying collections.
 }
 
 begin
-  #Return an array of approval requests
+  #Return an array of requester made approval requests, available to anyone
   result = api_instance.list_requests(opts)
   p result
 rescue ApprovalApiClient::ApiError => e
@@ -102,14 +100,14 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **approver** | **String**| Fetch requests by given approver username | [optional] 
+ **x_rh_persona** | **String**| Current login user&#39;s persona | [optional] 
  **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 100]
  **offset** | **Integer**| Starting Offset | [optional] [default to 0]
  **filter** | [**Object**](.md)| Filter for querying collections. | [optional] 
 
 ### Return type
 
-[**RequestOutCollection**](RequestOutCollection.md)
+[**RequestCollection**](RequestCollection.md)
 
 ### Authorization
 
@@ -122,12 +120,12 @@ Name | Type | Description  | Notes
 
 
 
-# **list_requests_by_workflow**
-> RequestOutCollection list_requests_by_workflow(workflow_id, opts)
+# **list_requests_by_request**
+> RequestCollection list_requests_by_request(request_id)
 
-Return approval requests by given workflow id
+Return an array of child requests of a given request id
 
-Return approval requests by given workflow id
+Return an array of child requests of a given request id, available for admin/requester
 
 ### Example
 ```ruby
@@ -141,19 +139,14 @@ ApprovalApiClient.configure do |config|
 end
 
 api_instance = ApprovalApiClient::RequestApi.new
-workflow_id = 'workflow_id_example' # String | Id of workflow
-opts = {
-  limit: 100, # Integer | How many items to return at one time (max 1000)
-  offset: 0, # Integer | Starting Offset
-  filter: nil # Object | Filter for querying collections.
-}
+request_id = 'request_id_example' # String | Id of request
 
 begin
-  #Return approval requests by given workflow id
-  result = api_instance.list_requests_by_workflow(workflow_id, opts)
+  #Return an array of child requests of a given request id
+  result = api_instance.list_requests_by_request(request_id)
   p result
 rescue ApprovalApiClient::ApiError => e
-  puts "Exception when calling RequestApi->list_requests_by_workflow: #{e}"
+  puts "Exception when calling RequestApi->list_requests_by_request: #{e}"
 end
 ```
 
@@ -161,14 +154,11 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **workflow_id** | **String**| Id of workflow | 
- **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 100]
- **offset** | **Integer**| Starting Offset | [optional] [default to 0]
- **filter** | [**Object**](.md)| Filter for querying collections. | [optional] 
+ **request_id** | **String**| Id of request | 
 
 ### Return type
 
-[**RequestOutCollection**](RequestOutCollection.md)
+[**RequestCollection**](RequestCollection.md)
 
 ### Authorization
 
@@ -182,11 +172,11 @@ Name | Type | Description  | Notes
 
 
 # **show_request**
-> RequestOut show_request(id)
+> Request show_request(id)
 
 Return an approval request by given id
 
-Return an approval request by given id
+Return an approval request by given id, available to anyone who can access the request
 
 ### Example
 ```ruby
@@ -219,7 +209,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RequestOut**](RequestOut.md)
+[**Request**](Request.md)
 
 ### Authorization
 
