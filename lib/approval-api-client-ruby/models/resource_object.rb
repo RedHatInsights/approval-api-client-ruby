@@ -13,37 +13,32 @@ OpenAPI Generator version: 3.3.4
 require 'date'
 
 module ApprovalApiClient
-  # Input parameters for approval request object.
-  class RequestIn
-    # Request name
-    attr_accessor :name
+  # Resource object definition
+  class ResourceObject
+    # Object type
+    attr_accessor :object_type
 
-    # Request description
-    attr_accessor :description
+    # Application name the object belongs to
+    attr_accessor :app_name
 
-    # JSON object with request content
-    attr_accessor :content
-
-    # collection of resources having tags that determine the workflows for the request
-    attr_accessor :tag_resources
+    # Id of the object
+    attr_accessor :object_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name',
-        :'description' => :'description',
-        :'content' => :'content',
-        :'tag_resources' => :'tag_resources'
+        :'object_type' => :'object_type',
+        :'app_name' => :'app_name',
+        :'object_id' => :'object_id'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'name' => :'String',
-        :'description' => :'String',
-        :'content' => :'Object',
-        :'tag_resources' => :'Array<TagResource>'
+        :'object_type' => :'String',
+        :'app_name' => :'String',
+        :'object_id' => :'String'
       }
     end
 
@@ -55,22 +50,16 @@ module ApprovalApiClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.has_key?(:'object_type')
+        self.object_type = attributes[:'object_type']
       end
 
-      if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+      if attributes.has_key?(:'app_name')
+        self.app_name = attributes[:'app_name']
       end
 
-      if attributes.has_key?(:'content')
-        self.content = attributes[:'content']
-      end
-
-      if attributes.has_key?(:'tag_resources')
-        if (value = attributes[:'tag_resources']).is_a?(Array)
-          self.tag_resources = value
-        end
+      if attributes.has_key?(:'object_id')
+        self.object_id = attributes[:'object_id']
       end
     end
 
@@ -78,16 +67,16 @@ module ApprovalApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      if @object_type.nil?
+        invalid_properties.push('invalid value for "object_type", object_type cannot be nil.')
       end
 
-      if @content.nil?
-        invalid_properties.push('invalid value for "content", content cannot be nil.')
+      if @app_name.nil?
+        invalid_properties.push('invalid value for "app_name", app_name cannot be nil.')
       end
 
-      if @tag_resources.nil?
-        invalid_properties.push('invalid value for "tag_resources", tag_resources cannot be nil.')
+      if @object_id.nil?
+        invalid_properties.push('invalid value for "object_id", object_id cannot be nil.')
       end
 
       invalid_properties
@@ -96,9 +85,9 @@ module ApprovalApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @name.nil?
-      return false if @content.nil?
-      return false if @tag_resources.nil?
+      return false if @object_type.nil?
+      return false if @app_name.nil?
+      return false if @object_id.nil?
       true
     end
 
@@ -107,10 +96,9 @@ module ApprovalApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          name == o.name &&
-          description == o.description &&
-          content == o.content &&
-          tag_resources == o.tag_resources
+          object_type == o.object_type &&
+          app_name == o.app_name &&
+          object_id == o.object_id
     end
 
     # @see the `==` method
@@ -122,7 +110,7 @@ module ApprovalApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, description, content, tag_resources].hash
+      [object_type, app_name, object_id].hash
     end
 
     # Builds the object from hash

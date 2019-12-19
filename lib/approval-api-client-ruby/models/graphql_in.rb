@@ -13,37 +13,31 @@ OpenAPI Generator version: 3.3.4
 require 'date'
 
 module ApprovalApiClient
-  # Input parameters for approval request object.
-  class RequestIn
-    # Request name
-    attr_accessor :name
+  class GraphqlIn
+    # The GraphQL query
+    attr_accessor :query
 
-    # Request description
-    attr_accessor :description
+    # If the Query contains several named operations, the operationName controls which one should be executed
+    attr_accessor :operation_name
 
-    # JSON object with request content
-    attr_accessor :content
-
-    # collection of resources having tags that determine the workflows for the request
-    attr_accessor :tag_resources
+    # Optional Query variables
+    attr_accessor :variables
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name',
-        :'description' => :'description',
-        :'content' => :'content',
-        :'tag_resources' => :'tag_resources'
+        :'query' => :'query',
+        :'operation_name' => :'operationName',
+        :'variables' => :'variables'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'name' => :'String',
-        :'description' => :'String',
-        :'content' => :'Object',
-        :'tag_resources' => :'Array<TagResource>'
+        :'query' => :'String',
+        :'operation_name' => :'String',
+        :'variables' => :'Object'
       }
     end
 
@@ -55,22 +49,18 @@ module ApprovalApiClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.has_key?(:'query')
+        self.query = attributes[:'query']
+      else
+        self.query = '{}'
       end
 
-      if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+      if attributes.has_key?(:'operationName')
+        self.operation_name = attributes[:'operationName']
       end
 
-      if attributes.has_key?(:'content')
-        self.content = attributes[:'content']
-      end
-
-      if attributes.has_key?(:'tag_resources')
-        if (value = attributes[:'tag_resources']).is_a?(Array)
-          self.tag_resources = value
-        end
+      if attributes.has_key?(:'variables')
+        self.variables = attributes[:'variables']
       end
     end
 
@@ -78,16 +68,8 @@ module ApprovalApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @content.nil?
-        invalid_properties.push('invalid value for "content", content cannot be nil.')
-      end
-
-      if @tag_resources.nil?
-        invalid_properties.push('invalid value for "tag_resources", tag_resources cannot be nil.')
+      if @query.nil?
+        invalid_properties.push('invalid value for "query", query cannot be nil.')
       end
 
       invalid_properties
@@ -96,9 +78,7 @@ module ApprovalApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @name.nil?
-      return false if @content.nil?
-      return false if @tag_resources.nil?
+      return false if @query.nil?
       true
     end
 
@@ -107,10 +87,9 @@ module ApprovalApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          name == o.name &&
-          description == o.description &&
-          content == o.content &&
-          tag_resources == o.tag_resources
+          query == o.query &&
+          operation_name == o.operation_name &&
+          variables == o.variables
     end
 
     # @see the `==` method
@@ -122,7 +101,7 @@ module ApprovalApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, description, content, tag_resources].hash
+      [query, operation_name, variables].hash
     end
 
     # Builds the object from hash

@@ -34,11 +34,10 @@ describe 'RequestApi' do
 
   # unit tests for create_request
   # Add an approval request by given parameters
-  # Add an approval request by given parameters
-  # @param workflow_id Id of workflow
+  # Add an approval request by given parameters, available to anyone
   # @param request_in Parameters need to create a request
   # @param [Hash] opts the optional parameters
-  # @return [RequestOut]
+  # @return [Request]
   describe 'create_request test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -46,30 +45,27 @@ describe 'RequestApi' do
   end
 
   # unit tests for list_requests
-  # Return an array of approval requests
-  # Return an array of requests
+  # Return an array of requester made approval requests, available to anyone
+  # The result depends on the x-rh-persona header (approval/admin, approval/requseter, or approval/approver). Program generated child requests are not included.
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :approver Fetch requests by given approver username
+  # @option opts [String] :x_rh_persona Current login user&#39;s persona
   # @option opts [Integer] :limit How many items to return at one time (max 1000)
   # @option opts [Integer] :offset Starting Offset
   # @option opts [Object] :filter Filter for querying collections.
-  # @return [RequestOutCollection]
+  # @return [RequestCollection]
   describe 'list_requests test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  # unit tests for list_requests_by_workflow
-  # Return approval requests by given workflow id
-  # Return approval requests by given workflow id
-  # @param workflow_id Id of workflow
+  # unit tests for list_requests_by_request
+  # Return an array of child requests of a given request id
+  # Return an array of child requests of a given request id, available for admin/requester
+  # @param request_id Id of request
   # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :limit How many items to return at one time (max 1000)
-  # @option opts [Integer] :offset Starting Offset
-  # @option opts [Object] :filter Filter for querying collections.
-  # @return [RequestOutCollection]
-  describe 'list_requests_by_workflow test' do
+  # @return [RequestCollection]
+  describe 'list_requests_by_request test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -77,10 +73,10 @@ describe 'RequestApi' do
 
   # unit tests for show_request
   # Return an approval request by given id
-  # Return an approval request by given id
+  # Return an approval request by given id, available to anyone who can access the request
   # @param id Query by id
   # @param [Hash] opts the optional parameters
-  # @return [RequestOut]
+  # @return [Request]
   describe 'show_request test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

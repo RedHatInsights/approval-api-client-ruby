@@ -13,37 +13,29 @@ OpenAPI Generator version: 3.3.4
 require 'date'
 
 module ApprovalApiClient
-  # Input parameters for approval request object.
-  class RequestIn
-    # Request name
+  # tag details
+  class Tag
+    attr_accessor :namespace
+
     attr_accessor :name
 
-    # Request description
-    attr_accessor :description
-
-    # JSON object with request content
-    attr_accessor :content
-
-    # collection of resources having tags that determine the workflows for the request
-    attr_accessor :tag_resources
+    attr_accessor :value
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'namespace' => :'namespace',
         :'name' => :'name',
-        :'description' => :'description',
-        :'content' => :'content',
-        :'tag_resources' => :'tag_resources'
+        :'value' => :'value'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'namespace' => :'String',
         :'name' => :'String',
-        :'description' => :'String',
-        :'content' => :'Object',
-        :'tag_resources' => :'Array<TagResource>'
+        :'value' => :'String'
       }
     end
 
@@ -55,22 +47,16 @@ module ApprovalApiClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
+      if attributes.has_key?(:'namespace')
+        self.namespace = attributes[:'namespace']
+      end
+
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
-      end
-
-      if attributes.has_key?(:'content')
-        self.content = attributes[:'content']
-      end
-
-      if attributes.has_key?(:'tag_resources')
-        if (value = attributes[:'tag_resources']).is_a?(Array)
-          self.tag_resources = value
-        end
+      if attributes.has_key?(:'value')
+        self.value = attributes[:'value']
       end
     end
 
@@ -78,16 +64,12 @@ module ApprovalApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @namespace.nil?
+        invalid_properties.push('invalid value for "namespace", namespace cannot be nil.')
+      end
+
       if @name.nil?
         invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @content.nil?
-        invalid_properties.push('invalid value for "content", content cannot be nil.')
-      end
-
-      if @tag_resources.nil?
-        invalid_properties.push('invalid value for "tag_resources", tag_resources cannot be nil.')
       end
 
       invalid_properties
@@ -96,9 +78,8 @@ module ApprovalApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @namespace.nil?
       return false if @name.nil?
-      return false if @content.nil?
-      return false if @tag_resources.nil?
       true
     end
 
@@ -107,10 +88,9 @@ module ApprovalApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          namespace == o.namespace &&
           name == o.name &&
-          description == o.description &&
-          content == o.content &&
-          tag_resources == o.tag_resources
+          value == o.value
     end
 
     # @see the `==` method
@@ -122,7 +102,7 @@ module ApprovalApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, description, content, tag_resources].hash
+      [namespace, name, value].hash
     end
 
     # Builds the object from hash

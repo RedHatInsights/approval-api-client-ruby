@@ -33,13 +33,13 @@ describe 'TemplateApi' do
   end
 
   # unit tests for list_templates
-  # Return all templates
+  # Return all templates, only available for admin
   # Return all templates
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :limit How many items to return at one time (max 1000)
   # @option opts [Integer] :offset Starting Offset
   # @option opts [Object] :filter Filter for querying collections.
-  # @return [TemplateOutCollection]
+  # @return [TemplateCollection]
   describe 'list_templates test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -47,11 +47,11 @@ describe 'TemplateApi' do
   end
 
   # unit tests for show_template
-  # Return a template by given id
+  # Return a template by given id, only available for admin
   # Return a template by given id
   # @param id Query by id
   # @param [Hash] opts the optional parameters
-  # @return [TemplateOut]
+  # @return [Template]
   describe 'show_template test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

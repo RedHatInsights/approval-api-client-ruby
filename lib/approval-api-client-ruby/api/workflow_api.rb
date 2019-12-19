@@ -19,24 +19,24 @@ module ApprovalApiClient
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Add a workflow by given template id
+    # Add a workflow by given template id, only available for admin
     # Add a workflow by given template id
     # @param template_id Id of template
-    # @param workflow_in Parameters need to create workflow
+    # @param workflow Parameters need to create workflow
     # @param [Hash] opts the optional parameters
-    # @return [WorkflowOut]
-    def add_workflow_to_template(template_id, workflow_in, opts = {})
-      data, _status_code, _headers = add_workflow_to_template_with_http_info(template_id, workflow_in, opts)
+    # @return [Workflow]
+    def add_workflow_to_template(template_id, workflow, opts = {})
+      data, _status_code, _headers = add_workflow_to_template_with_http_info(template_id, workflow, opts)
       data
     end
 
-    # Add a workflow by given template id
+    # Add a workflow by given template id, only available for admin
     # Add a workflow by given template id
     # @param template_id Id of template
-    # @param workflow_in Parameters need to create workflow
+    # @param workflow Parameters need to create workflow
     # @param [Hash] opts the optional parameters
-    # @return [Array<(WorkflowOut, Fixnum, Hash)>] WorkflowOut data, response status code and response headers
-    def add_workflow_to_template_with_http_info(template_id, workflow_in, opts = {})
+    # @return [Array<(Workflow, Fixnum, Hash)>] Workflow data, response status code and response headers
+    def add_workflow_to_template_with_http_info(template_id, workflow, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WorkflowApi.add_workflow_to_template ...'
       end
@@ -44,9 +44,13 @@ module ApprovalApiClient
       if @api_client.config.client_side_validation && template_id.nil?
         fail ArgumentError, "Missing the required parameter 'template_id' when calling WorkflowApi.add_workflow_to_template"
       end
-      # verify the required parameter 'workflow_in' is set
-      if @api_client.config.client_side_validation && workflow_in.nil?
-        fail ArgumentError, "Missing the required parameter 'workflow_in' when calling WorkflowApi.add_workflow_to_template"
+      if @api_client.config.client_side_validation && template_id !~ Regexp.new(/^\d+$/)
+        fail ArgumentError, "invalid value for 'template_id' when calling WorkflowApi.add_workflow_to_template, must conform to the pattern /^\d+$/."
+      end
+
+      # verify the required parameter 'workflow' is set
+      if @api_client.config.client_side_validation && workflow.nil?
+        fail ArgumentError, "Missing the required parameter 'workflow' when calling WorkflowApi.add_workflow_to_template"
       end
       # resource path
       local_var_path = '/templates/{template_id}/workflows'.sub('{' + 'template_id' + '}', template_id.to_s)
@@ -65,7 +69,7 @@ module ApprovalApiClient
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(workflow_in)
+      post_body = @api_client.object_to_http_body(workflow)
       auth_names = ['Basic_auth']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
@@ -73,14 +77,14 @@ module ApprovalApiClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'WorkflowOut')
+        :return_type => 'Workflow')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WorkflowApi#add_workflow_to_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Delete approval workflow by given id
+    # Delete approval workflow by given id, only available for admin
     # Delete approval workflow by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
@@ -90,7 +94,7 @@ module ApprovalApiClient
       nil
     end
 
-    # Delete approval workflow by given id
+    # Delete approval workflow by given id, only available for admin
     # Delete approval workflow by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
@@ -103,6 +107,10 @@ module ApprovalApiClient
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling WorkflowApi.destroy_workflow"
       end
+      if @api_client.config.client_side_validation && id !~ Regexp.new(/^\d+$/)
+        fail ArgumentError, "invalid value for 'id' when calling WorkflowApi.destroy_workflow, must conform to the pattern /^\d+$/."
+      end
+
       # resource path
       local_var_path = '/workflows/{id}'.sub('{' + 'id' + '}', id.to_s)
 
@@ -130,25 +138,93 @@ module ApprovalApiClient
       return data, status_code, headers
     end
 
-    # Return all approval workflows
-    # Return all approval workflows
+    # Create a resource link to a given workflow
+    # Link a resource object to a given workflow
+    # @param id Query by id
+    # @param resource_object Parameters needed to create a link
     # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def link_workflow(id, resource_object, opts = {})
+      link_workflow_with_http_info(id, resource_object, opts)
+      nil
+    end
+
+    # Create a resource link to a given workflow
+    # Link a resource object to a given workflow
+    # @param id Query by id
+    # @param resource_object Parameters needed to create a link
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def link_workflow_with_http_info(id, resource_object, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WorkflowApi.link_workflow ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling WorkflowApi.link_workflow"
+      end
+      if @api_client.config.client_side_validation && id !~ Regexp.new(/^\d+$/)
+        fail ArgumentError, "invalid value for 'id' when calling WorkflowApi.link_workflow, must conform to the pattern /^\d+$/."
+      end
+
+      # verify the required parameter 'resource_object' is set
+      if @api_client.config.client_side_validation && resource_object.nil?
+        fail ArgumentError, "Missing the required parameter 'resource_object' when calling WorkflowApi.link_workflow"
+      end
+      # resource path
+      local_var_path = '/workflows/{id}/link'.sub('{' + 'id' + '}', id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(resource_object)
+      auth_names = ['Basic_auth']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WorkflowApi#link_workflow\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Return all approval workflows, only available for admin
+    # Depends on the query parameters, either return all workflows in ascending sequence order when no parameters are provided; or return the workflows linking to the resource object whose app_name, object_type and object_id are specified by query parameters
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :app_name Name of the application
+    # @option opts [String] :object_id Id of the resource object
+    # @option opts [String] :object_type Type of the resource object
     # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 100)
     # @option opts [Integer] :offset Starting Offset (default to 0)
     # @option opts [Object] :filter Filter for querying collections.
-    # @return [WorkflowOutCollection]
+    # @return [WorkflowCollection]
     def list_workflows(opts = {})
       data, _status_code, _headers = list_workflows_with_http_info(opts)
       data
     end
 
-    # Return all approval workflows
-    # Return all approval workflows
+    # Return all approval workflows, only available for admin
+    # Depends on the query parameters, either return all workflows in ascending sequence order when no parameters are provided; or return the workflows linking to the resource object whose app_name, object_type and object_id are specified by query parameters
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :app_name Name of the application
+    # @option opts [String] :object_id Id of the resource object
+    # @option opts [String] :object_type Type of the resource object
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
     # @option opts [Object] :filter Filter for querying collections.
-    # @return [Array<(WorkflowOutCollection, Fixnum, Hash)>] WorkflowOutCollection data, response status code and response headers
+    # @return [Array<(WorkflowCollection, Fixnum, Hash)>] WorkflowCollection data, response status code and response headers
     def list_workflows_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WorkflowApi.list_workflows ...'
@@ -170,6 +246,9 @@ module ApprovalApiClient
 
       # query parameters
       query_params = {}
+      query_params[:'app_name'] = opts[:'app_name'] if !opts[:'app_name'].nil?
+      query_params[:'object_id'] = opts[:'object_id'] if !opts[:'object_id'].nil?
+      query_params[:'object_type'] = opts[:'object_type'] if !opts[:'object_type'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
       query_params[:'filter'] = opts[:'filter'] if !opts[:'filter'].nil?
@@ -191,34 +270,34 @@ module ApprovalApiClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'WorkflowOutCollection')
+        :return_type => 'WorkflowCollection')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WorkflowApi#list_workflows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Return an array of workflows by given template id
+    # Return an array of workflows by given template id, only available for admin
     # Return an array of workflows by given template id
     # @param template_id Id of template
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000) (default to 100)
     # @option opts [Integer] :offset Starting Offset (default to 0)
     # @option opts [Object] :filter Filter for querying collections.
-    # @return [WorkflowOutCollection]
+    # @return [WorkflowCollection]
     def list_workflows_by_template(template_id, opts = {})
       data, _status_code, _headers = list_workflows_by_template_with_http_info(template_id, opts)
       data
     end
 
-    # Return an array of workflows by given template id
+    # Return an array of workflows by given template id, only available for admin
     # Return an array of workflows by given template id
     # @param template_id Id of template
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit How many items to return at one time (max 1000)
     # @option opts [Integer] :offset Starting Offset
     # @option opts [Object] :filter Filter for querying collections.
-    # @return [Array<(WorkflowOutCollection, Fixnum, Hash)>] WorkflowOutCollection data, response status code and response headers
+    # @return [Array<(WorkflowCollection, Fixnum, Hash)>] WorkflowCollection data, response status code and response headers
     def list_workflows_by_template_with_http_info(template_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WorkflowApi.list_workflows_by_template ...'
@@ -227,6 +306,10 @@ module ApprovalApiClient
       if @api_client.config.client_side_validation && template_id.nil?
         fail ArgumentError, "Missing the required parameter 'template_id' when calling WorkflowApi.list_workflows_by_template"
       end
+      if @api_client.config.client_side_validation && template_id !~ Regexp.new(/^\d+$/)
+        fail ArgumentError, "invalid value for 'template_id' when calling WorkflowApi.list_workflows_by_template, must conform to the pattern /^\d+$/."
+      end
+
       if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 1000
         fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WorkflowApi.list_workflows_by_template, must be smaller than or equal to 1000.'
       end
@@ -265,28 +348,28 @@ module ApprovalApiClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'WorkflowOutCollection')
+        :return_type => 'WorkflowCollection')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WorkflowApi#list_workflows_by_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Return an approval workflow by given id
+    # Return an approval workflow by given id, only available for admin
     # Return an approval workflow by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [WorkflowOut]
+    # @return [Workflow]
     def show_workflow(id, opts = {})
       data, _status_code, _headers = show_workflow_with_http_info(id, opts)
       data
     end
 
-    # Return an approval workflow by given id
+    # Return an approval workflow by given id, only available for admin
     # Return an approval workflow by given id
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Array<(WorkflowOut, Fixnum, Hash)>] WorkflowOut data, response status code and response headers
+    # @return [Array<(Workflow, Fixnum, Hash)>] Workflow data, response status code and response headers
     def show_workflow_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WorkflowApi.show_workflow ...'
@@ -295,6 +378,10 @@ module ApprovalApiClient
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling WorkflowApi.show_workflow"
       end
+      if @api_client.config.client_side_validation && id !~ Regexp.new(/^\d+$/)
+        fail ArgumentError, "invalid value for 'id' when calling WorkflowApi.show_workflow, must conform to the pattern /^\d+$/."
+      end
+
       # resource path
       local_var_path = '/workflows/{id}'.sub('{' + 'id' + '}', id.to_s)
 
@@ -318,31 +405,93 @@ module ApprovalApiClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'WorkflowOut')
+        :return_type => 'Workflow')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WorkflowApi#show_workflow\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Update an approval workflow by given id
+    # Break the link between a resource object and selected workflow
+    # Break the link between a resource object and selected workflow
+    # @param id Query by id
+    # @param resource_object Parameters needed to remove a link
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def unlink_workflow(id, resource_object, opts = {})
+      unlink_workflow_with_http_info(id, resource_object, opts)
+      nil
+    end
+
+    # Break the link between a resource object and selected workflow
+    # Break the link between a resource object and selected workflow
+    # @param id Query by id
+    # @param resource_object Parameters needed to remove a link
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def unlink_workflow_with_http_info(id, resource_object, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WorkflowApi.unlink_workflow ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling WorkflowApi.unlink_workflow"
+      end
+      if @api_client.config.client_side_validation && id !~ Regexp.new(/^\d+$/)
+        fail ArgumentError, "invalid value for 'id' when calling WorkflowApi.unlink_workflow, must conform to the pattern /^\d+$/."
+      end
+
+      # verify the required parameter 'resource_object' is set
+      if @api_client.config.client_side_validation && resource_object.nil?
+        fail ArgumentError, "Missing the required parameter 'resource_object' when calling WorkflowApi.unlink_workflow"
+      end
+      # resource path
+      local_var_path = '/workflows/{id}/unlink'.sub('{' + 'id' + '}', id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(resource_object)
+      auth_names = ['Basic_auth']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WorkflowApi#unlink_workflow\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update an approval workflow by given id, only available for admin
     # Update an approval workflow by given id
     # @param id Query by id
-    # @param workflow_in Parameters need to update approval workflow
+    # @param workflow Parameters need to update approval workflow
     # @param [Hash] opts the optional parameters
-    # @return [WorkflowOut]
-    def update_workflow(id, workflow_in, opts = {})
-      data, _status_code, _headers = update_workflow_with_http_info(id, workflow_in, opts)
+    # @return [Workflow]
+    def update_workflow(id, workflow, opts = {})
+      data, _status_code, _headers = update_workflow_with_http_info(id, workflow, opts)
       data
     end
 
-    # Update an approval workflow by given id
+    # Update an approval workflow by given id, only available for admin
     # Update an approval workflow by given id
     # @param id Query by id
-    # @param workflow_in Parameters need to update approval workflow
+    # @param workflow Parameters need to update approval workflow
     # @param [Hash] opts the optional parameters
-    # @return [Array<(WorkflowOut, Fixnum, Hash)>] WorkflowOut data, response status code and response headers
-    def update_workflow_with_http_info(id, workflow_in, opts = {})
+    # @return [Array<(Workflow, Fixnum, Hash)>] Workflow data, response status code and response headers
+    def update_workflow_with_http_info(id, workflow, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WorkflowApi.update_workflow ...'
       end
@@ -350,9 +499,13 @@ module ApprovalApiClient
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling WorkflowApi.update_workflow"
       end
-      # verify the required parameter 'workflow_in' is set
-      if @api_client.config.client_side_validation && workflow_in.nil?
-        fail ArgumentError, "Missing the required parameter 'workflow_in' when calling WorkflowApi.update_workflow"
+      if @api_client.config.client_side_validation && id !~ Regexp.new(/^\d+$/)
+        fail ArgumentError, "invalid value for 'id' when calling WorkflowApi.update_workflow, must conform to the pattern /^\d+$/."
+      end
+
+      # verify the required parameter 'workflow' is set
+      if @api_client.config.client_side_validation && workflow.nil?
+        fail ArgumentError, "Missing the required parameter 'workflow' when calling WorkflowApi.update_workflow"
       end
       # resource path
       local_var_path = '/workflows/{id}'.sub('{' + 'id' + '}', id.to_s)
@@ -371,7 +524,7 @@ module ApprovalApiClient
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(workflow_in)
+      post_body = @api_client.object_to_http_body(workflow)
       auth_names = ['Basic_auth']
       data, status_code, headers = @api_client.call_api(:PATCH, local_var_path,
         :header_params => header_params,
@@ -379,7 +532,7 @@ module ApprovalApiClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'WorkflowOut')
+        :return_type => 'Workflow')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WorkflowApi#update_workflow\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

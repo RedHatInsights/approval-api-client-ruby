@@ -4,14 +4,14 @@ All URIs are relative to *https://cloud.redhat.com//api/approval/v1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**list_templates**](TemplateApi.md#list_templates) | **GET** /templates | Return all templates
-[**show_template**](TemplateApi.md#show_template) | **GET** /templates/{id} | Return a template by given id
+[**list_templates**](TemplateApi.md#list_templates) | **GET** /templates | Return all templates, only available for admin
+[**show_template**](TemplateApi.md#show_template) | **GET** /templates/{id} | Return a template by given id, only available for admin
 
 
 # **list_templates**
-> TemplateOutCollection list_templates(opts)
+> TemplateCollection list_templates(opts)
 
-Return all templates
+Return all templates, only available for admin
 
 Return all templates
 
@@ -34,7 +34,7 @@ opts = {
 }
 
 begin
-  #Return all templates
+  #Return all templates, only available for admin
   result = api_instance.list_templates(opts)
   p result
 rescue ApprovalApiClient::ApiError => e
@@ -52,7 +52,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TemplateOutCollection**](TemplateOutCollection.md)
+[**TemplateCollection**](TemplateCollection.md)
 
 ### Authorization
 
@@ -66,9 +66,9 @@ Name | Type | Description  | Notes
 
 
 # **show_template**
-> TemplateOut show_template(id)
+> Template show_template(id)
 
-Return a template by given id
+Return a template by given id, only available for admin
 
 Return a template by given id
 
@@ -87,7 +87,7 @@ api_instance = ApprovalApiClient::TemplateApi.new
 id = 'id_example' # String | Query by id
 
 begin
-  #Return a template by given id
+  #Return a template by given id, only available for admin
   result = api_instance.show_template(id)
   p result
 rescue ApprovalApiClient::ApiError => e
@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TemplateOut**](TemplateOut.md)
+[**Template**](Template.md)
 
 ### Authorization
 

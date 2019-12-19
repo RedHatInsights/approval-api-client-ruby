@@ -19,95 +19,38 @@ module ApprovalApiClient
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Add an action to a given stage
-    # Add an action to a given stage
-    # @param stage_id Id of stage
-    # @param action_in Action object that will be added
+    # Add an action to a given request
+    # Add an action to a given request, available for admin/approver/requester
+    # @param request_id Id of request
+    # @param action Action object that will be added
     # @param [Hash] opts the optional parameters
-    # @return [ActionOut]
-    def create_action(stage_id, action_in, opts = {})
-      data, _status_code, _headers = create_action_with_http_info(stage_id, action_in, opts)
+    # @return [Action]
+    def create_action(request_id, action, opts = {})
+      data, _status_code, _headers = create_action_with_http_info(request_id, action, opts)
       data
     end
 
-    # Add an action to a given stage
-    # Add an action to a given stage
-    # @param stage_id Id of stage
-    # @param action_in Action object that will be added
+    # Add an action to a given request
+    # Add an action to a given request, available for admin/approver/requester
+    # @param request_id Id of request
+    # @param action Action object that will be added
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ActionOut, Fixnum, Hash)>] ActionOut data, response status code and response headers
-    def create_action_with_http_info(stage_id, action_in, opts = {})
+    # @return [Array<(Action, Fixnum, Hash)>] Action data, response status code and response headers
+    def create_action_with_http_info(request_id, action, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ActionApi.create_action ...'
       end
-      # verify the required parameter 'stage_id' is set
-      if @api_client.config.client_side_validation && stage_id.nil?
-        fail ArgumentError, "Missing the required parameter 'stage_id' when calling ActionApi.create_action"
-      end
-      # verify the required parameter 'action_in' is set
-      if @api_client.config.client_side_validation && action_in.nil?
-        fail ArgumentError, "Missing the required parameter 'action_in' when calling ActionApi.create_action"
-      end
-      # resource path
-      local_var_path = '/stages/{stage_id}/actions'.sub('{' + 'stage_id' + '}', stage_id.to_s)
-
-      # query parameters
-      query_params = {}
-
-      # header parameters
-      header_params = {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = {}
-
-      # http body (model)
-      post_body = @api_client.object_to_http_body(action_in)
-      auth_names = ['Basic_auth']
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'ActionOut')
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ActionApi#create_action\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Add an action to current active stage of a given request
-    # Add an action to current active stage of a given request. If request is finished, i.e. no current active stage is available, no action can be posted here.
-    # @param request_id Id of request
-    # @param action_in Action object that will be added
-    # @param [Hash] opts the optional parameters
-    # @return [ActionOut]
-    def create_action_by_request(request_id, action_in, opts = {})
-      data, _status_code, _headers = create_action_by_request_with_http_info(request_id, action_in, opts)
-      data
-    end
-
-    # Add an action to current active stage of a given request
-    # Add an action to current active stage of a given request. If request is finished, i.e. no current active stage is available, no action can be posted here.
-    # @param request_id Id of request
-    # @param action_in Action object that will be added
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ActionOut, Fixnum, Hash)>] ActionOut data, response status code and response headers
-    def create_action_by_request_with_http_info(request_id, action_in, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ActionApi.create_action_by_request ...'
-      end
       # verify the required parameter 'request_id' is set
       if @api_client.config.client_side_validation && request_id.nil?
-        fail ArgumentError, "Missing the required parameter 'request_id' when calling ActionApi.create_action_by_request"
+        fail ArgumentError, "Missing the required parameter 'request_id' when calling ActionApi.create_action"
       end
-      # verify the required parameter 'action_in' is set
-      if @api_client.config.client_side_validation && action_in.nil?
-        fail ArgumentError, "Missing the required parameter 'action_in' when calling ActionApi.create_action_by_request"
+      if @api_client.config.client_side_validation && request_id !~ Regexp.new(/^\d+$/)
+        fail ArgumentError, "invalid value for 'request_id' when calling ActionApi.create_action, must conform to the pattern /^\d+$/."
+      end
+
+      # verify the required parameter 'action' is set
+      if @api_client.config.client_side_validation && action.nil?
+        fail ArgumentError, "Missing the required parameter 'action' when calling ActionApi.create_action"
       end
       # resource path
       local_var_path = '/requests/{request_id}/actions'.sub('{' + 'request_id' + '}', request_id.to_s)
@@ -126,7 +69,7 @@ module ApprovalApiClient
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(action_in)
+      post_body = @api_client.object_to_http_body(action)
       auth_names = ['Basic_auth']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
@@ -134,38 +77,42 @@ module ApprovalApiClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'ActionOut')
+        :return_type => 'Action')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ActionApi#create_action_by_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ActionApi#create_action\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Return actions in a given stage
-    # List all actions of a stage
-    # @param stage_id Id of stage
+    # List all actions of a request
+    # Return actions in a given request, available for admin/approver
+    # @param request_id Id of request
     # @param [Hash] opts the optional parameters
-    # @return [ActionOutCollection]
-    def list_actions_by_stage(stage_id, opts = {})
-      data, _status_code, _headers = list_actions_by_stage_with_http_info(stage_id, opts)
+    # @return [ActionCollection]
+    def list_actions_by_request(request_id, opts = {})
+      data, _status_code, _headers = list_actions_by_request_with_http_info(request_id, opts)
       data
     end
 
-    # Return actions in a given stage
-    # List all actions of a stage
-    # @param stage_id Id of stage
+    # List all actions of a request
+    # Return actions in a given request, available for admin/approver
+    # @param request_id Id of request
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ActionOutCollection, Fixnum, Hash)>] ActionOutCollection data, response status code and response headers
-    def list_actions_by_stage_with_http_info(stage_id, opts = {})
+    # @return [Array<(ActionCollection, Fixnum, Hash)>] ActionCollection data, response status code and response headers
+    def list_actions_by_request_with_http_info(request_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ActionApi.list_actions_by_stage ...'
+        @api_client.config.logger.debug 'Calling API: ActionApi.list_actions_by_request ...'
       end
-      # verify the required parameter 'stage_id' is set
-      if @api_client.config.client_side_validation && stage_id.nil?
-        fail ArgumentError, "Missing the required parameter 'stage_id' when calling ActionApi.list_actions_by_stage"
+      # verify the required parameter 'request_id' is set
+      if @api_client.config.client_side_validation && request_id.nil?
+        fail ArgumentError, "Missing the required parameter 'request_id' when calling ActionApi.list_actions_by_request"
       end
+      if @api_client.config.client_side_validation && request_id !~ Regexp.new(/^\d+$/)
+        fail ArgumentError, "invalid value for 'request_id' when calling ActionApi.list_actions_by_request, must conform to the pattern /^\d+$/."
+      end
+
       # resource path
-      local_var_path = '/stages/{stage_id}/actions'.sub('{' + 'stage_id' + '}', stage_id.to_s)
+      local_var_path = '/requests/{request_id}/actions'.sub('{' + 'request_id' + '}', request_id.to_s)
 
       # query parameters
       query_params = {}
@@ -187,28 +134,28 @@ module ApprovalApiClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'ActionOutCollection')
+        :return_type => 'ActionCollection')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ActionApi#list_actions_by_stage\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ActionApi#list_actions_by_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
     # Return an user action by id
-    # Return an user action by id
+    # Return an user action by id, available to all
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [ActionOut]
+    # @return [Action]
     def show_action(id, opts = {})
       data, _status_code, _headers = show_action_with_http_info(id, opts)
       data
     end
 
     # Return an user action by id
-    # Return an user action by id
+    # Return an user action by id, available to all
     # @param id Query by id
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ActionOut, Fixnum, Hash)>] ActionOut data, response status code and response headers
+    # @return [Array<(Action, Fixnum, Hash)>] Action data, response status code and response headers
     def show_action_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ActionApi.show_action ...'
@@ -217,6 +164,10 @@ module ApprovalApiClient
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling ActionApi.show_action"
       end
+      if @api_client.config.client_side_validation && id !~ Regexp.new(/^\d+$/)
+        fail ArgumentError, "invalid value for 'id' when calling ActionApi.show_action, must conform to the pattern /^\d+$/."
+      end
+
       # resource path
       local_var_path = '/actions/{id}'.sub('{' + 'id' + '}', id.to_s)
 
@@ -240,7 +191,7 @@ module ApprovalApiClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'ActionOut')
+        :return_type => 'Action')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ActionApi#show_action\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
