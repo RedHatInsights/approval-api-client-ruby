@@ -7,7 +7,9 @@ Method | HTTP request | Description
 [**post_graphql**](GraphqlApi.md#post_graphql) | **POST** /graphql | Perform a GraphQL Query
 
 
-# **post_graphql**
+
+## post_graphql
+
 > GraphqlOut post_graphql(graphql_in)
 
 Perform a GraphQL Query
@@ -15,6 +17,7 @@ Perform a GraphQL Query
 Performs a GraphQL Query
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -39,6 +42,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **graphql_in** | [**GraphqlIn**](GraphqlIn.md)| GraphQL Query Request | 
@@ -53,8 +57,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
+- **Content-Type**: application/json
+- **Accept**: application/json
 

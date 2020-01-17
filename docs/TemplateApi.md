@@ -8,7 +8,9 @@ Method | HTTP request | Description
 [**show_template**](TemplateApi.md#show_template) | **GET** /templates/{id} | Return a template by given id, only available for admin
 
 
-# **list_templates**
+
+## list_templates
+
 > TemplateCollection list_templates(opts)
 
 Return all templates, only available for admin
@@ -16,6 +18,7 @@ Return all templates, only available for admin
 Return all templates
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -44,6 +47,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 100]
@@ -60,12 +64,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## show_template
 
-# **show_template**
 > Template show_template(id)
 
 Return a template by given id, only available for admin
@@ -73,6 +77,7 @@ Return a template by given id, only available for admin
 Return a template by given id
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -97,6 +102,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| Query by id | 
@@ -111,8 +117,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: */*
-
-
+- **Content-Type**: Not defined
+- **Accept**: */*
 
