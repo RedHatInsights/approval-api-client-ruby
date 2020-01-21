@@ -9,14 +9,17 @@ Method | HTTP request | Description
 [**show_action**](ActionApi.md#show_action) | **GET** /actions/{id} | Return an user action by id
 
 
-# **create_action**
+
+## create_action
+
 > Action create_action(request_id, action)
 
 Add an action to a given request
 
-Add an action to a given request, available for admin/approver/requester
+Add an action to a given request, available for admin/approver/requester. Applicable operation types are based on request current state.
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -42,6 +45,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **request_id** | **String**| Id of request | 
@@ -57,12 +61,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## list_actions_by_request
 
-# **list_actions_by_request**
 > ActionCollection list_actions_by_request(request_id)
 
 List all actions of a request
@@ -70,6 +74,7 @@ List all actions of a request
 Return actions in a given request, available for admin/approver
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -94,6 +99,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **request_id** | **String**| Id of request | 
@@ -108,12 +114,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## show_action
 
-# **show_action**
 > Action show_action(id)
 
 Return an user action by id
@@ -121,6 +127,7 @@ Return an user action by id
 Return an user action by id, available to all
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -145,6 +152,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| Query by id | 
@@ -159,8 +167,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: */*
-
-
+- **Content-Type**: Not defined
+- **Accept**: */*
 

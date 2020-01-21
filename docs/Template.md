@@ -1,10 +1,21 @@
 # ApprovalApiClient::Template
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | [optional] 
-**title** | **String** |  | [optional] 
-**description** | **String** |  | [optional] 
+**id** | **String** |  | [optional] [readonly] 
+**title** | **String** |  | [optional] [readonly] 
+**description** | **String** |  | [optional] [readonly] 
+
+## Code Sample
+
+```ruby
+require 'ApprovalApiClient'
+
+instance = ApprovalApiClient::Template.new(id: null,
+                                 title: null,
+                                 description: null)
+```
 
 

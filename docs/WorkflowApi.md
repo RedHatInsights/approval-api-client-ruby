@@ -14,7 +14,9 @@ Method | HTTP request | Description
 [**update_workflow**](WorkflowApi.md#update_workflow) | **PATCH** /workflows/{id} | Update an approval workflow by given id, only available for admin
 
 
-# **add_workflow_to_template**
+
+## add_workflow_to_template
+
 > Workflow add_workflow_to_template(template_id, workflow)
 
 Add a workflow by given template id, only available for admin
@@ -22,6 +24,7 @@ Add a workflow by given template id, only available for admin
 Add a workflow by given template id
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -47,6 +50,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **String**| Id of template | 
@@ -62,12 +66,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
+## destroy_workflow
 
-# **destroy_workflow**
 > destroy_workflow(id)
 
 Delete approval workflow by given id, only available for admin
@@ -75,6 +79,7 @@ Delete approval workflow by given id, only available for admin
 Delete approval workflow by given id
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -98,6 +103,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| Query by id | 
@@ -112,12 +118,12 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## link_workflow
 
-# **link_workflow**
 > link_workflow(id, resource_object)
 
 Create a resource link to a given workflow
@@ -125,6 +131,7 @@ Create a resource link to a given workflow
 Link a resource object to a given workflow
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -149,6 +156,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| Query by id | 
@@ -164,12 +172,12 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: Not defined
+- **Content-Type**: application/json
+- **Accept**: Not defined
 
 
+## list_workflows
 
-# **list_workflows**
 > WorkflowCollection list_workflows(opts)
 
 Return all approval workflows, only available for admin
@@ -177,6 +185,7 @@ Return all approval workflows, only available for admin
 Depends on the query parameters, either return all workflows in ascending sequence order when no parameters are provided; or return the workflows linking to the resource object whose app_name, object_type and object_id are specified by query parameters
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -208,6 +217,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **app_name** | **String**| Name of the application | [optional] 
@@ -227,12 +237,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: */*
+- **Content-Type**: Not defined
+- **Accept**: */*
 
 
+## list_workflows_by_template
 
-# **list_workflows_by_template**
 > WorkflowCollection list_workflows_by_template(template_id, opts)
 
 Return an array of workflows by given template id, only available for admin
@@ -240,6 +250,7 @@ Return an array of workflows by given template id, only available for admin
 Return an array of workflows by given template id
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -269,6 +280,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **String**| Id of template | 
@@ -286,12 +298,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## show_workflow
 
-# **show_workflow**
 > Workflow show_workflow(id)
 
 Return an approval workflow by given id, only available for admin
@@ -299,6 +311,7 @@ Return an approval workflow by given id, only available for admin
 Return an approval workflow by given id
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -323,6 +336,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| Query by id | 
@@ -337,12 +351,12 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: */*
+- **Content-Type**: Not defined
+- **Accept**: */*
 
 
+## unlink_workflow
 
-# **unlink_workflow**
 > unlink_workflow(id, resource_object)
 
 Break the link between a resource object and selected workflow
@@ -350,6 +364,7 @@ Break the link between a resource object and selected workflow
 Break the link between a resource object and selected workflow
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -374,6 +389,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| Query by id | 
@@ -389,12 +405,12 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: Not defined
+- **Content-Type**: application/json
+- **Accept**: Not defined
 
 
+## update_workflow
 
-# **update_workflow**
 > Workflow update_workflow(id, workflow)
 
 Update an approval workflow by given id, only available for admin
@@ -402,6 +418,7 @@ Update an approval workflow by given id, only available for admin
 Update an approval workflow by given id
 
 ### Example
+
 ```ruby
 # load the gem
 require 'approval-api-client-ruby'
@@ -427,6 +444,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| Query by id | 
@@ -442,8 +460,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: */*
-
-
+- **Content-Type**: application/json
+- **Accept**: */*
 
