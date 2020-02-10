@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | [optional] [readonly] 
-**state** | **String** | The state of the request. Possible value: canceled, completed, notified, skipped, or started | [optional] [readonly] 
-**decision** | **String** | Approval decision. Possible value: undecided, approved, canceled, or denied | [optional] [readonly] 
+**state** | **String** | The state of the request. Possible value: canceled, completed, failed, notified, skipped, or started | [optional] [readonly] 
+**decision** | **String** | Approval decision. Possible value: undecided, approved, canceled, denied, or error | [optional] [readonly] 
 **reason** | **String** | Reason for the decision. Optional. Present normally when the decision is denied | [optional] [readonly] 
 **workflow_id** | **String** | Associate workflow id. Available only if the request is a leaf node | [optional] [readonly] 
 **created_at** | **DateTime** | Timestamp of creation | [optional] [readonly] 

@@ -17,10 +17,10 @@ module ApprovalApiClient
   class Request
     attr_accessor :id
 
-    # The state of the request. Possible value: canceled, completed, notified, skipped, or started
+    # The state of the request. Possible value: canceled, completed, failed, notified, skipped, or started
     attr_accessor :state
 
-    # Approval decision. Possible value: undecided, approved, canceled, or denied
+    # Approval decision. Possible value: undecided, approved, canceled, denied, or error
     attr_accessor :decision
 
     # Reason for the decision. Optional. Present normally when the decision is denied
@@ -228,9 +228,9 @@ module ApprovalApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      state_validator = EnumAttributeValidator.new('String', ["canceled", "completed", "notified", "pending", "skipped", "started"])
+      state_validator = EnumAttributeValidator.new('String', ["canceled", "completed", "failed", "notified", "pending", "skipped", "started"])
       return false unless state_validator.valid?(@state)
-      decision_validator = EnumAttributeValidator.new('String', ["undecided", "approved", "canceled", "denied"])
+      decision_validator = EnumAttributeValidator.new('String', ["undecided", "approved", "canceled", "denied", "error"])
       return false unless decision_validator.valid?(@decision)
       true
     end
@@ -238,7 +238,7 @@ module ApprovalApiClient
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] state Object to be assigned
     def state=(state)
-      validator = EnumAttributeValidator.new('String', ["canceled", "completed", "notified", "pending", "skipped", "started"])
+      validator = EnumAttributeValidator.new('String', ["canceled", "completed", "failed", "notified", "pending", "skipped", "started"])
       unless validator.valid?(state)
         fail ArgumentError, "invalid value for \"state\", must be one of #{validator.allowable_values}."
       end
@@ -248,7 +248,7 @@ module ApprovalApiClient
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] decision Object to be assigned
     def decision=(decision)
-      validator = EnumAttributeValidator.new('String', ["undecided", "approved", "canceled", "denied"])
+      validator = EnumAttributeValidator.new('String', ["undecided", "approved", "canceled", "denied", "error"])
       unless validator.valid?(decision)
         fail ArgumentError, "invalid value for \"decision\", must be one of #{validator.allowable_values}."
       end

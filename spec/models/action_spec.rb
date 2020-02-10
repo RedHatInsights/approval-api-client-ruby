@@ -59,7 +59,7 @@ describe 'Action' do
   describe 'test attribute "operation"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["approve", "cancel", "deny", "notify", "memo", "skip", "start"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["approve", "cancel", "deny", "error", "notify", "memo", "skip", "start"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.operation = value }.not_to raise_error
       # end

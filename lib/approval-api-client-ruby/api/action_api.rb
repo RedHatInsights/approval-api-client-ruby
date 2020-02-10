@@ -20,7 +20,7 @@ module ApprovalApiClient
       @api_client = api_client
     end
     # Add an action to a given request
-    # Add an action to a given request, available for admin/approver/requester. Applicable operation types are based on request current state.
+    # Add an action to a given request. Admin can do approve, deny, memo, and cancel operations; approver can do approve, deny and memo operations; while requester can do only cancel operation.
     # @param request_id [String] Id of request
     # @param action [Action] Action object that will be added
     # @param [Hash] opts the optional parameters
@@ -31,7 +31,7 @@ module ApprovalApiClient
     end
 
     # Add an action to a given request
-    # Add an action to a given request, available for admin/approver/requester. Applicable operation types are based on request current state.
+    # Add an action to a given request. Admin can do approve, deny, memo, and cancel operations; approver can do approve, deny and memo operations; while requester can do only cancel operation.
     # @param request_id [String] Id of request
     # @param action [Action] Action object that will be added
     # @param [Hash] opts the optional parameters

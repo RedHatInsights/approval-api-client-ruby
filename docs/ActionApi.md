@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Add an action to a given request
 
-Add an action to a given request, available for admin/approver/requester. Applicable operation types are based on request current state.
+Add an action to a given request. Admin can do approve, deny, memo, and cancel operations; approver can do approve, deny and memo operations; while requester can do only cancel operation.
 
 ### Example
 
