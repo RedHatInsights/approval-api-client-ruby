@@ -1,8 +1,8 @@
 {
 	"moduleName": "ApprovalApiClient",
-	"gemName": "approval-api-client-ruby",
+	"gemName": "approval-api-client",
 	"gemHomepage" : "https://github.com/ManageIQ/approval-api-client-ruby",
-	"gemAuthor" : "ManageIQ Authors",
+	"gemAuthor" : "Insights Authors",
 	"gemLicense" : "Apache-2.0",
-	"gemDescription" : "Ruby client gem to connect to ManageIQ Approval Service"
+	"gemDescription" : "Ruby client gem to connect to Insights Approval Service"
 }
