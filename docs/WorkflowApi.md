@@ -1,6 +1,6 @@
 # ApprovalApiClient::WorkflowApi
 
-All URIs are relative to *https://cloud.redhat.com//api/approval/v1.0*
+All URIs are relative to *https://cloud.redhat.com//api/approval/v1.2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -27,7 +27,7 @@ Add a workflow by given template id
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -82,7 +82,7 @@ Delete approval workflow by given id
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -134,7 +134,7 @@ Link a resource object to a given workflow
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -188,7 +188,7 @@ Depends on the query parameters, either return all workflows in ascending sequen
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -203,7 +203,8 @@ opts = {
   object_type: 'object_type_example', # String | Type of the resource object
   limit: 100, # Integer | How many items to return at one time (max 1000)
   offset: 0, # Integer | Starting Offset
-  filter: nil # Object | Filter for querying collections.
+  filter: nil, # Object | Filter for querying collections.
+  sort_by: 'sort_by_example' # String | Parameter to sort collection
 }
 
 begin
@@ -226,6 +227,7 @@ Name | Type | Description  | Notes
  **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 100]
  **offset** | **Integer**| Starting Offset | [optional] [default to 0]
  **filter** | [**Object**](.md)| Filter for querying collections. | [optional] 
+ **sort_by** | **String**| Parameter to sort collection | [optional] 
 
 ### Return type
 
@@ -253,7 +255,7 @@ Return an array of workflows by given template id
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -266,7 +268,8 @@ template_id = 'template_id_example' # String | Id of template
 opts = {
   limit: 100, # Integer | How many items to return at one time (max 1000)
   offset: 0, # Integer | Starting Offset
-  filter: nil # Object | Filter for querying collections.
+  filter: nil, # Object | Filter for querying collections.
+  sort_by: 'sort_by_example' # String | Parameter to sort collection
 }
 
 begin
@@ -287,6 +290,7 @@ Name | Type | Description  | Notes
  **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 100]
  **offset** | **Integer**| Starting Offset | [optional] [default to 0]
  **filter** | [**Object**](.md)| Filter for querying collections. | [optional] 
+ **sort_by** | **String**| Parameter to sort collection | [optional] 
 
 ### Return type
 
@@ -314,7 +318,7 @@ Return an approval workflow by given id
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -367,7 +371,7 @@ Break the link between a resource object and selected workflow
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -421,7 +425,7 @@ Update an approval workflow by given id
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth

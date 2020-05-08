@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **id** | **String** |  | [optional] [readonly] 
 **title** | **String** |  | [optional] [readonly] 
 **description** | **String** |  | [optional] [readonly] 
+**metadata** | [**Object**](.md) | JSON Metadata about the template | [optional] [readonly] 
 
 ## Code Sample
 
@@ -15,7 +16,8 @@ require 'ApprovalApiClient'
 
 instance = ApprovalApiClient::Template.new(id: null,
                                  title: null,
-                                 description: null)
+                                 description: null,
+                                 metadata: null)
 ```
 
 

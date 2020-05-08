@@ -1,6 +1,6 @@
 # ApprovalApiClient::ActionApi
 
-All URIs are relative to *https://cloud.redhat.com//api/approval/v1.0*
+All URIs are relative to *https://cloud.redhat.com//api/approval/v1.2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -16,13 +16,13 @@ Method | HTTP request | Description
 
 Add an action to a given request
 
-Add an action to a given request, available for admin/approver/requester. Applicable operation types are based on request current state.
+Add an action to a given request. Admin can do approve, deny, memo, and cancel operations; approver can do approve, deny and memo operations; while requester can do only cancel operation.
 
 ### Example
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -77,7 +77,7 @@ Return actions in a given request, available for admin/approver
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -130,7 +130,7 @@ Return an user action by id, available to all
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
