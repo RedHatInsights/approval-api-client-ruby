@@ -1,4 +1,4 @@
-name: Ruby Gem
+name: Push Approval API Client RubyGem
 
 on:
   push:
