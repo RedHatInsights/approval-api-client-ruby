@@ -11,5 +11,5 @@ OpenAPI Generator version: 4.2.2
 =end
 
 module ApprovalApiClient
-  VERSION = '1.0.0'
+  VERSION = '1.2.0'
 end
