@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Insights Authors"]
   s.email       = ["support@redhat.com"]
-  s.homepage    = "https://github.com/ManageIQ/approval-api-client-ruby"
+  s.homepage    = "https://github.com/RedHatInsights/approval-api-client-ruby"
   s.summary     = "Insights Service Approval APIs Ruby Gem"
   s.description = "Ruby client gem to connect to Insights Approval Service"
   s.license     = 'Apache-2.0'

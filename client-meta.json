@@ -1,7 +1,7 @@
 {
 	"moduleName": "ApprovalApiClient",
 	"gemName": "insights-approval-api-client",
-	"gemHomepage" : "https://github.com/ManageIQ/approval-api-client-ruby",
+	"gemHomepage" : "https://github.com/RedHatInsights/approval-api-client-ruby",
 	"gemAuthor" : "Insights Authors",
 	"gemLicense" : "Apache-2.0",
 	"gemVersion" : "1.2.0",
