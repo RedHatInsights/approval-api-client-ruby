@@ -9,7 +9,8 @@ Name | Type | Description | Notes
 **name** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
 **sequence** | **Integer** | an indicator of the execution order for selected workflows | [optional] 
-**group_refs** | **Array&lt;String&gt;** | Group reference ids associated with workflow | [optional] 
+**group_refs** | [**Array&lt;GroupRef&gt;**](GroupRef.md) | Group reference ids associated with workflow | [optional] 
+**metadata** | [**Object**](.md) | JSON Metadata about the workflow | [optional] [readonly] 
 
 ## Code Sample
 
@@ -21,7 +22,8 @@ instance = ApprovalApiClient::Workflow.new(id: null,
                                  name: null,
                                  description: null,
                                  sequence: null,
-                                 group_refs: null)
+                                 group_refs: null,
+                                 metadata: null)
 ```
 
 

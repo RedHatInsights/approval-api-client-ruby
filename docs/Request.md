@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | [optional] [readonly] 
-**state** | **String** | The state of the request. Possible value: canceled, completed, notified, skipped, or started | [optional] [readonly] 
-**decision** | **String** | Approval decision. Possible value: undecided, approved, canceled, or denied | [optional] [readonly] 
+**state** | **String** | The state of the request. Possible value: canceled, completed, failed, notified, skipped, or started | [optional] [readonly] 
+**decision** | **String** | Approval decision. Possible value: undecided, approved, canceled, denied, or error | [optional] [readonly] 
 **reason** | **String** | Reason for the decision. Optional. Present normally when the decision is denied | [optional] [readonly] 
 **workflow_id** | **String** | Associate workflow id. Available only if the request is a leaf node | [optional] [readonly] 
 **created_at** | **DateTime** | Timestamp of creation | [optional] [readonly] 
@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **description** | **String** | Request description | [optional] [readonly] 
 **group_name** | **String** | Name of approver group(s) assigned to approve this request | [optional] [readonly] 
 **parent_id** | **String** | Parent request id | [optional] [readonly] 
+**metadata** | [**Object**](.md) | JSON Metadata about the request | [optional] [readonly] 
 
 ## Code Sample
 
@@ -41,7 +42,8 @@ instance = ApprovalApiClient::Request.new(id: null,
                                  name: null,
                                  description: null,
                                  group_name: null,
-                                 parent_id: null)
+                                 parent_id: null,
+                                 metadata: null)
 ```
 
 

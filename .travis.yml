@@ -1,0 +1,11 @@
+language: ruby
+cache: bundler
+rvm:
+  - 2.4
+  - 2.5
+  - 2.6
+script:
+  - bundle install --path vendor/bundle
+  - bundle exec rspec
+  - gem build insights-approval-api-client.gemspec
+  - gem install ./insights-approval-api-client-1.2.0.gem

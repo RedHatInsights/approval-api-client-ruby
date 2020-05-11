@@ -1,6 +1,6 @@
 # ApprovalApiClient::TemplateApi
 
-All URIs are relative to *https://cloud.redhat.com//api/approval/v1.0*
+All URIs are relative to *https://cloud.redhat.com//api/approval/v1.2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -21,7 +21,7 @@ Return all templates
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'insights-approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -33,7 +33,8 @@ api_instance = ApprovalApiClient::TemplateApi.new
 opts = {
   limit: 100, # Integer | How many items to return at one time (max 1000)
   offset: 0, # Integer | Starting Offset
-  filter: nil # Object | Filter for querying collections.
+  filter: nil, # Object | Filter for querying collections.
+  sort_by: 'sort_by_example' # String | Parameter to sort collection
 }
 
 begin
@@ -53,6 +54,7 @@ Name | Type | Description  | Notes
  **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 100]
  **offset** | **Integer**| Starting Offset | [optional] [default to 0]
  **filter** | [**Object**](.md)| Filter for querying collections. | [optional] 
+ **sort_by** | **String**| Parameter to sort collection | [optional] 
 
 ### Return type
 
@@ -80,7 +82,7 @@ Return a template by given id
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'insights-approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
