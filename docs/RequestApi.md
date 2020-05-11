@@ -1,6 +1,6 @@
 # ApprovalApiClient::RequestApi
 
-All URIs are relative to *https://cloud.redhat.com//api/approval/v1.0*
+All URIs are relative to *https://cloud.redhat.com//api/approval/v1.2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -24,7 +24,7 @@ Add an approval request by given parameters, available to anyone
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'insights-approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -77,7 +77,7 @@ The result depends on the x-rh-persona header (approval/admin, approval/requsete
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'insights-approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -90,7 +90,8 @@ opts = {
   x_rh_persona: 'x_rh_persona_example', # String | Current login user's persona
   limit: 100, # Integer | How many items to return at one time (max 1000)
   offset: 0, # Integer | Starting Offset
-  filter: nil # Object | Filter for querying collections.
+  filter: nil, # Object | Filter for querying collections.
+  sort_by: 'sort_by_example' # String | Parameter to sort collection
 }
 
 begin
@@ -111,6 +112,7 @@ Name | Type | Description  | Notes
  **limit** | **Integer**| How many items to return at one time (max 1000) | [optional] [default to 100]
  **offset** | **Integer**| Starting Offset | [optional] [default to 0]
  **filter** | [**Object**](.md)| Filter for querying collections. | [optional] 
+ **sort_by** | **String**| Parameter to sort collection | [optional] 
 
 ### Return type
 
@@ -138,7 +140,7 @@ Return an array of child requests of a given request id. The result depends on t
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'insights-approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -195,7 +197,7 @@ Return an approval request by given id, available to anyone who can access the r
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'insights-approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
@@ -248,7 +250,7 @@ Return request content of a given request id, available to all
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'insights-approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth

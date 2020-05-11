@@ -1,6 +1,6 @@
 # ApprovalApiClient::GraphqlApi
 
-All URIs are relative to *https://cloud.redhat.com//api/approval/v1.0*
+All URIs are relative to *https://cloud.redhat.com//api/approval/v1.2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -20,7 +20,7 @@ Performs a GraphQL Query
 
 ```ruby
 # load the gem
-require 'approval-api-client-ruby'
+require 'insights-approval-api-client'
 # setup authorization
 ApprovalApiClient.configure do |config|
   # Configure HTTP basic authorization: Basic_auth
