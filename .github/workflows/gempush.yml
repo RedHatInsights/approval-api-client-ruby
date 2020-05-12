@@ -27,7 +27,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: "v${{ fromJson(version_file.outputs.gemVersion) }}"
+        tag_name: "v${{ fromJson(steps.version_file.outputs.gemVersion) }}"
           
     - name: Publish to RubyGems
       run: |
