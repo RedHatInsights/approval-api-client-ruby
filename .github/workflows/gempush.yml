@@ -3,6 +3,8 @@ name: Push Approval API Client RubyGem
 on:
   push:
     branches: [ master ]
+  pull_request:
+     branches: [ master ]  
 
 jobs:
   build:
@@ -15,6 +17,17 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.x
+    - name: Read the client-meta.json
+      id: version_file
+      run: |
+        cat client_meta.json 
+    - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: "v${{ fromJson(version_file.outputs.gemVersion) }}"
 
     - name: Publish to RubyGems
       run: |
