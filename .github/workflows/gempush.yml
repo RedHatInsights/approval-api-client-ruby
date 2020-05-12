@@ -23,7 +23,7 @@ jobs:
         cat client-meta.json
     - name: Echo the gem version
       run: |
-        echo "${{ fromJson(steps.version_file.outputs) }}"   
+        echo "${{ steps.version_file.outputs }}"   
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
