@@ -1,4 +1,4 @@
-name: Push Approval API Client RubyGem
+name: Push Approval API Client RubyGem and create a Release
 
 on:
   push:
