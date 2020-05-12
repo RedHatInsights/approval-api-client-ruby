@@ -31,6 +31,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: "v${{ fromJson(steps.version_file.outputs.data).gemVersion }}"
+        release_name: "v${{ fromJson(steps.version_file.outputs.data).gemVersion }}" 
           
     - name: Publish to RubyGems
       run: |
