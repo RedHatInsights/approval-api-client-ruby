@@ -20,7 +20,10 @@ jobs:
     - name: Read the client-meta.json
       id: version_file
       run: |
-        cat client-meta.json 
+        cat client-meta.json
+    - name: Echo the gem version
+      run: |
+        echo "{{ fromJson(steps.version_file.outputs.data) }}"   
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
