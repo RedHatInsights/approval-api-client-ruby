@@ -20,7 +20,7 @@ jobs:
     - name: Read the client-meta.json
       id: version_file
       run: |
-        cat client_meta.json 
+        cat client-meta.json 
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
